@@ -11,7 +11,7 @@ TODO:
 
 - Tasks
 - [ ] REQ 1:
-- [ ] REQ 2: 
+- [ ] REQ 2:
 - [ ] REQ 3:
 - UML for each REQ
 - Design rationale (SOLID, DRY principles) (DONE)
@@ -79,14 +79,14 @@ TODO:
 ### REQ 4: The room at the end of the forest
 **1. Great knife Weapon**
 - Sold to player before leaving the old building
-- ">", 75 damage, 70% Hitrate, 
+- ">", 75 damage, 70% Hitrate,
   - skill: "stab and step"
   - 300 runes
   - 25% of max stamina
-**2. Purchasing Great Knife**
+    **2. Purchasing Great Knife**
   - 5% chance to pay 3x price
   - insuffecient balance, rejected
-  
+
 **3. Sell Great knife**
 - 175 runes,
 - 10% chance getting scammed
@@ -98,13 +98,13 @@ TODO:
 
 **5. Giant Hammer Weapon**
 - "P", 160dmg, 90 Hitrate
-  - Skill: "Great Slam" 
+  - Skill: "Great Slam"
   - 5% of players maximum stamina
   - Sold for 250 runes, cannot be bought
 
 ### REQ 5: Hollow Soldier (Inhabitants of Burial Grounds)
 - Boos room is a new map travelled from gate in the forest
-**1. Boss**
+  **1. Boss**
 - “Abxervyer, the Forest Watcher”
 - "Y", 2000HP, 80dmg, 25% Hitrate
 - same logic as other enemy (* immune to void)
@@ -121,9 +121,8 @@ TODO:
 - Weather alternates every 3 turns until boss dead
 - * Boss change weather even if player not in room
 
-**3. End** 
+**3. End**
 - Once defeated, spawn a gate at last location
 - TP back to ancient woods
 - 5000 runes dropped
 - Print message
-
