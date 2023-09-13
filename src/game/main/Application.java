@@ -1,0 +1,118 @@
+package game.main;
+
+import java.util.Arrays;
+import java.util.List;
+
+import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.FancyGroundFactory;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.World;
+import game.grounds.Gate;
+import game.grounds.Graveyard;
+import game.actions.FocusAction;
+import game.actors.HollowSoldier;
+import game.actors.Player;
+import game.actors.WanderingUndead;
+import game.grounds.*;
+import game.grounds.Void;
+import game.items.HealingVial;
+import game.items.OldKey;
+import game.items.RefreshingFlask;
+import game.weapons.BroadSword;
+
+/**
+ * The main class to start the game.
+ * Created by:
+ * @author Adrian Kristanto
+ * Modified by: Daryl Boon (32836899)
+ *
+ */
+public class Application {
+
+    public static void main(String[] args) {
+
+        World world = new World(new Display());
+
+        FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
+                new Wall(), new Floor(), new Puddle(), new Void());
+
+        List<String> map = Arrays.asList(
+                "...........................++++....++++....................",
+                "...#######................+++.....+++++....................",
+                "...#__.........................++++................++++....",
+                "...#..___#.......................................++++++....",
+                "...###.###......+++.......#######.................+++++....",
+                "..................++++....#_____#...................+++....",
+                "........~~.......+++++....#_____#....................++....",
+                ".........~~~..............###_###....................+.....",
+                "...~~~~~~~~................................................",
+                "....~~~~~.......+++.......................###..##..........",
+                "~~~~~~~.......+++...............++++......#___..#..........",
+                "~~~~~~.......+++................+++++......#..___#.........",
+                "~~~~~~~~~..............+++++++++++++......#######..........");
+
+        GameMap gameMap = new GameMap(groundFactory, map);
+        world.addGameMap(gameMap);
+
+        List<String> burialMap = Arrays.asList(
+                "...........+++++++........~~~~~~++....~~",
+                "...........++++++.........~~~~~~+.....~~",
+                "............++++...........~~~~~......++",
+                "............+.+.............~~~.......++",
+                "..........++~~~.......................++",
+                ".........+++~~~....#######...........+++",
+                ".........++++~.....#_____#.........+++++",
+                "..........+++......#_____#........++++++",
+                "..........+++......###_###.......~~+++++",
+                "..........~~.....................~~...++",
+                "..........~~~..................++.......",
+                "...........~~....~~~~~.........++.......",
+                "......~~....++..~~~~~~~~~~~......~......",
+                "....+~~~~..++++++++~~~~~~~~~....~~~.....",
+                "....+~~~~..++++++++~~~..~~~~~..~~~~~....");
+
+        GameMap burialGroundMap = new GameMap(groundFactory, burialMap);
+        world.addGameMap(burialGroundMap);
+
+        for (String line : FancyMessage.TITLE.split("\n")) {
+            new Display().println(line);
+            try {
+                Thread.sleep(200);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+
+        // Graveyard
+        gameMap.at(25, 10).setGround(new Graveyard(gameMap, new WanderingUndead()));
+        gameMap.at(13, 3).setGround(new Graveyard(gameMap, new WanderingUndead()));
+        gameMap.at(42, 5).setGround(new Graveyard(gameMap, new WanderingUndead()));
+        burialGroundMap.at(25, 10).setGround(new Graveyard(burialGroundMap, new HollowSoldier()));
+        burialGroundMap.at(36, 2).setGround(new Graveyard(burialGroundMap, new HollowSoldier()));
+
+        // Player
+        Player player = new Player("The Abstracted One", '@', 150, 200);
+        world.addPlayer(player, gameMap.at(29, 5));
+
+        // Gate
+        gameMap.at(22, 3).setGround(new Gate(burialGroundMap)); // test: 12, 9, actual: 22, 3
+        burialGroundMap.at(22, 6).setGround(new Gate(gameMap)); // test: 20, 9,actual: 22, 6
+
+        // Broadsword
+        BroadSword broadSword = new BroadSword("BroadSword", '1', 110, "slashes", 80);
+        broadSword.addAction(new FocusAction(broadSword));
+        gameMap.at(29, 6).addItem(broadSword);
+
+        // Extra features
+//        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);
+//        gameMap.at(32, 0).addItem(healingVial);
+//        RefreshingFlask refreshingFlash = new RefreshingFlask("Refreshing Flask", 'u', true);
+//        gameMap.at(56, 5).addItem(refreshingFlash);
+//        OldKey oldKey = new OldKey("Old Key", '-', true);
+//        gameMap.at(44, 11).addItem(oldKey);
+//        OldKey oldKey1 = new OldKey("Old Key", '-', true);
+//        gameMap.at(29, 6).addItem(oldKey1);
+
+        world.run();
+    }
+}

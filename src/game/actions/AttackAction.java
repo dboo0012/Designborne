@@ -1,4 +1,4 @@
-package game;
+package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -7,6 +7,9 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 
 import java.util.Random;
 
+/**
+ * Action for attacking another Actor.
+ */
 public class AttackAction extends Action {
 
     /**
@@ -52,6 +55,12 @@ public class AttackAction extends Action {
         this.direction = direction;
     }
 
+    /**
+     * Perform the Action of attacking the target.
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return result of the attack
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         if (weapon == null) {

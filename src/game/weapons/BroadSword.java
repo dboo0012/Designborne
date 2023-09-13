@@ -1,0 +1,107 @@
+package game.weapons;
+
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.*;
+import game.actions.AttackAction;
+import game.actions.FocusAction;
+
+/**
+ * A BroadSword weapon.
+ */
+public class BroadSword extends WeaponItem{
+    private static final float DEFAULT_DAMAGE_MULTIPLIER = 1.0f;
+    private final int initialHitRate;
+    private float damageMultiplier;
+    private int focusCounter;
+    private FocusAction focusAction;
+    /**
+     * Constructor.
+     *
+     * @param name name of the item
+     * @param displayChar character to use for display when item is on the ground
+     * @param damage amount of damage this weapon does
+     * @param verb verb to use for this weapon, e.g. "hits", "zaps"
+     * @param hitRate the probability/chance to hit the target.
+     */
+    public BroadSword(String name, char displayChar, int damage, String verb, int hitRate) {
+        super(name, displayChar, damage, verb, hitRate);
+        this.initialHitRate = hitRate;
+        this.damageMultiplier = DEFAULT_DAMAGE_MULTIPLIER;
+    }
+
+    /**
+     * Add a new FocusAction to the weapon.
+     * @param newAction the new action to be added.
+     */
+    public void addAction(FocusAction newAction){
+        this.focusAction = newAction;
+    }
+
+    /**
+     * Initialise the focus counter.
+     */
+    public void setFocusCounter() {
+    	this.focusCounter = 0;
+    }
+
+    /**
+     * Revert the BroadSword to its original stats if the weapon is dropped.
+     * @param location The location of the ground on which we lie.
+     */
+    public void tick (Location location){
+        if(location.getItems().contains(this)){
+            this.updateHitRate(initialHitRate);
+            this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
+            focusAction.toggleFocusActive();
+        }
+    }
+
+    /**
+     * Keeps track of the Focus skill.
+     * @param location The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
+     */
+    public void tick(Location location, Actor actor){
+        // Keeps track of focus
+        if(focusAction.isFocusActive()){
+            int MAX_FOCUS_COUNTER = 5;
+            if (focusCounter < MAX_FOCUS_COUNTER) {
+                focusCounter++;
+                new Display().println(String.format("Focus counter: %d/%d", focusCounter, MAX_FOCUS_COUNTER));
+                if (focusCounter == MAX_FOCUS_COUNTER){
+                    new Display().println("Focus expires next round!");
+                }
+            } else{
+                this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
+            }
+        }
+    }
+
+    /**
+     * Adds the focusAction to the allowable actions.
+     * @param actor the actor that owns the item
+     * @return ActionList of allowable actions
+     */
+    @Override
+    public ActionList allowableActions(Actor actor) {
+        ActionList actions = new ActionList();
+        actions.add(this.focusAction);
+        return actions;
+    }
+
+    /**
+     * Adds the attack action to attack mobs.
+     * @param actor the other actor
+     * @param location the location of the other actor
+     * @return ActionList of allowable actions
+     */
+    @Override
+    public ActionList allowableActions(Actor actor, Location location) {
+        ActionList actions = new ActionList();
+        actions.add(new AttackAction(actor, location.toString(), this));
+        return actions;
+    }
+}

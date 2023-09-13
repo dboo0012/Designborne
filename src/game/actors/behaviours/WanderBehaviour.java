@@ -1,4 +1,4 @@
-package game;
+package game.actors.behaviours;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,7 +13,7 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 /**
  * Created by:
  * @author Riordan D. Alfredo
- * Modified by:
+ * Modified by: Daryl Boon (32836899)
  *
  */
 public class WanderBehaviour implements Behaviour {

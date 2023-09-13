@@ -1,4 +1,4 @@
-package game;
+package game.main;
 
 /**
  * Fancy messages used to print the game title

@@ -1,4 +1,4 @@
-package game;
+package game.attributes;
 
 /**
  * Use this enum to represent abilities.
