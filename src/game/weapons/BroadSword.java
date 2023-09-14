@@ -32,6 +32,12 @@ public class BroadSword extends WeaponItem{
         this.damageMultiplier = DEFAULT_DAMAGE_MULTIPLIER;
     }
 
+    public void reset(){
+        setFocusCounter();
+        this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
+        this.updateHitRate(80);
+    }
+
     /**
      * Add a new FocusAction to the weapon.
      * @param newAction the new action to be added.
@@ -44,7 +50,7 @@ public class BroadSword extends WeaponItem{
      * Initialise the focus counter.
      */
     public void setFocusCounter() {
-    	this.focusCounter = 0;
+        this.focusCounter = 0;
     }
 
     /**
@@ -52,11 +58,8 @@ public class BroadSword extends WeaponItem{
      * @param location The location of the ground on which we lie.
      */
     public void tick (Location location){
-        if(location.getItems().contains(this)){
-            this.updateHitRate(initialHitRate);
-            this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
-            focusAction.toggleFocusActive();
-        }
+        reset();
+        focusAction.toggleFocusActive();
     }
 
     /**
