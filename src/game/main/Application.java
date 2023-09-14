@@ -36,42 +36,10 @@ public class Application {
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
                 new Wall(), new Floor(), new Puddle(), new Void());
 
-        List<String> map = Arrays.asList(
-                "...........................++++....++++....................",
-                "...#######................+++.....+++++....................",
-                "...#__.........................++++................++++....",
-                "...#..___#.......................................++++++....",
-                "...###.###......+++.......#######.................+++++....",
-                "..................++++....#_____#...................+++....",
-                "........~~.......+++++....#_____#....................++....",
-                ".........~~~..............###_###....................+.....",
-                "...~~~~~~~~................................................",
-                "....~~~~~.......+++.......................###..##..........",
-                "~~~~~~~.......+++...............++++......#___..#..........",
-                "~~~~~~.......+++................+++++......#..___#.........",
-                "~~~~~~~~~..............+++++++++++++......#######..........");
+        GameMap abandonedGroundMap = new GameMap(groundFactory, Maps.ABANDONED_VILLAGE);
+        world.addGameMap(abandonedGroundMap);
 
-        GameMap gameMap = new GameMap(groundFactory, map);
-        world.addGameMap(gameMap);
-
-        List<String> burialMap = Arrays.asList(
-                "...........+++++++........~~~~~~++....~~",
-                "...........++++++.........~~~~~~+.....~~",
-                "............++++...........~~~~~......++",
-                "............+.+.............~~~.......++",
-                "..........++~~~.......................++",
-                ".........+++~~~....#######...........+++",
-                ".........++++~.....#_____#.........+++++",
-                "..........+++......#_____#........++++++",
-                "..........+++......###_###.......~~+++++",
-                "..........~~.....................~~...++",
-                "..........~~~..................++.......",
-                "...........~~....~~~~~.........++.......",
-                "......~~....++..~~~~~~~~~~~......~......",
-                "....+~~~~..++++++++~~~~~~~~~....~~~.....",
-                "....+~~~~..++++++++~~~..~~~~~..~~~~~....");
-
-        GameMap burialGroundMap = new GameMap(groundFactory, burialMap);
+        GameMap burialGroundMap = new GameMap(groundFactory, Maps.BURIAL_GROUND);
         world.addGameMap(burialGroundMap);
 
         for (String line : FancyMessage.TITLE.split("\n")) {
@@ -84,24 +52,24 @@ public class Application {
         }
 
         // Graveyard
-        gameMap.at(25, 10).setGround(new Graveyard(gameMap, new WanderingUndead()));
-        gameMap.at(13, 3).setGround(new Graveyard(gameMap, new WanderingUndead()));
-        gameMap.at(42, 5).setGround(new Graveyard(gameMap, new WanderingUndead()));
+        abandonedGroundMap.at(25, 10).setGround(new Graveyard(abandonedGroundMap, new WanderingUndead()));
+        abandonedGroundMap.at(13, 3).setGround(new Graveyard(abandonedGroundMap, new WanderingUndead()));
+        abandonedGroundMap.at(42, 5).setGround(new Graveyard(abandonedGroundMap, new WanderingUndead()));
         burialGroundMap.at(25, 10).setGround(new Graveyard(burialGroundMap, new HollowSoldier()));
         burialGroundMap.at(36, 2).setGround(new Graveyard(burialGroundMap, new HollowSoldier()));
 
         // Player
         Player player = new Player("The Abstracted One", '@', 150, 200);
-        world.addPlayer(player, gameMap.at(29, 5));
+        world.addPlayer(player, abandonedGroundMap.at(29, 5));
 
         // Gate
-        gameMap.at(22, 3).setGround(new Gate(burialGroundMap)); // test: 12, 9, actual: 22, 3
-        burialGroundMap.at(22, 6).setGround(new Gate(gameMap)); // test: 20, 9,actual: 22, 6
+        abandonedGroundMap.at(22, 3).setGround(new Gate(burialGroundMap)); // test: 12, 9, actual: 22, 3
+        burialGroundMap.at(22, 6).setGround(new Gate(abandonedGroundMap)); // test: 20, 9,actual: 22, 6
 
         // Broadsword
         BroadSword broadSword = new BroadSword("BroadSword", '1', 110, "slashes", 80);
         broadSword.addAction(new FocusAction(broadSword));
-        gameMap.at(29, 6).addItem(broadSword);
+        abandonedGroundMap.at(29, 6).addItem(broadSword);
 
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);
