@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.attributes.Status;
 import game.grounds.Gate;
 import game.items.OldKey;
 
@@ -37,7 +38,7 @@ public class UnlockAction extends Action {
             }
         }
         if(hasOldKey){ // Actor has old key in inventory
-            gate.unlock();
+            gate.removeCapability(Status.LOCKED);
             return actor + " unlocks the gate to The Burial Grounds!";
         }
         return "Gate is locked shut.";
