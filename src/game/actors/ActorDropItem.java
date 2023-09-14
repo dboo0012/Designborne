@@ -7,5 +7,5 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import java.util.ArrayList;
 
 public interface ActorDropItem {
-    void dropItems(Actor actor, GameMap map, ArrayList<Class<? extends Item>> itemsToBeDropped, int[] itemsToBeDroppedChance);
+    void dropItems(Actor actor, GameMap map);
 }

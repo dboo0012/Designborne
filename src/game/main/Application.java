@@ -71,6 +71,8 @@ public class Application {
         broadSword.addAction(new FocusAction(broadSword));
         abandonedGroundMap.at(29, 6).addItem(broadSword);
 
+        abandonedGroundMap.at(29, 6).addActor(new HollowSoldier());
+
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);
 //        gameMap.at(32, 0).addItem(healingVial);

@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.attributes.EntityTypes;
 import game.attributes.Status;
 
 import java.lang.reflect.InvocationTargetException;
@@ -21,23 +22,24 @@ public class ItemDrop {
             * @param itemsToBeDropped     A list of items to be dropped.
             * @param itemsToBeDroppedChance An array of chances to drop items, with indices matching itemsToBeDropped.
      */
-    public void dropItems(Actor actor, GameMap map, ArrayList<Class<? extends Item>> itemsToBeDropped, int[] itemsToBeDroppedChance) {
+    public void dropItems(Actor actor, GameMap map, ArrayList<Class<? extends Item>> itemsToBeDropped, double[] itemsToBeDroppedChance) {
         Location currentLocation = map.locationOf(actor);
 
         for (int i = 0; i < itemsToBeDropped.size(); i++) {
-            if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-                Class<? extends Item> item = itemsToBeDropped.get(i);
-                int chanceToSpawn = itemsToBeDroppedChance[i];
+            Class<? extends Item> item = itemsToBeDropped.get(i);
+            double chanceToSpawn = itemsToBeDroppedChance[i];
 
-                if (rand.nextInt(100) < chanceToSpawn) {
-                    try {
-                        map.at(currentLocation.x(), currentLocation.y()).addItem(item.getConstructor().newInstance());
-                    } catch (InstantiationException | NoSuchMethodException | IllegalAccessException |
-                             InvocationTargetException e) {
-                        // Handle exceptions if necessary
-                    }
-
+            double chance = Math.random();
+            System.out.println(item + "|" + chanceToSpawn + "|" + chance);
+            if (chance < chanceToSpawn) {
+                try {
+                    map.at(currentLocation.x(), currentLocation.y()).addItem(item.getConstructor().newInstance());
+                } catch (InstantiationException | NoSuchMethodException | IllegalAccessException |
+                         InvocationTargetException e) {
+                    System.out.println(e);
+                    // Handle exceptions if necessary
                 }
+
             }
         }
     }

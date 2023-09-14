@@ -76,7 +76,7 @@ public class WanderingUndead extends Actor implements ActorSpawn {
         // 20% chance of dropping potion
         if (Math.random() < 0.20){
             map.at(map.locationOf(this).x(), map.locationOf(this).y())
-                    .addItem(new HealingVial("Healing Vial", 'a', true));
+                    .addItem(new HealingVial());
         }
         map.removeActor(this);
         return this + " met their demise in the hand of " + actor;
