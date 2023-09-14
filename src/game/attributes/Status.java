@@ -8,4 +8,5 @@ package game.attributes;
  */
 public enum Status {
     HOSTILE_TO_ENEMY,
+    LOCKED,
 }

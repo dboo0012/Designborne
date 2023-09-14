@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
@@ -13,6 +14,9 @@ import game.attributes.Ability;
 import game.main.FancyMessage;
 import game.attributes.EntityTypes;
 import game.attributes.Status;
+import game.utilities.FancyMessageDisplay;
+
+import java.util.ArrayList;
 
 /**
  * Class representing the Player.
@@ -49,11 +53,11 @@ public class Player extends Actor {
     public void recoverStamina() {
         maxStamina = getAttributeMaximum(BaseActorAttributes.STAMINA);
         currentStamina = getAttribute(BaseActorAttributes.STAMINA);
-        int recoverAmount = maxStamina / 100; // 1% of max stamina
+        int recoverAmount = (int) (maxStamina * 0.01); // 1% of max stamina
         if (currentStamina < maxStamina){
             this.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, recoverAmount);
         }
-        System.out.println(currentStamina);
+//        System.out.println(currentStamina);
     }
 
     /**
@@ -82,7 +86,19 @@ public class Player extends Actor {
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
 
+        /// Display inventory
+        if (this.getItemInventory() != null) {
+            ArrayList<Item> itemList = new ArrayList<>(this.getItemInventory()); // Get all the items in players inventory
+            new Display().println("The Abstracted One inventory:");
+            for (Item item : itemList) {
+                new Display().println(String.format(" • %s", item.toString()));
+            }
+        }
+
         // return/print the console menu
+        new Display().println("The Abstracted One stats:");
+        new Display().println(String.format(" • HP: %s/%s", this.getAttribute(BaseActorAttributes.HEALTH), this.getAttributeMaximum(BaseActorAttributes.HEALTH)));
+        new Display().println(String.format(" • Stamina: %s/%s", this.getAttribute(BaseActorAttributes.STAMINA), this.getAttributeMaximum(BaseActorAttributes.STAMINA)));
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
     }
@@ -97,15 +113,9 @@ public class Player extends Actor {
      */
     @Override
     public String unconscious(GameMap map) {
-        for (String line : FancyMessage.YOU_DIED.split("\n")) {
-            new Display().println(line);
-            try {
-                Thread.sleep(200);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
+        FancyMessageDisplay.createString(FancyMessage.YOU_DIED);
         return super.unconscious(map);
+        //ToDo: The sequence of You Died is incorrect
     }
 
     /**
@@ -118,14 +128,7 @@ public class Player extends Actor {
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
-        for (String line : FancyMessage.YOU_DIED.split("\n")) {
-            new Display().println(line);
-            try {
-                Thread.sleep(200);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
+        FancyMessageDisplay.createString(FancyMessage.YOU_DIED);
         return super.unconscious(actor, map);
     }
 }

@@ -11,4 +11,5 @@ public interface ActorSpawn {
      * @return actor.
      */
     Actor spawn();
+
 }
