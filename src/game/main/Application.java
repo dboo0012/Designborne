@@ -1,8 +1,5 @@
 package game.main;
 
-import java.util.Arrays;
-import java.util.List;
-
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -15,9 +12,7 @@ import game.actors.Player;
 import game.actors.WanderingUndead;
 import game.grounds.*;
 import game.grounds.Void;
-import game.items.HealingVial;
-import game.items.OldKey;
-import game.items.RefreshingFlask;
+import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
 
 /**
@@ -42,14 +37,7 @@ public class Application {
         GameMap burialGroundMap = new GameMap(groundFactory, Maps.BURIAL_GROUND);
         world.addGameMap(burialGroundMap);
 
-        for (String line : FancyMessage.TITLE.split("\n")) {
-            new Display().println(line);
-            try {
-                Thread.sleep(200);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
+        FancyMessageDisplay.createString(FancyMessage.TITLE);
 
         // Graveyard
         abandonedGroundMap.at(25, 10).setGround(new Graveyard(abandonedGroundMap, new WanderingUndead()));

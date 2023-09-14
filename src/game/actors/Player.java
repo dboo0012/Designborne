@@ -14,6 +14,7 @@ import game.attributes.Ability;
 import game.main.FancyMessage;
 import game.attributes.EntityTypes;
 import game.attributes.Status;
+import game.utilities.FancyMessageDisplay;
 
 import java.util.ArrayList;
 
@@ -112,15 +113,9 @@ public class Player extends Actor {
      */
     @Override
     public String unconscious(GameMap map) {
-        for (String line : FancyMessage.YOU_DIED.split("\n")) {
-            new Display().println(line);
-            try {
-                Thread.sleep(200);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
+        FancyMessageDisplay.createString(FancyMessage.YOU_DIED);
         return super.unconscious(map);
+        //ToDo: The sequence of You Died is incorrect
     }
 
     /**
@@ -133,14 +128,7 @@ public class Player extends Actor {
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
-        for (String line : FancyMessage.YOU_DIED.split("\n")) {
-            new Display().println(line);
-            try {
-                Thread.sleep(200);
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
+        FancyMessageDisplay.createString(FancyMessage.YOU_DIED);
         return super.unconscious(actor, map);
     }
 }
