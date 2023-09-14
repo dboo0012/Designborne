@@ -60,7 +60,7 @@ public class Application {
         abandonedGroundMap.at(29, 6).addItem(broadSword);
 
         // TESTING CODE
-        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
+//        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
 
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);
