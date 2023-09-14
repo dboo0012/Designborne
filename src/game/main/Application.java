@@ -72,7 +72,7 @@ public class Application {
         abandonedGroundMap.at(29, 6).addItem(broadSword);
 
         // TESTING CODE
-//        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
+        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
 
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);
@@ -83,6 +83,7 @@ public class Application {
 //        gameMap.at(44, 11).addItem(oldKey);
 //        OldKey oldKey1 = new OldKey();
 //        abandonedGroundMap.at(29, 6).addItem(oldKey1);
+
 
         world.run();
     }

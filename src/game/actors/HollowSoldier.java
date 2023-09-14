@@ -30,9 +30,9 @@ import java.util.Map;
 public class HollowSoldier extends EnemyActor implements ActorSpawn, ActorDropItem {
 
     //Pre-defined list of items to drop
-    private final ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>(List.of(RefreshingFlask.class, HealingVial.class));
+    private final ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>();
     //Array of chances to drop, with indices matching itemsToBeDropped
-    private final double[] itemsToBeDroppedChance = {0.3, 0.2};
+    private final ArrayList<Double> itemsToBeDroppedChance = new ArrayList<>();
 
     private ItemDrop itemDrop = new ItemDrop();
 
@@ -42,15 +42,15 @@ public class HollowSoldier extends EnemyActor implements ActorSpawn, ActorDropIt
         super("Hollow Soldier", '&', 200);
         this.behaviours.put(999, new WanderBehaviour());
         this.behaviours.put(998, new AttackBehaviour());
+
+        addDroppableItem(new RefreshingFlask(), 0.3);
+        addDroppableItem(new HealingVial(), 0.2);
+
     }
 
-    /**
-     * Intrinsic weapon for WanderingUndead
-     * @return a freshly-instantiated IntrinsicWeapon
-     */
-    @Override
-    public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(50, "smacks", 50);
+    public void addDroppableItem(Item item, double chance){
+        this.itemsToBeDropped.add(item.getClass());
+        this.itemsToBeDroppedChance.add(chance);
     }
 
     @Override
@@ -69,6 +69,14 @@ public class HollowSoldier extends EnemyActor implements ActorSpawn, ActorDropIt
         itemDrop.dropItems(actor, map, this.itemsToBeDropped, this.itemsToBeDroppedChance);
     }
 
+    /**
+     * Intrinsic weapon for WanderingUndead
+     * @return a freshly-instantiated IntrinsicWeapon
+     */
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(50, "smacks", 50);
+    }
 
     /**
      * Spawn a Hollow Soldier with a 10% chance.

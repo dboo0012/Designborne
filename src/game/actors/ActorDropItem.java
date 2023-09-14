@@ -8,4 +8,5 @@ import java.util.ArrayList;
 
 public interface ActorDropItem {
     void dropItems(Actor actor, GameMap map);
+    void addDroppableItem(Item item, double chance);
 }

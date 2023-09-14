@@ -27,12 +27,14 @@ import java.util.Map;
 /**
  * A Wandering Undead actor that has the ability to be spawned.
  */
-public class WanderingUndead extends Actor implements ActorSpawn {
+public class WanderingUndead extends Actor implements ActorSpawn, ActorDropItem{
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
-    private final ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>(List.of(OldKey.class, HealingVial.class));
+
+    //Pre-defined list of items to drop
+    private final ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>();
     //Array of chances to drop, with indices matching itemsToBeDropped
-    private final double[] itemsToBeDroppedChance = {0.25, 0.2};
+    private final ArrayList<Double> itemsToBeDroppedChance = new ArrayList<>();
 
     private ItemDrop itemDrop = new ItemDrop();
 
@@ -43,6 +45,14 @@ public class WanderingUndead extends Actor implements ActorSpawn {
         super("Wandering Undead", 't', 100);
         this.behaviours.put(999, new WanderBehaviour());
         this.behaviours.put(1, new AttackBehaviour());
+
+        addDroppableItem(new OldKey(), 0.25);
+        addDroppableItem(new HealingVial(), 0.2);
+    }
+
+    public void addDroppableItem(Item item, double chance){
+        this.itemsToBeDropped.add(item.getClass());
+        this.itemsToBeDroppedChance.add(chance);
     }
 
     /**
