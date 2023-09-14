@@ -13,7 +13,7 @@ public class OldKey extends Item {
      * @param displayChar the character to use to represent this item if it is on the ground
      * @param portable true if the Item can be picked up, false otherwise
      */
-    public OldKey(String name, char displayChar, boolean portable) {
-        super(name, displayChar, portable);
+    public OldKey() {
+        super("Old Key", '-', true);
     }
 }

@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.grounds.Void;
@@ -14,9 +15,13 @@ import game.actions.VoidDeathAction;
 import game.actors.behaviours.AttackBehaviour;
 import game.actors.behaviours.WanderBehaviour;
 import game.items.HealingVial;
+import game.items.ItemDrop;
 import game.items.OldKey;
+import game.items.RefreshingFlask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +29,12 @@ import java.util.Map;
  */
 public class WanderingUndead extends Actor implements ActorSpawn {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
+
+    private final ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>(List.of(OldKey.class, HealingVial.class));
+    //Array of chances to drop, with indices matching itemsToBeDropped
+    private final double[] itemsToBeDroppedChance = {0.25, 0.2};
+
+    private ItemDrop itemDrop = new ItemDrop();
 
     /**
      * Constructor.
@@ -59,27 +70,20 @@ public class WanderingUndead extends Actor implements ActorSpawn {
         return new DoNothingAction();
     }
 
-    /**
-     * When the actor is unconscious, there is a 25% chance of dropping an Old Key and a 20% chance of dropping a Healing Vial.
-     *
-     * @param actor the perpetrator
-     * @param map where the actor fell unconscious
-     * @return String that says the actor is dead
-     */
     @Override
     public String unconscious(Actor actor, GameMap map) {
-        // 25% chance of dropping Old Key
-        if (Math.random() < 0.25){
-            map.at(map.locationOf(this).x(), map.locationOf(this).y())
-                    .addItem(new OldKey("Old Key", '-', true));
-        }
-        // 20% chance of dropping potion
-        if (Math.random() < 0.20){
-            map.at(map.locationOf(this).x(), map.locationOf(this).y())
-                    .addItem(new HealingVial());
-        }
-        map.removeActor(this);
-        return this + " met their demise in the hand of " + actor;
+        dropItems(this, map);
+        return super.unconscious(actor, map);
+    }
+
+    /**
+     * Drops items when the actor becomes unconscious.
+     *
+     * @param actor                The actor that became unconscious.
+     * @param map                  The map where the actor fell unconscious.
+     */
+    public void dropItems(Actor actor, GameMap map) {
+        itemDrop.dropItems(actor, map, this.itemsToBeDropped, this.itemsToBeDroppedChance);
     }
 
     /**

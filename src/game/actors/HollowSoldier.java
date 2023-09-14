@@ -32,14 +32,14 @@ public class HollowSoldier extends EnemyActor implements ActorSpawn, ActorDropIt
     //Pre-defined list of items to drop
     private final ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>(List.of(RefreshingFlask.class, HealingVial.class));
     //Array of chances to drop, with indices matching itemsToBeDropped
-    private final double[] itemsToBeDroppedChance = {1, 1};
+    private final double[] itemsToBeDroppedChance = {0.3, 0.2};
 
     private ItemDrop itemDrop = new ItemDrop();
 
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public HollowSoldier() {
-        super("Hollow Soldier", '&', 2);
+        super("Hollow Soldier", '&', 200);
         this.behaviours.put(999, new WanderBehaviour());
         this.behaviours.put(998, new AttackBehaviour());
     }
