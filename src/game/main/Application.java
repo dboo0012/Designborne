@@ -61,6 +61,7 @@ public class Application {
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
+        abandonedGroundMap.at(29, 6).addActor(new HollowSoldier());
 
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);
