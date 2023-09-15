@@ -14,6 +14,7 @@ import game.actors.behaviours.AttackBehaviour;
 import game.actors.behaviours.WanderBehaviour;
 import game.attributes.EntityTypes;
 import game.attributes.Status;
+import game.items.ItemDrop;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -27,12 +28,8 @@ public class EnemyActor extends Actor implements Attackable{
 
     private final Random rand = new Random();
 
-    private Map<Integer, Behaviour> behaviours = new TreeMap<>();
+    protected Map<Integer, Behaviour> behaviours = new TreeMap<>();
 
-    // Pre-defined list of items to drop
-//    private final ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>();
-    // List of chances to drop, with indices matching itemsToBeDropped
-//    private final int[] itemsToBeDroppedChance = new int[0];
 
     /**
      * Constructor for creating an EnemyActor object.
@@ -65,10 +62,6 @@ public class EnemyActor extends Actor implements Attackable{
                 return action;
         }
         return new DoNothingAction();
-    }
-
-    public void addBehaviour(int priority, Behaviour behaviour) {
-        this.behaviours.put(priority, behaviour);
     }
 
     /**

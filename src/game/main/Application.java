@@ -12,7 +12,6 @@ import game.actors.Player;
 import game.actors.WanderingUndead;
 import game.grounds.*;
 import game.grounds.Void;
-import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
 
@@ -38,9 +37,6 @@ public class Application {
         GameMap burialGroundMap = new GameMap(groundFactory, Maps.BURIAL_GROUND);
         world.addGameMap(burialGroundMap);
 
-        GameMap ancientWoodsMap = new GameMap(groundFactory, Maps.ANCIENT_WOODS);
-        world.addGameMap(ancientWoodsMap);
-
         FancyMessageDisplay.createString(FancyMessage.TITLE);
 
         // Graveyard
@@ -58,9 +54,6 @@ public class Application {
         abandonedGroundMap.at(22, 3).setGround(new Gate(burialGroundMap)); // test: 12, 9, actual: 22, 3
         burialGroundMap.at(22, 6).setGround(new Gate(abandonedGroundMap)); // test: 20, 9,actual: 22, 6
 
-        burialGroundMap.at(25, 9).setGround(new Gate(ancientWoodsMap)); // test: 28, 9, actual: 22, 9
-        ancientWoodsMap.at(17, 9).setGround(new Gate(burialGroundMap)); // test: 40, 9, actual: 22, 9
-
         // Broadsword
         BroadSword broadSword = new BroadSword("BroadSword", '1', 110, "slashes", 80);
         broadSword.addAction(new FocusAction(broadSword));
@@ -68,7 +61,6 @@ public class Application {
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
-        abandonedGroundMap.at(29, 6).addItem(new OldKey());
 
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);
