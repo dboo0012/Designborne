@@ -30,9 +30,9 @@ import java.util.Map;
 public class HollowSoldier extends EnemyDropActor implements ActorSpawn {
 
     public HollowSoldier() {
-        super("Hollow Soldier", '&', 2);
+        super("Hollow Soldier", '&', 200);
 
-        addDroppableItem(new RefreshingFlask(), 1); //0.3
+        addDroppableItem(new RefreshingFlask(), 0.3); //0.3
         addDroppableItem(new HealingVial(), 0.2); //0.2
     }
 
