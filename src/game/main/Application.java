@@ -89,8 +89,10 @@ public class Application {
         abandonedGroundMap.at(30, 9).addItem(new Bloodberry("Bloodberry", '*', true));
         abandonedGroundMap.at(27, 8).addItem(new Bloodberry("Bloodberry", '*', true));
         abandonedGroundMap.at(27, 9).addItem(new Bloodberry("Bloodberry", '*', true));
-
         burialGroundMap.at(28, 5).addItem(new Bloodberry("Bloodberry", '*', true));
+
+        // Boss
+        bossMap.at(15, 1).addActor(new Abxervyer());
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
