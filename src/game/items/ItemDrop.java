@@ -24,7 +24,7 @@ public class ItemDrop {
      */
     public void dropItems(Actor actor, GameMap map, ArrayList<Class<? extends Item>> itemsToBeDropped, ArrayList<Double> itemsToBeDroppedChance) {
         Location currentLocation = map.locationOf(actor);
-        System.out.println(actor);
+//        System.out.println(actor);
         //ToDo: doesn't check if the actor that killed it was Player
 
         for (int i = 0; i < itemsToBeDropped.size(); i++) {
@@ -33,7 +33,7 @@ public class ItemDrop {
 
             double chance = Math.random();
 
-            System.out.println(item + "|" + chanceToSpawn + "|" + chance);
+//            System.out.println(item + "|" + chanceToSpawn + "|" + chance);
 
             if (chance < chanceToSpawn) {
                 try {

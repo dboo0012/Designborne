@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.ItemDrop;
+import game.items.Runes;
 
 import java.util.ArrayList;
 
@@ -15,8 +16,9 @@ public class EnemyDropActor extends EnemyActor implements ActorDropItem {
 
     protected ItemDrop itemDrop = new ItemDrop();
 
-    public EnemyDropActor(String name, char displayChar, int hitPoints) {
-        super(name, displayChar, hitPoints);
+    public EnemyDropActor(String name, char displayChar, int hitPoints, int runesDropped) {
+        super(name, displayChar, hitPoints, runesDropped);
+//        addDroppableItem(new Runes(this.runesDropped), 1);
     }
 
     public void addDroppableItem(Item item, double chance){
