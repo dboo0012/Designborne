@@ -10,12 +10,12 @@ import game.attributes.Status;
 
 
 /**
- * A Forest Keeper  actor that has the ability to be spawned.
+ * A Red Wolf  actor that has the ability to be spawned.
  */
-public class ForestKeeper extends EnemyDropActor implements ActorSpawn {
+public class RedWolf extends EnemyDropActor implements ActorSpawn {
 
-    public ForestKeeper() {
-        super("Forest Keeper", '8', 125);
+    public RedWolf() {
+        super("Red Wolf", 'r', 25);
     }
 
     /**
@@ -24,7 +24,7 @@ public class ForestKeeper extends EnemyDropActor implements ActorSpawn {
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(25, "touches", 75);
+        return new IntrinsicWeapon(15, "bites", 80);
     }
 
     @Override
@@ -38,13 +38,13 @@ public class ForestKeeper extends EnemyDropActor implements ActorSpawn {
     }
 
     /**
-     * Spawn a Forest Keeper with a 15% chance.
-     * @return ForestKeeper or null
+     * Spawn a Red Wolf with a 30% chance.
+     * @return RedWolf or null
      */
     @Override
     public Actor spawn() {
-        if (Math.random() < 0.15){
-            return new ForestKeeper();
+        if (Math.random() < 0.30){
+            return new RedWolf();
         }
         return null;
     }

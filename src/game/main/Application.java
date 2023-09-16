@@ -4,13 +4,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.actors.ForestKeeper;
+import game.actors.*;
 import game.grounds.Gate;
 import game.grounds.Graveyard;
 import game.actions.FocusAction;
-import game.actors.HollowSoldier;
-import game.actors.Player;
-import game.actors.WanderingUndead;
 import game.grounds.*;
 import game.grounds.Void;
 import game.items.OldKey;
@@ -55,6 +52,9 @@ public class Application {
         // Empty Huts
         ancientWoodsMap.at(5, 2).setGround(new EmptyHuts(ancientWoodsMap, new ForestKeeper()));
         ancientWoodsMap.at(9, 2).setGround(new EmptyHuts(ancientWoodsMap, new ForestKeeper()));
+
+        // Bushes
+        ancientWoodsMap.at(3, 5).setGround(new Bush(ancientWoodsMap, new RedWolf()));
 
         // Player
         Player player = new Player("The Abstracted One", '@', 150, 200);
