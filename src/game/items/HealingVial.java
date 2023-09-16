@@ -2,8 +2,11 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.ChangeAttributeAction;
 import game.actions.HealAction;
 
 /**
@@ -19,19 +22,19 @@ public class HealingVial extends Item {
     }
 
     /**
-     * Player is able to heal if item in inventory.
-     * @param currentLocation The location of the actor carrying this Item.
-     * @param actor The actor carrying this Item.
+     * Generates an allowable action for the owner of the Healing Vial, which is to use it and increase their health.
+     *
+     * @param owner the actor that owns the item
+     * @return an unmodifiable list of Actions
      */
-    @Override
-    public void tick(Location currentLocation, Actor actor) {
-        if (actor.getItemInventory().contains(this) && actions.size() == 0){
-            actions.add(new HealAction(this));
-        }
-    }
-
-    @Override
     public ActionList allowableActions(Actor owner) {
-        return actions;
+        int maxHealth = owner.getAttributeMaximum(BaseActorAttributes.HEALTH);
+        float increasePercentage = 0.1f;
+
+        // Create a ChangeAttributeAction to increase the actor's health
+        ChangeAttributeAction changeAttributeAction = new ChangeAttributeAction(this, BaseActorAttributes.HEALTH,
+                ActorAttributeOperations.INCREASE, (int) (maxHealth * increasePercentage), true);
+
+        return new ActionList(changeAttributeAction);
     }
 }

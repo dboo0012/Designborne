@@ -13,8 +13,6 @@ public class addBalanceAction extends Action {
         this.runes = runes;
         this.value = runes.getValue();
         this.currencyName = runes.toString();
-
-        System.out.println("Value: " + runes.getValue());
     }
 
     @Override

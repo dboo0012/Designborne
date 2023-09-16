@@ -33,7 +33,7 @@ public class WanderingUndead extends EnemyActor implements ActorSpawn{
      * Constructor.
      */
     public WanderingUndead() {
-        super("Wandering Undead", 't', 1, 50);
+        super("Wandering Undead", 't', 100, 50);
 
         addDroppableItem(new OldKey(), 0.25); //0.25
         addDroppableItem(new HealingVial(), 0.2); //0.2
