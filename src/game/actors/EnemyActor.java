@@ -15,6 +15,7 @@ import game.actors.behaviours.WanderBehaviour;
 import game.attributes.EntityTypes;
 import game.attributes.Status;
 import game.items.ItemDrop;
+import game.items.Runes;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -24,13 +25,17 @@ import java.util.*;
  *
  * The EnemyActor class extends the Actor class and represents an enemy character in the game. It includes behaviors such as wandering and attacking.
  */
-public class EnemyActor extends Actor implements Attackable{
+public abstract class EnemyActor extends Actor implements Attackable{
 
     private final Random rand = new Random();
 
     protected Map<Integer, Behaviour> behaviours = new TreeMap<>();
-
-
+    //Pre-defined list of items to drop
+    protected final ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>();
+    //Array of chances to drop, with indices matching itemsToBeDropped
+    protected final ArrayList<Double> itemsToBeDroppedChance = new ArrayList<>();
+    protected ItemDrop itemDrop = new ItemDrop();
+    protected int runesDropped;
     /**
      * Constructor for creating an EnemyActor object.
      *
@@ -38,11 +43,51 @@ public class EnemyActor extends Actor implements Attackable{
      * @param displayChar Character to represent the enemy actor in the UI.
      * @param hitPoints   Enemy actor's starting number of hit points.
      */
-    public EnemyActor(String name, char displayChar, int hitPoints) {
+    public EnemyActor(String name, char displayChar, int hitPoints, int runesDropped) {
         super(name, displayChar, hitPoints);
+        this.runesDropped = runesDropped;
         this.behaviours.put(999, new WanderBehaviour());
         this.behaviours.put(998, new AttackBehaviour());
         this.addCapability(EntityTypes.ENEMY);
+    }
+
+    public int getRunesDropped(){
+        return this.runesDropped;
+    }
+
+    public void addDroppableItem(Item item, double chance){
+        this.itemsToBeDropped.add(item.getClass());
+        this.itemsToBeDroppedChance.add(chance);
+    }
+
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+        dropItems(this, map);
+        dropRune(this, map);
+        return super.unconscious(actor, map);
+    }
+
+    public void dropRune(Actor actor, GameMap map){
+        Location currentLocation = map.locationOf(actor);
+        if (runesDropped > 0){
+            Runes runes = new Runes(runesDropped);
+            map.at(currentLocation.x(), currentLocation.y()).addItem(runes);
+
+        }
+
+
+
+
+    }
+
+    /**
+     * Drops items when the actor becomes unconscious.
+     *
+     * @param actor                The actor that became unconscious.
+     * @param map                  The map where the actor fell unconscious.
+     */
+    public void dropItems(Actor actor, GameMap map) {
+        itemDrop.dropItems(actor, map, this.itemsToBeDropped, this.itemsToBeDroppedChance);
     }
 
     /**
@@ -80,9 +125,21 @@ public class EnemyActor extends Actor implements Attackable{
         }
         return actions;
     }
+// TODO: Every actor would drop runes, why still need enemydropactor class?
 
+//    @Override
+//    public String unconscious(Actor actor, GameMap map) {
+//        dropRunes(actor, map);
+//        return super.unconscious(actor, map);
+//    }
 
-//    /**
+//    public void dropRunes(Actor actor, GameMap map){
+//        Location currentLocation = map.locationOf(actor);
+//
+//        map.at(currentLocation.x(), currentLocation.y()).addItem(new Runes(runesDropped));
+//    }
+
+    //    /**
 //     * Handles what happens when the actor is unconscious due to the action of another actor.
 //     *
 //     * @param actor The perpetrator actor.

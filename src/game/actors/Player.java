@@ -99,6 +99,7 @@ public class Player extends Actor {
         new Display().println("The Abstracted One stats:");
         new Display().println(String.format(" • HP: %s/%s", this.getAttribute(BaseActorAttributes.HEALTH), this.getAttributeMaximum(BaseActorAttributes.HEALTH)));
         new Display().println(String.format(" • Stamina: %s/%s", this.getAttribute(BaseActorAttributes.STAMINA), this.getAttributeMaximum(BaseActorAttributes.STAMINA)));
+        new Display().println(String.format(" • Wallet: $%d", this.getBalance()));
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
     }

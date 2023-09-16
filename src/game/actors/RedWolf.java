@@ -13,10 +13,10 @@ import game.items.HealingVial;
 /**
  * A Red Wolf  actor that has the ability to be spawned.
  */
-public class RedWolf extends EnemyDropActor implements ActorSpawn {
+public class RedWolf extends EnemyActor implements ActorSpawn {
 
     public RedWolf() {
-        super("Red Wolf", 'r', 25);
+        super("Red Wolf", 'r', 25, 25);
         addDroppableItem(new HealingVial(), 0.1);
     }
 

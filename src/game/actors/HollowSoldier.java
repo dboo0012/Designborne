@@ -27,10 +27,10 @@ import java.util.Map;
 /**
  * A Hollow Soldier actor that has the ability to be spawned.
  */
-public class HollowSoldier extends EnemyDropActor implements ActorSpawn {
+public class HollowSoldier extends EnemyActor implements ActorSpawn {
 
     public HollowSoldier() {
-        super("Hollow Soldier", '&', 200);
+        super("Hollow Soldier", '&', 200, 100);
 
         addDroppableItem(new RefreshingFlask(), 0.3); //0.3
         addDroppableItem(new HealingVial(), 0.2); //0.2
