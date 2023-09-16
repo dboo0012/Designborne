@@ -1,6 +1,11 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
+import game.actions.IncreaseMaxAttributeAction;
 
 public class Bloodberry extends Item {
     /***
@@ -13,5 +18,14 @@ public class Bloodberry extends Item {
         super(name, displayChar, portable);
     }
 
+    @Override
+    public ActionList allowableActions(Actor owner) {
+        int increaseValue = 5;
 
+        // Increase the actor's maximum health by a value
+        IncreaseMaxAttributeAction changeAttributeAction = new IncreaseMaxAttributeAction(this, BaseActorAttributes.HEALTH,
+                ActorAttributeOperations.INCREASE, increaseValue, true);
+
+        return new ActionList(changeAttributeAction);
+    }
 }
