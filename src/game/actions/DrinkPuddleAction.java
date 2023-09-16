@@ -9,7 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 public class DrinkPuddleAction extends Action {
 
     /**
-     * Perform the Action.
+     * Drinks from the Puddle
      *
      * @param actor The actor performing the action.
      * @param map   The map the actor is on.

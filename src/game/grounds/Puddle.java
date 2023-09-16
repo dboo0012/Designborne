@@ -19,7 +19,7 @@ public class Puddle extends Ground {
     }
 
     /**
-     * Returns an empty Action list.
+     * Returns a DrinkPuddleAction
      *
      * @param actor the Actor acting
      * @param location the current Location

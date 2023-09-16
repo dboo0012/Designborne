@@ -90,9 +90,9 @@ public class Application {
 //        abandonedGroundMap.at(29, 6).addItem(new Bloodberry("Bloodberry", '*', true));
 
         //Testing Puddle
-        player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 50);
-        player.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 50);
-        abandonedGroundMap.at(29, 5).setGround(new Puddle());
+//        player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 50);
+//        player.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 50);
+//        abandonedGroundMap.at(29, 5).setGround(new Puddle());
 
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);
