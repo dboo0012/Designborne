@@ -17,7 +17,7 @@ public class RedWolf extends EnemyDropActor implements ActorSpawn {
 
     public RedWolf() {
         super("Red Wolf", 'r', 1);
-        addDroppableItem(new HealingVial(), 0.0); //0.2
+        addDroppableItem(new HealingVial(), 0.1);
     }
 
     /**

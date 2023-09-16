@@ -17,7 +17,7 @@ public class ForestKeeper extends EnemyDropActor implements ActorSpawn {
 
     public ForestKeeper() {
         super("Forest Keeper", '8', 1);
-        addDroppableItem(new HealingVial(), 0.9); //0.2
+        addDroppableItem(new HealingVial(), 0.2); //0.2
     }
 
     /**

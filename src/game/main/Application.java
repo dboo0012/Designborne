@@ -57,7 +57,7 @@ public class Application {
         ancientWoodsMap.at(3, 5).setGround(new Bush(ancientWoodsMap, new RedWolf()));
 
         // Player
-        Player player = new Player("The Abstracted One", '@', 150000, 200);
+        Player player = new Player("The Abstracted One", '@', 150, 200);
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
 
         // Gate
