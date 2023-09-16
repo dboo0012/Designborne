@@ -16,7 +16,7 @@ import game.items.HealingVial;
 public class RedWolf extends EnemyDropActor implements ActorSpawn {
 
     public RedWolf() {
-        super("Red Wolf", 'r', 1);
+        super("Red Wolf", 'r', 25);
         addDroppableItem(new HealingVial(), 0.1);
     }
 

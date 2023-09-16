@@ -16,7 +16,7 @@ import game.items.HealingVial;
 public class ForestKeeper extends EnemyDropActor implements ActorSpawn {
 
     public ForestKeeper() {
-        super("Forest Keeper", '8', 1);
+        super("Forest Keeper", '8', 125);
         addDroppableItem(new HealingVial(), 0.2); //0.2
     }
 
