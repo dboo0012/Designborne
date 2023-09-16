@@ -1,5 +1,7 @@
 package game.main;
 
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -74,6 +76,11 @@ public class Application {
         // TESTING CODE
         abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
 //        abandonedGroundMap.at(29, 6).addItem(new OldKey());
+
+        //Testing Puddle
+        player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 50);
+        player.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 50);
+        abandonedGroundMap.at(29, 5).setGround(new Puddle());
 
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);

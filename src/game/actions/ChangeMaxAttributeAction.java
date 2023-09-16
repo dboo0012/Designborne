@@ -12,7 +12,7 @@ public class ChangeMaxAttributeAction extends Action{
     private ActorAttributeOperations operation; // The operation applied to the attribute
     private int amountAffected; // The amount by which the attribute is modified
     private boolean singleConsume; // Indicates whether the item is consumed and removed from inventory after use
-    public ChangeAttributeAction(Item item, BaseActorAttributes attributeAffected,
+    public ChangeMaxAttributeAction(Item item, BaseActorAttributes attributeAffected,
                                  ActorAttributeOperations operation, int amountAffected, boolean singleConsume) {
         this.item = item;
         this.attributeAffected = attributeAffected;

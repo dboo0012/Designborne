@@ -36,6 +36,7 @@ public class ChangeAttributeAction extends Action {
         this.singleConsume = singleConsume;
     }
 
+
     /**
      * Perform the Action.
      *
@@ -52,6 +53,7 @@ public class ChangeAttributeAction extends Action {
         }
 
         return String.format("%s consumed %s", actor, item);
+
     }
 
     /**
