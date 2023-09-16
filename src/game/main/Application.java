@@ -4,14 +4,13 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.*;
 import game.grounds.Gate;
 import game.grounds.Graveyard;
 import game.actions.FocusAction;
-import game.actors.HollowSoldier;
-import game.actors.Player;
-import game.actors.WanderingUndead;
 import game.grounds.*;
 import game.grounds.Void;
+import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
 
@@ -37,6 +36,9 @@ public class Application {
         GameMap burialGroundMap = new GameMap(groundFactory, Maps.BURIAL_GROUND);
         world.addGameMap(burialGroundMap);
 
+        GameMap ancientWoodsMap = new GameMap(groundFactory, Maps.ANCIENT_WOODS);
+        world.addGameMap(ancientWoodsMap);
+
         FancyMessageDisplay.createString(FancyMessage.TITLE);
 
         // Graveyard
@@ -46,6 +48,14 @@ public class Application {
         burialGroundMap.at(25, 10).setGround(new Graveyard(burialGroundMap, new HollowSoldier()));
         burialGroundMap.at(36, 2).setGround(new Graveyard(burialGroundMap, new HollowSoldier()));
 
+
+        // Empty Huts
+        ancientWoodsMap.at(5, 2).setGround(new EmptyHuts(ancientWoodsMap, new ForestKeeper()));
+        ancientWoodsMap.at(9, 2).setGround(new EmptyHuts(ancientWoodsMap, new ForestKeeper()));
+
+        // Bushes
+        ancientWoodsMap.at(3, 5).setGround(new Bush(ancientWoodsMap, new RedWolf()));
+
         // Player
         Player player = new Player("The Abstracted One", '@', 150, 200);
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
@@ -53,6 +63,8 @@ public class Application {
         // Gate
         abandonedGroundMap.at(22, 3).setGround(new Gate(burialGroundMap)); // test: 12, 9, actual: 22, 3
         burialGroundMap.at(22, 6).setGround(new Gate(abandonedGroundMap)); // test: 20, 9,actual: 22, 6
+        burialGroundMap.at(25, 9).setGround(new Gate(ancientWoodsMap)); // test: 28, 9, actual: 22, 9
+        ancientWoodsMap.at(17, 9).setGround(new Gate(burialGroundMap)); // test: 40, 9, actual: 22, 9
 
         // Broadsword
         BroadSword broadSword = new BroadSword("BroadSword", '1', 110, "slashes", 80);
@@ -61,7 +73,7 @@ public class Application {
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
-        abandonedGroundMap.at(29, 6).addActor(new HollowSoldier());
+        abandonedGroundMap.at(29, 6).addItem(new OldKey());
 
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);
