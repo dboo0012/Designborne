@@ -42,6 +42,9 @@ public class Application {
         GameMap ancientWoodsMap = new GameMap(groundFactory, Maps.ANCIENT_WOODS);
         world.addGameMap(ancientWoodsMap);
 
+        GameMap bossMap = new GameMap(groundFactory, Maps.BOSS_MAP);
+        world.addGameMap(bossMap);
+
         FancyMessageDisplay.createString(FancyMessage.TITLE);
 
         // Graveyard
@@ -55,9 +58,12 @@ public class Application {
         // Empty Huts
         ancientWoodsMap.at(5, 2).setGround(new EmptyHuts(ancientWoodsMap, new ForestKeeper()));
         ancientWoodsMap.at(9, 2).setGround(new EmptyHuts(ancientWoodsMap, new ForestKeeper()));
+        bossMap.at(30, 1).setGround(new EmptyHuts(bossMap, new ForestKeeper()));
+        bossMap.at(32, 2).setGround(new EmptyHuts(bossMap, new ForestKeeper()));
 
         // Bushes
         ancientWoodsMap.at(3, 5).setGround(new Bush(ancientWoodsMap, new RedWolf()));
+        bossMap.at(3, 10).setGround(new Bush(bossMap, new RedWolf()));
 
         // Player
         Player player = new Player("The Abstracted One", '@', 150, 200);
@@ -68,6 +74,8 @@ public class Application {
         burialGroundMap.at(22, 6).setGround(new Gate(abandonedGroundMap)); // test: 20, 9,actual: 22, 6
         burialGroundMap.at(25, 9).setGround(new Gate(ancientWoodsMap)); // test: 28, 9, actual: 22, 9
         ancientWoodsMap.at(17, 9).setGround(new Gate(burialGroundMap)); // test: 40, 9, actual: 22, 9
+        ancientWoodsMap.at(17, 6).setGround(new Gate(bossMap)); // test: 40, 6, actual: 22, 6
+
 
         // Broadsword
         BroadSword broadSword = new BroadSword("BroadSword", '1', 110, "slashes", 80);
