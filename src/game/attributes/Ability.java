@@ -7,4 +7,5 @@ package game.attributes;
 public enum Ability {
     CAN_ENTER_FLOOR,
     TRAVEL,
+    TRADE,
 }
