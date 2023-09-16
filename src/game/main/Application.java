@@ -12,6 +12,7 @@ import game.grounds.Graveyard;
 import game.actions.FocusAction;
 import game.grounds.*;
 import game.grounds.Void;
+import game.items.Bloodberry;
 import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
@@ -73,9 +74,20 @@ public class Application {
         broadSword.addAction(new FocusAction(broadSword));
         abandonedGroundMap.at(29, 6).addItem(broadSword);
 
+        // Bloodberry
+        abandonedGroundMap.at(27, 5).addItem(new Bloodberry("Bloodberry", '*', true));
+        abandonedGroundMap.at(28, 5).addItem(new Bloodberry("Bloodberry", '*', true));
+        abandonedGroundMap.at(30, 8).addItem(new Bloodberry("Bloodberry", '*', true));
+        abandonedGroundMap.at(30, 9).addItem(new Bloodberry("Bloodberry", '*', true));
+        abandonedGroundMap.at(27, 8).addItem(new Bloodberry("Bloodberry", '*', true));
+        abandonedGroundMap.at(27, 9).addItem(new Bloodberry("Bloodberry", '*', true));
+
+        burialGroundMap.at(28, 5).addItem(new Bloodberry("Bloodberry", '*', true));
+
         // TESTING CODE
-        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
+//        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
 //        abandonedGroundMap.at(29, 6).addItem(new OldKey());
+//        abandonedGroundMap.at(29, 6).addItem(new Bloodberry("Bloodberry", '*', true));
 
         //Testing Puddle
         player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 50);
