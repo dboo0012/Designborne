@@ -7,6 +7,7 @@ import game.actions.AttackAction;
 import game.actors.behaviours.FollowBehaviour;
 import game.attributes.EntityTypes;
 import game.attributes.Status;
+import game.items.HealingVial;
 
 
 /**
@@ -15,7 +16,8 @@ import game.attributes.Status;
 public class RedWolf extends EnemyDropActor implements ActorSpawn {
 
     public RedWolf() {
-        super("Red Wolf", 'r', 25);
+        super("Red Wolf", 'r', 1);
+        addDroppableItem(new HealingVial(), 0.0); //0.2
     }
 
     /**

@@ -7,6 +7,7 @@ import game.actions.AttackAction;
 import game.actors.behaviours.FollowBehaviour;
 import game.attributes.EntityTypes;
 import game.attributes.Status;
+import game.items.HealingVial;
 
 
 /**
@@ -15,7 +16,8 @@ import game.attributes.Status;
 public class ForestKeeper extends EnemyDropActor implements ActorSpawn {
 
     public ForestKeeper() {
-        super("Forest Keeper", '8', 125);
+        super("Forest Keeper", '8', 1);
+        addDroppableItem(new HealingVial(), 0.9); //0.2
     }
 
     /**
