@@ -23,7 +23,6 @@ public abstract class Trader extends Actor {
      */
     public Trader(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        this.addCapability(EntityTypes.TRADER);
         this.addCapability(Ability.TRADE);
         addTradeItem(new HealingVial(), 100);
         addTradeItem(new RefreshingFlask(), 75);
@@ -39,6 +38,7 @@ public abstract class Trader extends Actor {
         return null;
     }
 
+    // PROBLEM, player uses additemToinventory when picking up items
     @Override
     public void addItemToInventory(Item item) {
         if (item.hasCapability(Ability.TRADABLE)) {
@@ -54,9 +54,11 @@ public abstract class Trader extends Actor {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
-        for (Item item: otherActor.getItemInventory()){
+        for (int i = 0; i < this.getItemInventory().size(); i++){
+            Item item = this.getItemInventory().get(i); // Get Item
+            int price = this.itemPrice.get(i); // Get price
             if (item.hasCapability(Ability.TRADABLE)){
-                actions.add(new SellAction(item, otherActor));
+                actions.add(new SellAction(item, price));
             }
         }
         return actions;
