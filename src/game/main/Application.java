@@ -69,6 +69,7 @@ public class Application {
         Player player = new Player("The Abstracted One", '@', 150000, 200);
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
 //        world.addPlayer(player, ancientWoodsMap.at(15,10));
+//        world.addPlayer(player, bossMap.at(15,2));
 
         // Gate
         abandonedGroundMap.at(22, 3).setGround(new Gate(burialGroundMap)); // test: 12, 9, actual: 22, 3
@@ -93,11 +94,11 @@ public class Application {
         burialGroundMap.at(28, 5).addItem(new Bloodberry("Bloodberry", '*', true));
 
         // Boss
-        bossMap.at(15, 1).addActor(new Abxervyer(new WeatherControl()));
+        bossMap.at(15, 1).addActor(new Abxervyer(ancientWoodsMap));
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
-//        abandonedGroundMap.at(29, 6).addItem(new OldKey());
+//        bossMap.at(15, 3).addItem(new OldKey());
 //        abandonedGroundMap.at(29, 6).addItem(new Bloodberry("Bloodberry", '*', true));
 
         //Testing Puddle

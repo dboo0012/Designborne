@@ -4,11 +4,13 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.actors.behaviours.FollowBehaviour;
 import game.attributes.EntityTypes;
 import game.attributes.Status;
+import game.grounds.Gate;
 import game.items.HealingVial;
 import game.main.Weather;
 import game.main.WeatherControl;
@@ -19,12 +21,12 @@ import game.main.WeatherControl;
  */
 public class Abxervyer extends EnemyActor  {
     private WeatherControl weatherControl;
+    private GameMap destination;
 
-    public Abxervyer(WeatherControl weatherControl) {
-        super("Abxervyer", 'Y', 2000, 5000);
-        addDroppableItem(new HealingVial(), 0.2); //0.2
+    public Abxervyer(GameMap destination) {
+        super("Abxervyer", 'Y', 2, 5000);
         addCapability(EntityTypes.BOSS);
-        this.weatherControl = weatherControl;
+        this.destination = destination;
     }
 
     /**
@@ -37,24 +39,10 @@ public class Abxervyer extends EnemyActor  {
     }
 
     @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        weatherControl.updateWeather();
-
-        // Get the current weather condition
-        Weather currentWeather = weatherControl.getCurrentWeather();
-
-        // Apply weather effects based on the current weather condition
-        if (currentWeather == Weather.SUNNY) {
-            // Implement sunny weather effects
-            // Modify spawning rates and enemy damage accordingly
-        } else if (currentWeather == Weather.RAINY) {
-            // Implement rainy weather effects
-            // Modify spawning rates and healing effects accordingly
-        }
-
-        // Perform other actions for the boss during its turn
-        return super.playTurn(actions, lastAction, map, display);
-
+    public String unconscious(Actor actor, GameMap map) {
+        Location currentLocation = map.locationOf(this);
+        currentLocation.setGround(new Gate(destination));
+        return this + "slain!"  + " " + super.unconscious(actor, map);
     }
 
     @Override
