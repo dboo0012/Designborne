@@ -94,6 +94,9 @@ public class Application {
 //        player.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 50);
 //        abandonedGroundMap.at(29, 5).setGround(new Puddle());
 
+        // Testing Traveller
+        abandonedGroundMap.at(29, 6).addActor(new Traveller());
+
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);
 //        gameMap.at(32, 0).addItem(healingVial);
