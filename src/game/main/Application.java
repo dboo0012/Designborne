@@ -78,7 +78,7 @@ public class Application {
 
 
         // Broadsword
-        BroadSword broadSword = new BroadSword("BroadSword", '1', 110, "slashes", 80);
+        BroadSword broadSword = new BroadSword();
         broadSword.addAction(new FocusAction(broadSword));
         abandonedGroundMap.at(29, 6).addItem(broadSword);
 
