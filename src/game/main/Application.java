@@ -83,14 +83,14 @@ public class Application {
         abandonedGroundMap.at(29, 6).addItem(broadSword);
 
         // Bloodberry
-        abandonedGroundMap.at(27, 5).addItem(new Bloodberry("Bloodberry", '*', true));
-        abandonedGroundMap.at(28, 5).addItem(new Bloodberry("Bloodberry", '*', true));
-        abandonedGroundMap.at(30, 8).addItem(new Bloodberry("Bloodberry", '*', true));
-        abandonedGroundMap.at(30, 9).addItem(new Bloodberry("Bloodberry", '*', true));
-        abandonedGroundMap.at(27, 8).addItem(new Bloodberry("Bloodberry", '*', true));
-        abandonedGroundMap.at(27, 9).addItem(new Bloodberry("Bloodberry", '*', true));
+        abandonedGroundMap.at(27, 5).addItem(new Bloodberry());
+        abandonedGroundMap.at(28, 5).addItem(new Bloodberry());
+        abandonedGroundMap.at(30, 8).addItem(new Bloodberry());
+        abandonedGroundMap.at(30, 9).addItem(new Bloodberry());
+        abandonedGroundMap.at(27, 8).addItem(new Bloodberry());
+        abandonedGroundMap.at(27, 9).addItem(new Bloodberry());
 
-        burialGroundMap.at(28, 5).addItem(new Bloodberry("Bloodberry", '*', true));
+        burialGroundMap.at(28, 5).addItem(new Bloodberry());
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
