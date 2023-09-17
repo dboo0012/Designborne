@@ -10,17 +10,21 @@ import game.actors.behaviours.FollowBehaviour;
 import game.attributes.EntityTypes;
 import game.attributes.Status;
 import game.items.HealingVial;
+import game.main.Weather;
+import game.main.WeatherControl;
 
 
 /**
  * A Abxervyer actor that has the ability to be spawned.
  */
 public class Abxervyer extends EnemyActor  {
+    private WeatherControl weatherControl;
 
-    public Abxervyer() {
+    public Abxervyer(WeatherControl weatherControl) {
         super("Abxervyer", 'Y', 2000, 5000);
         addDroppableItem(new HealingVial(), 0.2); //0.2
         addCapability(EntityTypes.BOSS);
+        this.weatherControl = weatherControl;
     }
 
     /**
@@ -34,6 +38,21 @@ public class Abxervyer extends EnemyActor  {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        weatherControl.updateWeather();
+
+        // Get the current weather condition
+        Weather currentWeather = weatherControl.getCurrentWeather();
+
+        // Apply weather effects based on the current weather condition
+        if (currentWeather == Weather.SUNNY) {
+            // Implement sunny weather effects
+            // Modify spawning rates and enemy damage accordingly
+        } else if (currentWeather == Weather.RAINY) {
+            // Implement rainy weather effects
+            // Modify spawning rates and healing effects accordingly
+        }
+
+        // Perform other actions for the boss during its turn
         return super.playTurn(actions, lastAction, map, display);
 
     }

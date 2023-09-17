@@ -1,8 +1,8 @@
 package game.main;
 
 public class WeatherControl {
-    private Weather currentWeather;
-    private int turnsSinceLastChange;
+    private static Weather currentWeather;
+    private static int turnsSinceLastChange;
     private static final int TURNS_PER_WEATHER_CHANGE = 3; // Change weather every 3 turns
 
     public WeatherControl() {
@@ -10,7 +10,7 @@ public class WeatherControl {
         turnsSinceLastChange = 0;
     }
 
-    public Weather getCurrentWeather() {
+    public static Weather getCurrentWeather() {
         return currentWeather;
     }
 
