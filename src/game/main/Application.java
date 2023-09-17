@@ -79,7 +79,7 @@ public class Application {
 
         // Broadsword
         BroadSword broadSword = new BroadSword();
-        broadSword.addAction(new FocusAction(broadSword));
+        broadSword.addAction(new FocusAction(broadSword, 1.0f,80,5));
         abandonedGroundMap.at(29, 6).addItem(broadSword);
 
         // Bloodberry
