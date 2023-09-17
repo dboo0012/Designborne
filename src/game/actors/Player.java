@@ -25,7 +25,7 @@ import java.util.ArrayList;
  * Modified by:
  *
  */
-public class Player extends Trader {
+public class Player extends Actor {
     private int maxStamina;
     private int currentStamina;
 

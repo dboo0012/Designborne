@@ -51,16 +51,23 @@ public abstract class Trader extends Actor {
         this.itemPrice.add(price);
     }
 
+    public ActionList getItems(Actor sellingActor){
+        ActionList actions = new ActionList();
+        for (int i = 0; i < sellingActor.getItemInventory().size(); i++){
+            Item item = sellingActor.getItemInventory().get(i); // Get Item
+            int price = sellingActor.itemPrice.get(i); // Get price
+            if (item.hasCapability(Ability.TRADABLE)){
+                actions.add(new SellAction(item, price, sellingActor));
+            }
+        }
+        return actions;
+    }
+
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
-        for (int i = 0; i < this.getItemInventory().size(); i++){
-            Item item = this.getItemInventory().get(i); // Get Item
-            int price = this.itemPrice.get(i); // Get price
-            if (item.hasCapability(Ability.TRADABLE)){
-                actions.add(new SellAction(item, price));
-            }
-        }
+        getItems(this);
+        getItems(otherActor);
         return actions;
     }
 }
