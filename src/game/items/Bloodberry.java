@@ -15,7 +15,7 @@ public class Bloodberry extends Item {
      * @param portable true if and only if the Item can be picked up
      */
     public Bloodberry(String name, char displayChar, boolean portable) {
-        super(name, displayChar, portable);
+        super("Bloodberry", '*', true);
     }
 
     @Override
@@ -28,4 +28,6 @@ public class Bloodberry extends Item {
 
         return new ActionList(changeAttributeAction);
     }
+
+
 }

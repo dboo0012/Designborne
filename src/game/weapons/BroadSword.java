@@ -4,30 +4,26 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.*;
 import game.actions.AttackAction;
 import game.actions.FocusAction;
+import game.items.TradeableWeaponItem;
 
 /**
  * A BroadSword weapon.
  */
-public class BroadSword extends WeaponItem{
+public class BroadSword extends TradeableWeaponItem {
     private static final float DEFAULT_DAMAGE_MULTIPLIER = 1.0f;
     private final int initialHitRate;
     private float damageMultiplier;
     private int focusCounter;
     private FocusAction focusAction;
+
     /**
      * Constructor.
      *
-     * @param name name of the item
-     * @param displayChar character to use for display when item is on the ground
-     * @param damage amount of damage this weapon does
-     * @param verb verb to use for this weapon, e.g. "hits", "zaps"
-     * @param hitRate the probability/chance to hit the target.
      */
     public BroadSword() {
-        super("BroadSword", '1', 110, "slashes", 80);
+        super("BroadSword", '1', 110, "slashes", 80, 100);
         this.initialHitRate = 80;
         this.damageMultiplier = DEFAULT_DAMAGE_MULTIPLIER;
     }
@@ -107,4 +103,10 @@ public class BroadSword extends WeaponItem{
         actions.add(new AttackAction(actor, location.toString(), this));
         return actions;
     }
+
+    @Override
+    public TradeableWeaponItem spawn() {
+        return new BroadSword();
+    }
+
 }

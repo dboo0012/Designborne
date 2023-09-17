@@ -12,13 +12,13 @@ import game.actions.HealAction;
 /**
  * An item that can be used to heal the player.
  */
-public class HealingVial extends Item {
+public class HealingVial extends TradeableItem {
     private ActionList actions = new ActionList();
     /***
      * Constructor.
      */
     public HealingVial() {
-        super("Healing Vial", 'a', true);
+        super("Healing Vial", 'a', true, 35);
     }
 
     /**
@@ -36,5 +36,10 @@ public class HealingVial extends Item {
                 ActorAttributeOperations.INCREASE, (int) (maxHealth * increasePercentage), true);
 
         return new ActionList(changeAttributeAction);
+    }
+
+    @Override
+    public TradeableItem spawn() {
+        return new HealingVial();
     }
 }

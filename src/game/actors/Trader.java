@@ -11,22 +11,31 @@ import game.attributes.Ability;
 import game.attributes.EntityTypes;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
+import game.items.Tradeable;
+import game.items.TradeableItem;
 import game.weapons.BroadSword;
 
 import java.util.ArrayList;
 
 public abstract class Trader extends Actor {
 //    protected final ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>();
-    private final ArrayList<Integer> itemPrice = new ArrayList<>();
+    private final ArrayList<Tradeable> itemsToSell = new ArrayList<>();
+
     /**
      * The constructor of the Traveller.
      */
     public Trader(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.addCapability(Ability.TRADE);
-        addTradeItem(new HealingVial(), 100);
-        addTradeItem(new RefreshingFlask(), 75);
-        addTradeItem(new BroadSword(), 250);
+        this.addCapability(EntityTypes.TRADER);
+
+        addItemToSell(new HealingVial().setPrice(100));
+        addItemToSell(new RefreshingFlask().setPrice(75));
+        addItemToSell(new BroadSword().setPrice(250));
+    }
+
+    public void addItemToSell(Tradeable item){
+        itemsToSell.add(item);
     }
 
     @Override
@@ -38,27 +47,15 @@ public abstract class Trader extends Actor {
         return null;
     }
 
-    // PROBLEM, player uses additemToinventory when picking up items
-    @Override
-    public void addItemToInventory(Item item) {
-        if (item.hasCapability(Ability.TRADABLE)) {
-            super.addItemToInventory(item);
-        }
-    }
-
-    public void addTradeItem(Item item, int price){
-        this.addItemToInventory(item);
-        this.itemPrice.add(price);
-    }
-
     public ActionList getItems(Actor sellingActor){
-        ActionList actions = new ActionList();
-        for (int i = 0; i < sellingActor.getItemInventory().size(); i++){
-            Item item = sellingActor.getItemInventory().get(i); // Get Item
-            int price = sellingActor.itemPrice.get(i); // Get price
+        ActionList actions = new ActionList(); //List of actions
+
+        for (int i = 0; i < sellingActor.getItemInventory().size(); i++){ // For each item to sell
+            Item item = sellingActor.getItemInventory().get(i); // Get Item Code Smell (Downcasting)
             if (item.hasCapability(Ability.TRADABLE)){
-                actions.add(new SellAction(item, price, sellingActor));
+                int price = (Tradeable) item.getPrice(); // Get price
             }
+            actions.add(new SellAction(item, price, sellingActor)); //Create a selling action
         }
         return actions;
     }
@@ -70,4 +67,6 @@ public abstract class Trader extends Actor {
         getItems(otherActor);
         return actions;
     }
+
+
 }

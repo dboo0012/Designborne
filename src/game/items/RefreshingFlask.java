@@ -12,13 +12,13 @@ import game.actions.RefreshAction;
 /**
  * An item that can be used to recover Player's stamina.
  */
-public class RefreshingFlask extends Item {
+public class RefreshingFlask extends TradeableItem {
     private ActionList actions = new ActionList();
     /***
      * Constructor.
      */
     public RefreshingFlask() {
-        super("Refreshing Flask", 'u', true);
+        super("Refreshing Flask", 'u', true, 25);
     }
 
     /**
@@ -37,5 +37,10 @@ public class RefreshingFlask extends Item {
                 BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, (int) (maxStamina * increasePercentage), true);
 
         return new ActionList(changeAttributeAction);
+    }
+
+    @Override
+    public TradeableItem spawn() {
+        return new RefreshingFlask();
     }
 }
