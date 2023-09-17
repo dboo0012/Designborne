@@ -1,19 +1,17 @@
 package game.main;
 
-import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.*;
+import game.actors.behaviours.Traveller;
 import game.grounds.Gate;
 import game.grounds.Graveyard;
 import game.actions.FocusAction;
 import game.grounds.*;
 import game.grounds.Void;
 import game.items.Bloodberry;
-import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
 
@@ -70,7 +68,7 @@ public class Application {
         ancientWoodsMap.at(17, 9).setGround(new Gate(burialGroundMap)); // test: 40, 9, actual: 22, 9
 
         // Broadsword
-        BroadSword broadSword = new BroadSword("BroadSword", '1', 110, "slashes", 80);
+        BroadSword broadSword = new BroadSword();
         broadSword.addAction(new FocusAction(broadSword));
         abandonedGroundMap.at(29, 6).addItem(broadSword);
 

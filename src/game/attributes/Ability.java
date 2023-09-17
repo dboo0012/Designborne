@@ -8,4 +8,5 @@ public enum Ability {
     CAN_ENTER_FLOOR,
     TRAVEL,
     TRADE,
+    TRADABLE, // Item with this ability can be traded
 }

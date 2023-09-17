@@ -19,7 +19,7 @@ public class SellAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         if (actor.getBalance() > price){
-            actor.addItemToInventory(buyItem);
+            actor.addItemToInventory(buyItem.getConstructor().newInstance());
             actor.deductBalance(price);
             return String.format("You have bought %s for %d dollars.", itemName, price);
         }

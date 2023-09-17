@@ -26,9 +26,9 @@ public class BroadSword extends WeaponItem{
      * @param verb verb to use for this weapon, e.g. "hits", "zaps"
      * @param hitRate the probability/chance to hit the target.
      */
-    public BroadSword(String name, char displayChar, int damage, String verb, int hitRate) {
-        super(name, displayChar, damage, verb, hitRate);
-        this.initialHitRate = hitRate;
+    public BroadSword() {
+        super("BroadSword", '1', 110, "slashes", 80);
+        this.initialHitRate = 80;
         this.damageMultiplier = DEFAULT_DAMAGE_MULTIPLIER;
     }
 
