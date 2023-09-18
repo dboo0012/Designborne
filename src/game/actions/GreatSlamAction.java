@@ -11,7 +11,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.weapons.GiantHammer;
 
 public class GreatSlamAction extends Action {
-
     private final GiantHammer giantHammer;
     private final Actor target;
 
@@ -19,6 +18,7 @@ public class GreatSlamAction extends Action {
         this.giantHammer = giantHammer;
         this.target = otherActor;
     }
+
     @Override
     public String execute(Actor actor, GameMap map) {
         double requiredStamina = actor.getAttributeMaximum(BaseActorAttributes.STAMINA)*0.05; // 5% of maximum stamina
@@ -45,7 +45,7 @@ public class GreatSlamAction extends Action {
         int originalDamage = giantHammer.damage();
         int splashDamage = (int) (originalDamage * 0.5);
 
-        Location target = map.locationOf(otherActor); // change the locationOf to the location of the target
+        Location target = map.locationOf(otherActor); // Get exits around the target actor
 
         for (Exit exit : target.getExits()) {
             Location destination = exit.getDestination();
@@ -62,5 +62,4 @@ public class GreatSlamAction extends Action {
     public String menuDescription(Actor actor) {
         return actor + " activates the skill of Great Slam on " + giantHammer.toString();
     }
-
 }

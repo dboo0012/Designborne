@@ -18,26 +18,6 @@ public class GiantHammer extends WeaponItem {
     }
 
     /**
-     * Add a new StabStepAction to the weapon.
-     * @param newAction the new action to be added.
-     */
-//    public void addAction(GreatSlam newAction){
-//        myActions.add(newAction);
-//        this.greatSlam = newAction;
-//    }
-
-    /**
-     * Adds the focusAction to the allowable actions.
-     * @param actor the actor that owns the item
-     * @return ActionList of allowable actions
-     */
-//    @Override
-//    public ActionList allowableActions(Actor actor) {
-//        myActions.add(greatSlam);
-//        return myActions;
-//    }
-
-    /**
      * Adds the attack action to attack mobs.
      * @param otherActor the other actor
      * @param location the location of the other actor
@@ -47,8 +27,6 @@ public class GiantHammer extends WeaponItem {
     public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actions = new ActionList();
         actions.add(new AttackAction(otherActor, location.toString(), this));
-//        greatSlamAction = new GreatSlamAction(this, otherActor);
-//        actions.add(greatSlamAction);
         actions.add(new GreatSlamAction(this, otherActor));
         return actions;
     }

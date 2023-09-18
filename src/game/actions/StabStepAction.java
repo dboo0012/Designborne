@@ -44,9 +44,9 @@ public class StabStepAction extends Action {
     }
 
     public Location step(Actor actor, GameMap map){
-        ArrayList<Location> locations = new ArrayList<>();
+        ArrayList<Location> locations = new ArrayList<>(); // A list of all possible locations the actor can go
 
-        Location target = map.locationOf(actor); // change the locationOf to the location of the target
+        Location target = map.locationOf(actor);
 
         for (Exit exit : target.getExits()) {
             Location destination = exit.getDestination();
@@ -56,15 +56,15 @@ public class StabStepAction extends Action {
             }
         }
         if (!locations.isEmpty()) {
-            return locations.get(random.nextInt(locations.size()));
+            return locations.get(random.nextInt(locations.size())); // A random exit is chosen
         }
         else {
-            return map.locationOf(actor);
+            return map.locationOf(actor); // Stay put if no exits can be found
         }
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " activates the skill of Stab and Step on " + greatKnife.toString();
+        return actor + " activates the skill of Stab & Step on " + greatKnife.toString();
     }
 }
