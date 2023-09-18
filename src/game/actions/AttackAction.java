@@ -63,6 +63,10 @@ public class AttackAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
+        return attack(actor, map);
+    }
+
+    public String attack(Actor actor, GameMap map){
         if (weapon == null) {
             weapon = actor.getIntrinsicWeapon();
         }

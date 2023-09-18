@@ -14,9 +14,11 @@ import java.util.Random;
 
 public class StabStepAction extends Action {
     private final GreatKnife greatKnife;
+    private final Actor target;
     private final Random random = new Random();
-    public StabStepAction(GreatKnife greatKnife){
+    public StabStepAction(GreatKnife greatKnife, Actor otherActor){
         this.greatKnife = greatKnife;
+        this.target = otherActor;
     }
 
     @Override
@@ -31,14 +33,13 @@ public class StabStepAction extends Action {
             actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, (int) requiredStamina);
 
             // Stab
-            new AttackAction(actor, "stabs using ", greatKnife).execute(actor, map);
+            String attack = new AttackAction(target, " stabbed ", greatKnife).attack(actor, map);
 
             // Step action (stab is done in weapon allowable actions)
             Location step = step(actor, map);
-            System.out.println("Player stepped to " + step.toString());
             map.moveActor(actor, step);
 
-            return actor + " has activated Stab & Step on " + greatKnife.toString();
+            return attack + "\n" + String.format("%s stabbed %s and stepped to %s", actor, target, step.toString());
         }
     }
 
