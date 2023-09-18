@@ -6,6 +6,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actions.GreatSlam;
+import game.actions.StabStepAction;
 import game.actors.*;
 import game.grounds.Gate;
 import game.grounds.Graveyard;
@@ -16,6 +18,8 @@ import game.items.Bloodberry;
 import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
+import game.weapons.GiantHammer;
+import game.weapons.GreatKnife;
 
 /**
  * The main class to start the game.
@@ -92,6 +96,16 @@ public class Application {
 
         burialGroundMap.at(28, 5).addItem(new Bloodberry());
 
+        // Great Knife
+        GreatKnife greatKnife = new GreatKnife();
+        greatKnife.addAction(new StabStepAction(greatKnife));
+        abandonedGroundMap.at(29, 6).addItem(greatKnife);
+
+        // Giant Hammer
+        GiantHammer giantHammer = new GiantHammer();
+        giantHammer.addAction(new GreatSlam(giantHammer));
+        abandonedGroundMap.at(29, 5).addItem(giantHammer);
+
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
 //        abandonedGroundMap.at(29, 6).addItem(new OldKey());
@@ -101,6 +115,12 @@ public class Application {
 //        player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 50);
 //        player.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 50);
 //        abandonedGroundMap.at(29, 5).setGround(new Puddle());
+
+        // Testing Great Knife
+//        world.addPlayer(player, abandonedGroundMap.at(36, 5));
+
+        // Testing Giant Hammer
+//        world.addPlayer(player, abandonedGroundMap.at(36, 5));
 
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);
