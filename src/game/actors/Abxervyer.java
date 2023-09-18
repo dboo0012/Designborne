@@ -20,7 +20,6 @@ import game.main.WeatherControl;
  * A Abxervyer actor that has the ability to be spawned.
  */
 public class Abxervyer extends EnemyActor  {
-    private WeatherControl weatherControl;
     private GameMap destination;
 
     public Abxervyer(GameMap destination) {
@@ -42,7 +41,7 @@ public class Abxervyer extends EnemyActor  {
     public String unconscious(Actor actor, GameMap map) {
         Location currentLocation = map.locationOf(this);
         currentLocation.setGround(new Gate(destination));
-        return this + "slain!"  + " " + super.unconscious(actor, map);
+        return "Abxervyer has been slain!"  + " " + super.unconscious(actor, map);
     }
 
     @Override
