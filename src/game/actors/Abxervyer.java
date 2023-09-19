@@ -6,26 +6,24 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.AttackAction;
 import game.actors.behaviours.FollowBehaviour;
 import game.attributes.EntityTypes;
-import game.attributes.Status;
 import game.grounds.Gate;
-import game.items.HealingVial;
-import game.main.Weather;
-import game.main.WeatherControl;
+import game.weather.WeatherControl;
 
 
 /**
  * A Abxervyer actor that has the ability to be spawned.
  */
 public class Abxervyer extends EnemyActor  {
+    private WeatherControl weatherControl;
     private GameMap destination;
 
-    public Abxervyer(GameMap destination) {
-        super("Abxervyer", 'Y', 2, 5000);
+    public Abxervyer(GameMap destination, WeatherControl weatherControl) {
+        super("Abxervyer", 'Y', 2000, 5000);
         addCapability(EntityTypes.BOSS);
         this.destination = destination;
+        this.weatherControl = weatherControl;
     }
 
     /**
@@ -42,6 +40,12 @@ public class Abxervyer extends EnemyActor  {
         Location currentLocation = map.locationOf(this);
         currentLocation.setGround(new Gate(destination));
         return "Abxervyer has been slain!"  + " " + super.unconscious(actor, map);
+    }
+
+    @Override
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        weatherControl.updateWeather();
+        return super.playTurn(actions, lastAction, map, display);
     }
 
     @Override

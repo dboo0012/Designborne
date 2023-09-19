@@ -1,4 +1,4 @@
-package game.main;
+package game.weather;
 
 public enum Weather {
     SUNNY,

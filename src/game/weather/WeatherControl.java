@@ -1,4 +1,4 @@
-package game.main;
+package game.weather;
 
 public class WeatherControl {
     private static Weather currentWeather;

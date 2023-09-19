@@ -1,19 +1,17 @@
 package game.main;
 
-import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.*;
+import game.weather.WeatherControl;
 import game.grounds.Gate;
 import game.grounds.Graveyard;
 import game.actions.FocusAction;
 import game.grounds.*;
 import game.grounds.Void;
 import game.items.Bloodberry;
-import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
 
@@ -67,8 +65,8 @@ public class Application {
 
         // Player
         Player player = new Player("The Abstracted One", '@', 150000, 200);
-        world.addPlayer(player, abandonedGroundMap.at(29, 5));
-//        world.addPlayer(player, ancientWoodsMap.at(15,10));
+//        world.addPlayer(player, abandonedGroundMap.at(29, 5));
+        world.addPlayer(player, ancientWoodsMap.at(15,10));
 //        world.addPlayer(player, bossMap.at(15,2));
 
         // Gate
@@ -94,7 +92,7 @@ public class Application {
         burialGroundMap.at(28, 5).addItem(new Bloodberry("Bloodberry", '*', true));
 
         // Boss
-        bossMap.at(15, 1).addActor(new Abxervyer(ancientWoodsMap));
+        bossMap.at(15, 1).addActor(new Abxervyer(ancientWoodsMap, new WeatherControl()));
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());

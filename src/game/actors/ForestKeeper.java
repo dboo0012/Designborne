@@ -7,13 +7,11 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.AttackAction;
 import game.actors.behaviours.FollowBehaviour;
 import game.attributes.EntityTypes;
-import game.attributes.Status;
 import game.items.HealingVial;
-import game.main.Weather;
-import game.main.WeatherControl;
+import game.weather.Weather;
+import game.weather.WeatherControl;
 
 
 /**
