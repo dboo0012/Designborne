@@ -9,14 +9,15 @@ import game.actions.FocusAction;
 import game.actions.StabStepAction;
 
 public class GreatKnife extends WeaponItem {
-    private ActionList actions = new ActionList();
-
+    /**
+     * Constructor.
+     */
     public GreatKnife() {
         super("Great Knife", '>', 75, "slashes", 70);
     }
 
     /**
-     * Adds the attack action to attack mobs.
+     * Adds the all the allowable actions when mobs are close.
      * @param otherActor the other actor
      * @param location the location of the other actor
      * @return ActionList of allowable actions

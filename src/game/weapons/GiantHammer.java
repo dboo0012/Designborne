@@ -8,8 +8,6 @@ import game.actions.AttackAction;
 import game.actions.GreatSlamAction;
 
 public class GiantHammer extends WeaponItem {
-    private ActionList myActions = new ActionList();
-    private GreatSlamAction greatSlamAction;
     /**
      * Constructor.
      */
@@ -18,7 +16,7 @@ public class GiantHammer extends WeaponItem {
     }
 
     /**
-     * Adds the attack action to attack mobs.
+     * Adds the all the allowable actions when mobs are close.
      * @param otherActor the other actor
      * @param location the location of the other actor
      * @return ActionList of allowable actions

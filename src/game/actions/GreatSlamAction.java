@@ -33,7 +33,7 @@ public class GreatSlamAction extends Action {
             // Slam
             slam(target, map);
 
-            // Attack target
+            // Attack
             String attack = new AttackAction(target, " slams ", giantHammer).attack(actor, map);
 
             return attack + "\n" + String.format("Great Slam did AOE damage around %s", target);

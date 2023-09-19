@@ -35,7 +35,7 @@ public class StabStepAction extends Action {
             // Stab
             String attack = new AttackAction(target, " stabbed ", greatKnife).attack(actor, map);
 
-            // Step action (stab is done in weapon allowable actions)
+            // Step
             Location step = step(actor, map);
             map.moveActor(actor, step);
 
