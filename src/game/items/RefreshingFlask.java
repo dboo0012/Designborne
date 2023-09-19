@@ -61,9 +61,9 @@ public class RefreshingFlask extends TradeableItem {
     public boolean isPriceAffected(Actor seller) {
         double chance = 0;
         if (seller.hasCapability(EntityTypes.TRADER)){
-            chance = 0.10; //0.25
+            chance = 0.10;
         } else if (seller.hasCapability(EntityTypes.PLAYABLE)){
-            chance = 0.50; //0.25
+            chance = 0.5; //0.5
         }
         return Math.random() < chance;
     }
@@ -81,6 +81,10 @@ public class RefreshingFlask extends TradeableItem {
 
     @Override
     public boolean isScam(Actor seller) {
-        return false;
+        boolean isScam = false;
+        if (seller.hasCapability(EntityTypes.PLAYABLE)){
+            isScam = true;
+        }
+        return isScam;
     }
 }

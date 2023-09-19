@@ -45,8 +45,6 @@ public class SellAction extends Action {
 
         // Player selling
         if (seller.hasCapability(EntityTypes.TRADER)){
-
-
             if (isScam){
                 actor.deductBalance(price);
                 return String.format("SCAMMED! %s took your money ($%d) without giving you a %s", seller, price, itemName);

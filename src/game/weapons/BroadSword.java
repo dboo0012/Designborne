@@ -118,10 +118,7 @@ public class BroadSword extends TradeableWeaponItem {
      */
     public boolean isPriceAffected(Actor seller) {
         double traderScamChance = 0.05; //0.05
-        return true;
-//        return Math.random() < traderScamChance;
-
-
+        return Math.random() < traderScamChance;
     }
 
     public int affectedPrice(Actor seller) {
