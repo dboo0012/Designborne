@@ -3,9 +3,12 @@ package game.items;
 import edu.monash.fit2099.engine.items.Item;
 import game.attributes.Ability;
 
+import java.util.Random;
+
 public abstract class TradeableItem extends Item implements Tradeable {
 
     private int price;
+
 
     /***
      * Constructor.
@@ -21,12 +24,12 @@ public abstract class TradeableItem extends Item implements Tradeable {
 
     public int getPrice() {return price;}
 
-    public Tradeable setPrice(int price) {
+    public Item setPrice(int price) {
         this.price = price;
         return this;
     }
 
-    public abstract TradeableItem spawn();
+    public abstract Item spawn();
 
 
 

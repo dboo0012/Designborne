@@ -6,6 +6,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.AttackAction;
 import game.actions.FocusAction;
+import game.attributes.Ability;
+import game.attributes.EntityTypes;
 import game.items.TradeableWeaponItem;
 
 /**
@@ -65,18 +67,18 @@ public class BroadSword extends TradeableWeaponItem {
      */
     public void tick(Location location, Actor actor){
         // Keeps track of focus
-        if(focusAction.isFocusActive()){
-            int MAX_FOCUS_COUNTER = 5;
-            if (focusCounter < MAX_FOCUS_COUNTER) {
-                focusCounter++;
-                new Display().println(String.format("Focus counter: %d/%d", focusCounter, MAX_FOCUS_COUNTER));
-                if (focusCounter == MAX_FOCUS_COUNTER){
-                    new Display().println("Focus expires next round!");
-                }
-            } else{
-                this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
-            }
-        }
+//        if(focusAction.isFocusActive()){
+//            int MAX_FOCUS_COUNTER = 5;
+//            if (focusCounter < MAX_FOCUS_COUNTER) {
+//                focusCounter++;
+//                new Display().println(String.format("Focus counter: %d/%d", focusCounter, MAX_FOCUS_COUNTER));
+//                if (focusCounter == MAX_FOCUS_COUNTER){
+//                    new Display().println("Focus expires next round!");
+//                }
+//            } else{
+//                this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
+//            }
+//        }
     }
 
     /**
@@ -109,4 +111,25 @@ public class BroadSword extends TradeableWeaponItem {
         return new BroadSword();
     }
 
+    /**
+     *
+     * @param seller the Actor selling, passed in because different seller types may have different probability
+     * @return a boolean indicating if the price is affected
+     */
+    public boolean isPriceAffected(Actor seller) {
+        double traderScamChance = 0.05; //0.05
+        return true;
+//        return Math.random() < traderScamChance;
+
+
+    }
+
+    public int affectedPrice(Actor seller) {
+        return getPrice();
+    }
+
+    @Override
+    public boolean isScam(Actor seller) {
+        return true;
+    }
 }

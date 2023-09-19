@@ -9,4 +9,5 @@ public enum Ability {
     TRAVEL,
     TRADE,
     TRADABLE, // Item with this ability can be traded
+    CONSUME, //Can consume items like runes, healing vial, refreshing flask
 }

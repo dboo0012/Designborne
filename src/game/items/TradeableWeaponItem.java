@@ -1,10 +1,16 @@
 package game.items;
 
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.attributes.Ability;
+
+import java.util.Random;
 
 public abstract class TradeableWeaponItem extends WeaponItem implements Tradeable {
 
     private int price;
+
+
 
     /** Constructor.
      *
@@ -19,16 +25,17 @@ public abstract class TradeableWeaponItem extends WeaponItem implements Tradeabl
     public TradeableWeaponItem(String name, char displayChar, int damage, String verb, int hitRate, int price) {
         super(name, displayChar, damage, verb, hitRate);
         this.price = price;
+        this.addCapability(Ability.TRADABLE);
     }
 
     public int getPrice() {return price;}
 
-    public Tradeable setPrice(int price) {
+    public Item setPrice(int price) {
         this.price = price;
         return this;
     }
 
-    public abstract TradeableWeaponItem spawn();
+    public abstract Item spawn();
 
 
 

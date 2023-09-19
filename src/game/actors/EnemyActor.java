@@ -121,6 +121,7 @@ public abstract class EnemyActor extends Actor implements Attackable{
         }
         return actions;
     }
+
 // TODO: Every actor would drop runes, why still need enemydropactor class?
 
 //    @Override

@@ -7,15 +7,12 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import game.actions.IncreaseMaxAttributeAction;
 
-public class Bloodberry extends Item {
+public class Bloodberry extends TradeableItem {
     /***
      * Constructor.
-     *  @param name the name of this Item
-     * @param displayChar the character to use to represent this item if it is on the ground
-     * @param portable true if and only if the Item can be picked up
      */
-    public Bloodberry(String name, char displayChar, boolean portable) {
-        super("Bloodberry", '*', true);
+    public Bloodberry() {
+        super("Bloodberry", '*', true, 10);
     }
 
     @Override
@@ -30,4 +27,27 @@ public class Bloodberry extends Item {
     }
 
 
+    @Override
+    public Item spawn() {
+        return new Bloodberry();
+    }
+
+    /**
+     * Bloodberry prices can't be affected
+     *
+     * @param seller the Actor selling, passed in because different seller types may have different probability
+     * @return a boolean indicating if the price is affected
+     */
+    public boolean isPriceAffected(Actor seller) {
+        return false;
+    }
+
+    public int affectedPrice(Actor seller) {
+        return getPrice();
+    }
+
+    @Override
+    public boolean isScam(Actor seller) {
+        return true;
+    }
 }

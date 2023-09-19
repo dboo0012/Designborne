@@ -8,6 +8,8 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ChangeAttributeAction;
 import game.actions.HealAction;
+import game.attributes.Ability;
+import game.attributes.EntityTypes;
 
 /**
  * An item that can be used to heal the player.
@@ -28,18 +30,60 @@ public class HealingVial extends TradeableItem {
      * @return an unmodifiable list of Actions
      */
     public ActionList allowableActions(Actor owner) {
-        int maxHealth = owner.getAttributeMaximum(BaseActorAttributes.HEALTH);
-        float increasePercentage = 0.1f;
+        ActionList actions = new ActionList();
 
-        // Create a ChangeAttributeAction to increase the actor's health
-        ChangeAttributeAction changeAttributeAction = new ChangeAttributeAction(this, BaseActorAttributes.HEALTH,
-                ActorAttributeOperations.INCREASE, (int) (maxHealth * increasePercentage), true);
+        if (owner.hasCapability(Ability.CONSUME)) {
+            int maxHealth = owner.getAttributeMaximum(BaseActorAttributes.HEALTH);
+            float increasePercentage = 0.1f;
 
-        return new ActionList(changeAttributeAction);
+            // Create a ChangeAttributeAction to increase the actor's health
+            ChangeAttributeAction changeAttributeAction = new ChangeAttributeAction(this, BaseActorAttributes.HEALTH,
+                    ActorAttributeOperations.INCREASE, (int) (maxHealth * increasePercentage), true);
+
+            actions.add(changeAttributeAction);
+        }
+
+        return actions;
     }
 
     @Override
-    public TradeableItem spawn() {
+    public Item spawn() {
         return new HealingVial();
     }
+
+    /**
+     *
+     * @param seller the Actor selling, passed in because different seller types may have different probability
+     * @return a boolean indicating if the price is affected
+     */
+    @Override
+    public boolean isPriceAffected(Actor seller) {
+        double chance = 0;
+        if (seller.hasCapability(EntityTypes.TRADER)){
+            chance = 0.25; //0.25
+        } else if (seller.hasCapability(EntityTypes.PLAYABLE)){
+            chance = 0.10; //0.25
+        }
+        return Math.random() < chance;
+    }
+
+    @Override
+    public int affectedPrice(Actor seller) {
+        double affectedPercentage = 1;
+
+        if (seller.hasCapability(EntityTypes.TRADER)){
+            affectedPercentage = 1.5;
+        } else if (seller.hasCapability(EntityTypes.PLAYABLE)) {
+            affectedPercentage = 2;
+        }
+
+        return (int) (getPrice() * affectedPercentage);
+    }
+
+    @Override
+    public boolean isScam(Actor seller) {
+        return false;
+    }
+
+
 }

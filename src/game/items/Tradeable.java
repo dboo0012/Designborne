@@ -1,12 +1,19 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import game.actors.ItemInventory;
 
-public interface Tradeable{
+public interface Tradeable {
 
     int getPrice();
 
-    Tradeable setPrice(int price);
+    Item setPrice(int price);
 
-    Tradeable spawn();
+    Item spawn();
+
+    boolean isPriceAffected(Actor seller);
+
+    boolean isScam(Actor seller);
+    int affectedPrice(Actor seller);
 }
