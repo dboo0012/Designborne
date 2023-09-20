@@ -95,14 +95,16 @@ public class BroadSword extends TradeableWeaponItem {
 
     /**
      * Adds the attack action to attack mobs.
-     * @param actor the other actor
+     * @param otherActor the other actor
      * @param location the location of the other actor
      * @return ActionList of allowable actions
      */
     @Override
-    public ActionList allowableActions(Actor actor, Location location) {
+    public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actions = new ActionList();
-        actions.add(new AttackAction(actor, location.toString(), this));
+        if(otherActor.hasCapability(EntityTypes.ENEMY)){
+            actions.add(new AttackAction(otherActor, location.toString(), this));
+        }
         return actions;
     }
 
