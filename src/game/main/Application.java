@@ -1,19 +1,19 @@
 package game.main;
 
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.*;
-import game.actors.Traveller;
 import game.grounds.Gate;
 import game.grounds.Graveyard;
 import game.actions.FocusAction;
 import game.grounds.*;
 import game.grounds.Void;
 import game.items.Bloodberry;
-import game.items.HealingVial;
-import game.items.RefreshingFlask;
+import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
 
@@ -42,7 +42,7 @@ public class Application {
         GameMap ancientWoodsMap = new GameMap(groundFactory, Maps.ANCIENT_WOODS);
         world.addGameMap(ancientWoodsMap);
 
-//        FancyMessageDisplay.createString(FancyMessage.TITLE); Uncomment
+        FancyMessageDisplay.createString(FancyMessage.TITLE);
 
         // Graveyard
         abandonedGroundMap.at(25, 10).setGround(new Graveyard(abandonedGroundMap, new WanderingUndead()));
@@ -70,19 +70,19 @@ public class Application {
         ancientWoodsMap.at(17, 9).setGround(new Gate(burialGroundMap)); // test: 40, 9, actual: 22, 9
 
         // Broadsword
-        BroadSword broadSword = new BroadSword();
+        BroadSword broadSword = new BroadSword("BroadSword", '1', 110, "slashes", 80);
         broadSword.addAction(new FocusAction(broadSword));
         abandonedGroundMap.at(29, 6).addItem(broadSword);
 
         // Bloodberry
-        abandonedGroundMap.at(27, 5).addItem(new Bloodberry());
-        abandonedGroundMap.at(28, 5).addItem(new Bloodberry());
-        abandonedGroundMap.at(30, 8).addItem(new Bloodberry());
-        abandonedGroundMap.at(30, 9).addItem(new Bloodberry());
-        abandonedGroundMap.at(27, 8).addItem(new Bloodberry());
-        abandonedGroundMap.at(27, 9).addItem(new Bloodberry());
+        abandonedGroundMap.at(27, 5).addItem(new Bloodberry("Bloodberry", '*', true));
+        abandonedGroundMap.at(28, 5).addItem(new Bloodberry("Bloodberry", '*', true));
+        abandonedGroundMap.at(30, 8).addItem(new Bloodberry("Bloodberry", '*', true));
+        abandonedGroundMap.at(30, 9).addItem(new Bloodberry("Bloodberry", '*', true));
+        abandonedGroundMap.at(27, 8).addItem(new Bloodberry("Bloodberry", '*', true));
+        abandonedGroundMap.at(27, 9).addItem(new Bloodberry("Bloodberry", '*', true));
 
-        burialGroundMap.at(28, 5).addItem(new Bloodberry());
+        burialGroundMap.at(28, 5).addItem(new Bloodberry("Bloodberry", '*', true));
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
@@ -93,11 +93,6 @@ public class Application {
 //        player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 50);
 //        player.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 50);
 //        abandonedGroundMap.at(29, 5).setGround(new Puddle());
-
-        // Testing Traveller
-        abandonedGroundMap.at(29, 6).addActor(new Traveller());
-        player.addItemToInventory(new RefreshingFlask());
-        player.addBalance(1000);
 
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);

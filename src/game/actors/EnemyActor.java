@@ -47,7 +47,7 @@ public abstract class EnemyActor extends Actor implements Attackable{
         super(name, displayChar, hitPoints);
         this.runesDropped = runesDropped;
         this.behaviours.put(999, new WanderBehaviour());
-        this.behaviours.put(998, new AttackBehaviour());
+        this.behaviours.put(1, new AttackBehaviour());
         this.addCapability(EntityTypes.ENEMY);
     }
 
