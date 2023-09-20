@@ -1,7 +1,9 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.attributes.Ability;
+import game.attributes.TradeCharacteristics;
 
 import java.util.Random;
 
@@ -30,6 +32,11 @@ public abstract class TradeableItem extends Item implements Tradeable {
     }
 
     public abstract Item spawn();
+
+    @Override
+    public Enum<TradeCharacteristics> getScamType(Actor seller) {
+        return TradeCharacteristics.NON_SCAMMABLE;
+    }
 
 
 

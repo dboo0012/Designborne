@@ -3,11 +3,13 @@ package game.weapons;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.AttackAction;
 import game.actions.FocusAction;
 import game.attributes.Ability;
 import game.attributes.EntityTypes;
+import game.attributes.TradeCharacteristics;
 import game.items.TradeableWeaponItem;
 
 /**
@@ -15,10 +17,12 @@ import game.items.TradeableWeaponItem;
  */
 public class BroadSword extends TradeableWeaponItem {
     private static final float DEFAULT_DAMAGE_MULTIPLIER = 1.0f;
-    private final int initialHitRate;
     private float damageMultiplier;
     private int focusCounter;
+    private int initialHitRate;
+    private ActionList actions = new ActionList();
     private FocusAction focusAction;
+
 
     /**
      * Constructor.
@@ -41,6 +45,7 @@ public class BroadSword extends TradeableWeaponItem {
      * @param newAction the new action to be added.
      */
     public void addAction(FocusAction newAction){
+        actions.add(newAction);
         this.focusAction = newAction;
     }
 
@@ -57,7 +62,7 @@ public class BroadSword extends TradeableWeaponItem {
      */
     public void tick (Location location){
         reset();
-        focusAction.toggleFocusActive();
+        focusAction.reset();
     }
 
     /**
@@ -66,19 +71,7 @@ public class BroadSword extends TradeableWeaponItem {
      * @param actor The actor carrying this Item.
      */
     public void tick(Location location, Actor actor){
-        // Keeps track of focus
-//        if(focusAction.isFocusActive()){
-//            int MAX_FOCUS_COUNTER = 5;
-//            if (focusCounter < MAX_FOCUS_COUNTER) {
-//                focusCounter++;
-//                new Display().println(String.format("Focus counter: %d/%d", focusCounter, MAX_FOCUS_COUNTER));
-//                if (focusCounter == MAX_FOCUS_COUNTER){
-//                    new Display().println("Focus expires next round!");
-//                }
-//            } else{
-//                this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
-//            }
-//        }
+        focusAction.tick();
     }
 
     /**
@@ -88,8 +81,8 @@ public class BroadSword extends TradeableWeaponItem {
      */
     @Override
     public ActionList allowableActions(Actor actor) {
-        ActionList actions = new ActionList();
-        actions.add(this.focusAction);
+//        ActionList actions = new ActionList();
+//        actions.add(new FocusAction(this, 1.0f,80,5));
         return actions;
     }
 
@@ -109,7 +102,7 @@ public class BroadSword extends TradeableWeaponItem {
     }
 
     @Override
-    public TradeableWeaponItem spawn() {
+    public Item spawn() {
         return new BroadSword();
     }
 
@@ -119,7 +112,7 @@ public class BroadSword extends TradeableWeaponItem {
      * @return a boolean indicating if the price is affected
      */
     public boolean isPriceAffected(Actor seller) {
-        double traderScamChance = 0.05; //0.05
+        double traderScamChance = 1; //0.05
         return Math.random() < traderScamChance;
     }
 
@@ -128,7 +121,12 @@ public class BroadSword extends TradeableWeaponItem {
     }
 
     @Override
-    public boolean isScam(Actor seller) {
-        return true;
+    public Enum<TradeCharacteristics> getScamType(Actor seller) {
+        Enum<TradeCharacteristics> scamType = super.getScamType(seller);
+        if (seller.hasCapability(EntityTypes.TRADER)){
+            scamType = TradeCharacteristics.STEAL_ITEMS;
+        }
+        return scamType;
     }
 }
+

@@ -2,6 +2,7 @@ package game.weapons;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
@@ -9,13 +10,16 @@ import game.actions.FocusAction;
 import game.actions.GreatSlamAction;
 import game.actions.StabStepAction;
 import game.attributes.EntityTypes;
+import game.attributes.TradeCharacteristics;
+import game.items.TradeableWeaponItem;
 
-public class GreatKnife extends WeaponItem {
+public class GreatKnife extends TradeableWeaponItem {
     /**
      * Constructor.
      */
     public GreatKnife() {
-        super("Great Knife", '>', 75, "slashes", 70);
+        super("Great Knife", '>', 75, "slashes", 70, 175);
+        this.addCapability(TradeCharacteristics.STEAL_RUNES);
     }
 
     /**
@@ -34,4 +38,36 @@ public class GreatKnife extends WeaponItem {
         return actions;
     }
 
+    @Override
+    public boolean isPriceAffected(Actor seller) {
+        double traderScamChance = 0.05;
+        return Math.random() < traderScamChance;
+    }
+
+    @Override
+    public Enum<TradeCharacteristics> getScamType(Actor seller) {
+        Enum<TradeCharacteristics> scamType = super.getScamType(seller);
+        if (seller.hasCapability(EntityTypes.TRADER)){
+            scamType = TradeCharacteristics.STEAL_RUNES;
+        }
+        return scamType;
+    }
+
+    @Override
+    public int affectedPrice(Actor seller) {
+        double affectedPercentage = 1;
+
+        if (seller.hasCapability(EntityTypes.TRADER)){ // Trader
+            affectedPercentage = 3;
+        } else if (seller.hasCapability(EntityTypes.PLAYABLE)) { // Player
+            affectedPercentage = 2;
+        }
+
+        return (int) (getPrice() * affectedPercentage);
+    }
+
+    @Override
+    public Item spawn() {
+        return null;
+    }
 }

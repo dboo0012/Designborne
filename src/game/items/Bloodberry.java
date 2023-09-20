@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import game.actions.IncreaseMaxAttributeAction;
+import game.attributes.TradeCharacteristics;
 
 public class Bloodberry extends TradeableItem {
     /***
@@ -46,8 +47,4 @@ public class Bloodberry extends TradeableItem {
         return getPrice();
     }
 
-    @Override
-    public boolean isScam(Actor seller) {
-        return true;
-    }
 }

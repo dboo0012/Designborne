@@ -2,7 +2,7 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import game.actors.ItemInventory;
+import game.attributes.TradeCharacteristics;
 
 public interface Tradeable {
 
@@ -14,6 +14,6 @@ public interface Tradeable {
 
     boolean isPriceAffected(Actor seller);
 
-    boolean isScam(Actor seller);
+    Enum<TradeCharacteristics> getScamType(Actor seller);
     int affectedPrice(Actor seller);
 }

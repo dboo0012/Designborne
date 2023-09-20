@@ -10,6 +10,7 @@ import game.actions.ChangeAttributeAction;
 import game.actions.HealAction;
 import game.attributes.Ability;
 import game.attributes.EntityTypes;
+import game.attributes.TradeCharacteristics;
 
 /**
  * An item that can be used to heal the player.
@@ -79,11 +80,4 @@ public class HealingVial extends TradeableItem {
 
         return (int) (getPrice() * affectedPercentage);
     }
-
-    @Override
-    public boolean isScam(Actor seller) {
-        return false;
-    }
-
-
 }

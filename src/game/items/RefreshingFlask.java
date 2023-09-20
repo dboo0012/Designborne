@@ -10,6 +10,7 @@ import game.actions.ChangeAttributeAction;
 import game.actions.RefreshAction;
 import game.attributes.Ability;
 import game.attributes.EntityTypes;
+import game.attributes.TradeCharacteristics;
 
 /**
  * An item that can be used to recover Player's stamina.
@@ -80,11 +81,11 @@ public class RefreshingFlask extends TradeableItem {
     }
 
     @Override
-    public boolean isScam(Actor seller) {
-        boolean isScam = false;
+    public Enum<TradeCharacteristics> getScamType(Actor seller) {
+        Enum<TradeCharacteristics> scamType = super.getScamType(seller);
         if (seller.hasCapability(EntityTypes.PLAYABLE)){
-            isScam = true;
+            scamType = TradeCharacteristics.STEAL_ITEMS;
         }
-        return isScam;
+        return scamType;
     }
 }

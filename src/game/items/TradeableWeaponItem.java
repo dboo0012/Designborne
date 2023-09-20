@@ -1,16 +1,16 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.attributes.Ability;
+import game.attributes.TradeCharacteristics;
 
 import java.util.Random;
 
 public abstract class TradeableWeaponItem extends WeaponItem implements Tradeable {
 
     private int price;
-
-
 
     /** Constructor.
      *
@@ -36,6 +36,11 @@ public abstract class TradeableWeaponItem extends WeaponItem implements Tradeabl
     }
 
     public abstract Item spawn();
+
+    @Override
+    public Enum<TradeCharacteristics> getScamType(Actor seller) {
+        return TradeCharacteristics.NON_SCAMMABLE;
+    }
 
 
 
