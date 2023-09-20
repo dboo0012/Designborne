@@ -47,13 +47,9 @@ public class ForestKeeper extends EnemyActor implements ActorSpawn {
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if (WeatherControl.getCurrentWeather() == Weather.SUNNY){
-            System.out.println(WeatherControl.getCurrentWeather());
             rate = DEFAULT_RATE * 2;
-            System.out.println(rate);
         } else if (WeatherControl.getCurrentWeather() == Weather.RAINY){
-            System.out.println(WeatherControl.getCurrentWeather());
             rate = DEFAULT_RATE;
-            System.out.println(rate);
             this.modifyAttribute((BaseActorAttributes.HEALTH), ActorAttributeOperations.INCREASE, 10);
         }
         return super.playTurn(actions, lastAction, map, display);
