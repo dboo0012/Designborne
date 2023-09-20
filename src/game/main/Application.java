@@ -16,6 +16,7 @@ import game.items.HealingVial;
 import game.items.RefreshingFlask;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
+import game.weapons.GiantHammer;
 
 /**
  * The main class to start the game.
@@ -98,6 +99,9 @@ public class Application {
         abandonedGroundMap.at(29, 6).addActor(new Traveller());
         player.addItemToInventory(new RefreshingFlask());
         player.addBalance(1000);
+
+        GiantHammer giantHammer = new GiantHammer();
+        abandonedGroundMap.at(29, 5).addItem(giantHammer);
 
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);
