@@ -32,13 +32,14 @@ public class BroadSword extends TradeableWeaponItem {
         super("BroadSword", '1', 110, "slashes", 80, 100);
         this.initialHitRate = 80;
         this.damageMultiplier = DEFAULT_DAMAGE_MULTIPLIER;
+        addAction(new FocusAction(this, 1.0f,80,5));
     }
 
-    public void reset(){
-        setFocusCounter();
-        this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
-        this.updateHitRate(80);
-    }
+//    public void reset(){
+//        setFocusCounter();
+//        this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
+//        this.updateHitRate(80);
+//    }
 
     /**
      * Add a new FocusAction to the weapon.
@@ -49,19 +50,19 @@ public class BroadSword extends TradeableWeaponItem {
         this.focusAction = newAction;
     }
 
-    /**
-     * Initialise the focus counter.
-     */
-    public void setFocusCounter() {
-        this.focusCounter = 0;
-    }
+//    /**
+//     * Initialise the focus counter.
+//     */
+//    public void setFocusCounter() {
+//        this.focusCounter = 0;
+//    }
 
     /**
      * Revert the BroadSword to its original stats if the weapon is dropped.
      * @param location The location of the ground on which we lie.
      */
     public void tick (Location location){
-        reset();
+//        reset();
         focusAction.reset();
     }
 

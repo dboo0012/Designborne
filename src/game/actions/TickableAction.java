@@ -12,9 +12,7 @@ public abstract class TickableAction extends Action {
     protected WeaponItem weaponItem;
     protected int counter;
     protected int maxCounter;
-
     protected boolean active = false;
-
     protected String actionName;
 
     public TickableAction(WeaponItem weaponItem, String actionName, float defDmgMultiplier, int defHitRate, int maxCounter){
