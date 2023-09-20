@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
 import game.actions.GreatSlamAction;
+import game.attributes.EntityTypes;
 
 public class GiantHammer extends WeaponItem {
     /**
@@ -24,8 +25,10 @@ public class GiantHammer extends WeaponItem {
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actions = new ActionList();
-        actions.add(new AttackAction(otherActor, location.toString(), this));
-        actions.add(new GreatSlamAction(this, otherActor));
+        if(otherActor.hasCapability(EntityTypes.ENEMY)){
+            actions.add(new AttackAction(otherActor, location.toString(), this));
+            actions.add(new GreatSlamAction(this, otherActor));
+        }
         return actions;
     }
 }
