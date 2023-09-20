@@ -20,6 +20,7 @@ import static game.weather.WeatherControl.getCurrentWeather;
 public class Abxervyer extends EnemyActor  {
     private WeatherControl weatherControl;
     private GameMap destination;
+    private final int FOLLOW_BEHAVIOUR_ID = 997;
 
     /**
      * Constructor for Abxervyer.
@@ -84,8 +85,8 @@ public class Abxervyer extends EnemyActor  {
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        if (otherActor.hasCapability(EntityTypes.PLAYABLE) && !this.behaviours.containsKey(997)){
-            this.behaviours.put(997, new FollowBehaviour(otherActor));
+        if (otherActor.hasCapability(EntityTypes.PLAYABLE) && !getBehaviours().containsKey(FOLLOW_BEHAVIOUR_ID)){
+            addBehaviour(FOLLOW_BEHAVIOUR_ID, new FollowBehaviour(otherActor));
         }
         return super.allowableActions(otherActor, direction, map);
 

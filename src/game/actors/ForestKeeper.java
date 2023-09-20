@@ -21,6 +21,7 @@ public class ForestKeeper extends EnemyActor implements ActorSpawn {
     private final double DEFAULT_RATE = 0.15;
     private double rate = DEFAULT_RATE;
     private int healAmount = 10;
+    private final int FOLLOW_BEHAVIOUR_ID = 997;
     public ForestKeeper() {
         super("Forest Keeper", '8', 125, 50);
         addDroppableItem(new HealingVial(), 0.2); //0.2
@@ -45,8 +46,8 @@ public class ForestKeeper extends EnemyActor implements ActorSpawn {
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        if (otherActor.hasCapability(EntityTypes.PLAYABLE) && !this.behaviours.containsKey(997)){
-            this.behaviours.put(997, new FollowBehaviour(otherActor));
+        if (otherActor.hasCapability(EntityTypes.PLAYABLE) && !getBehaviours().containsKey(FOLLOW_BEHAVIOUR_ID)){
+            addBehaviour(FOLLOW_BEHAVIOUR_ID, new FollowBehaviour(otherActor));
         }
         return super.allowableActions(otherActor, direction, map);
 
