@@ -11,6 +11,8 @@ import game.attributes.EntityTypes;
 import game.grounds.Gate;
 import game.weather.WeatherControl;
 
+import static game.weather.WeatherControl.getCurrentWeather;
+
 
 /**
  * A Abxervyer actor that has the ability to be spawned.
@@ -68,7 +70,7 @@ public class Abxervyer extends EnemyActor  {
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         weatherControl.updateWeather();
-        new Display().println("Current weather: " + weatherControl.getCurrentWeather());
+        new Display().println("Current weather: " + getCurrentWeather());
         return super.playTurn(actions, lastAction, map, display);
     }
 

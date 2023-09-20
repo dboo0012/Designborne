@@ -35,6 +35,14 @@ public class ForestKeeper extends EnemyActor implements ActorSpawn {
         return new IntrinsicWeapon(25, "touches", 75);
     }
 
+    /**
+     * Determine the allowable actions for the ForestKeeper, including the FollowBehaviour.
+     *
+     * @param otherActor the target actor to check for follow behavior
+     * @param direction  the direction in which to perform the action
+     * @param map        the GameMap in which the action is performed
+     * @return an ActionList containing allowable actions for the ForestKeeper
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         if (otherActor.hasCapability(EntityTypes.PLAYABLE) && !this.behaviours.containsKey(997)){
@@ -44,6 +52,15 @@ public class ForestKeeper extends EnemyActor implements ActorSpawn {
 
     }
 
+    /**
+     * Perform actions during the ForestKeeper's turn, including handling weather effects.
+     *
+     * @param actions    the list of available actions
+     * @param lastAction the last action performed
+     * @param map        the GameMap in which the action is performed
+     * @param display    the Display object to print messages
+     * @return the selected Action to perform
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if (WeatherControl.getCurrentWeather() == Weather.SUNNY){
@@ -56,8 +73,9 @@ public class ForestKeeper extends EnemyActor implements ActorSpawn {
     }
 
     /**
-     * Spawn a Forest Keeper with a 15% chance.
-     * @return ForestKeeper or null
+     * Spawn a Forest Keeper with a chance based on the current spawn rate.
+     *
+     * @return a new ForestKeeper instance if spawned, or null if not spawned
      */
     @Override
     public Actor spawn() {
