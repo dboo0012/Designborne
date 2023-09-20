@@ -51,6 +51,7 @@ public class SellAction extends Action {
         // Trader selling
         if (seller.hasCapability(EntityTypes.TRADER)){
             if (isScam){ // Take runes without giving item
+                System.out.println(tradeableItem + " "+ scamType);
                 if (scamType == TradeCharacteristics.STEAL_RUNES){
                     actor.deductBalance(price);
                     return String.format("SCAMMED! %s took your money ($ %d) without giving you a %s", seller, price, itemName);
@@ -77,6 +78,7 @@ public class SellAction extends Action {
                 }
                 return String.format("SCAMMED! %s took %s without paying you!", seller, itemName);
             } else { // Normal selling
+                actor.removeItemFromInventory(item);
                 actor.addBalance(price);
                 output += String.format("Trader purchased %s from %s for $%d", itemName, actor, price);
             }
