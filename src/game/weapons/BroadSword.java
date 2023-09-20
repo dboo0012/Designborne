@@ -123,7 +123,7 @@ public class BroadSword extends TradeableWeaponItem {
     public Enum<TradeCharacteristics> getScamType(Actor seller) {
         Enum<TradeCharacteristics> scamType = super.getScamType(seller);
         if (seller.hasCapability(EntityTypes.TRADER)){
-            scamType = TradeCharacteristics.STEAL_ITEMS;
+            scamType = TradeCharacteristics.STEAL_RUNES;
         }
         return scamType;
     }
