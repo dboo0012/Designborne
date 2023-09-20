@@ -46,7 +46,6 @@ public class FocusAction extends TickableAction {
         }
     }
 
-
     @Override
     public String menuDescription(Actor actor) {
         return actor + " activates the skill of Focus on " + weaponItem.toString();

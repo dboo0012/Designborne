@@ -27,7 +27,6 @@ public class Bloodberry extends TradeableItem {
         return new ActionList(changeAttributeAction);
     }
 
-
     @Override
     public Item spawn() {
         return new Bloodberry();

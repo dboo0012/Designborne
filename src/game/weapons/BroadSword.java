@@ -20,7 +20,6 @@ public class BroadSword extends TradeableWeaponItem {
     private float damageMultiplier;
     private int focusCounter;
     private int initialHitRate;
-    private ActionList actions = new ActionList();
     private FocusAction focusAction;
 
 
@@ -32,7 +31,7 @@ public class BroadSword extends TradeableWeaponItem {
         super("BroadSword", '1', 110, "slashes", 80, 100);
         this.initialHitRate = 80;
         this.damageMultiplier = DEFAULT_DAMAGE_MULTIPLIER;
-        addAction(new FocusAction(this, 1.0f,80,5));
+        this.focusAction = new FocusAction(this, 1.0f,80,5);
     }
 
 //    public void reset(){
@@ -40,15 +39,14 @@ public class BroadSword extends TradeableWeaponItem {
 //        this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
 //        this.updateHitRate(80);
 //    }
-
-    /**
-     * Add a new FocusAction to the weapon.
-     * @param newAction the new action to be added.
-     */
-    public void addAction(FocusAction newAction){
-        actions.add(newAction);
-        this.focusAction = newAction;
-    }
+//
+//    /**
+//     * Add a new FocusAction to the weapon.
+//     * @param newAction the new action to be added.
+//     */
+//    public void addAction(FocusAction newAction){
+//        this.focusAction = newAction;
+//    }
 
 //    /**
 //     * Initialise the focus counter.
@@ -82,8 +80,8 @@ public class BroadSword extends TradeableWeaponItem {
      */
     @Override
     public ActionList allowableActions(Actor actor) {
-//        ActionList actions = new ActionList();
-//        actions.add(new FocusAction(this, 1.0f,80,5));
+        ActionList actions = new ActionList();
+        actions.add(focusAction);
         return actions;
     }
 
@@ -113,7 +111,7 @@ public class BroadSword extends TradeableWeaponItem {
      * @return a boolean indicating if the price is affected
      */
     public boolean isPriceAffected(Actor seller) {
-        double traderScamChance = 1; //0.05
+        double traderScamChance = 1; //0.05 [REVERT]
         return Math.random() < traderScamChance;
     }
 
