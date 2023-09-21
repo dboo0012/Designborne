@@ -52,7 +52,7 @@ public class Application {
         abandonedGroundMap.at(25, 10).setGround(new Graveyard(abandonedGroundMap, new WanderingUndead()));
         abandonedGroundMap.at(13, 3).setGround(new Graveyard(abandonedGroundMap, new WanderingUndead()));
         abandonedGroundMap.at(42, 5).setGround(new Graveyard(abandonedGroundMap, new WanderingUndead()));
-        burialGroundMap.at(25, 10).setGround(new Graveyard(burialGroundMap, new HollowSoldier()));
+        burialGroundMap.at(5, 10).setGround(new Graveyard(burialGroundMap, new HollowSoldier()));
         burialGroundMap.at(36, 2).setGround(new Graveyard(burialGroundMap, new HollowSoldier()));
 
 
@@ -67,15 +67,16 @@ public class Application {
         bossMap.at(3, 10).setGround(new Bush(bossMap, new RedWolf()));
 
         // Player
-        Player player = new Player("The Abstracted One", '@', 150, 200);
+        Player player = new Player("The Abstracted One", '@', 15000, 200);
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
+//        world.addPlayer(player, bossMap.at(15,2));
 
         // Gate
-        abandonedGroundMap.at(22, 3).setGround(new Gate(burialGroundMap)); // test: 12, 9, actual: 22, 3
-        burialGroundMap.at(22, 6).setGround(new Gate(abandonedGroundMap)); // test: 20, 9,actual: 22, 6
-        burialGroundMap.at(25, 9).setGround(new Gate(ancientWoodsMap)); // test: 28, 9, actual: 22, 9
-        ancientWoodsMap.at(17, 9).setGround(new Gate(burialGroundMap)); // test: 40, 9, actual: 22, 9
-        ancientWoodsMap.at(17, 6).setGround(new Gate(bossMap)); // test: 40, 6, actual: 22, 6
+        abandonedGroundMap.at(22, 3).setGround(new Gate(burialGroundMap, 22, 6)); // test: 12, 9, actual: 22, 3
+        burialGroundMap.at(6, 2).setGround(new Gate(abandonedGroundMap, 29, 5)); // test: 20, 9,actual: 22, 6
+        burialGroundMap.at(25, 12).setGround(new Gate(ancientWoodsMap, 20, 3)); // test: 28, 9, actual: 22, 9
+        ancientWoodsMap.at(0, 8).setGround(new Gate(burialGroundMap, 22, 6)); // test: 40, 9, actual: 22, 9
+        ancientWoodsMap.at(27, 6).setGround(new Gate(bossMap, 0, 9)); // test: 40, 6, actual: 22, 6
 
 
         // Broadsword
@@ -100,7 +101,8 @@ public class Application {
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
-//        abandonedGroundMap.at(29, 6).addItem(new OldKey());
+        abandonedGroundMap.at(29, 6).addItem(new OldKey());
+//        bossMap.at(15,3).addItem(new OldKey());
 //        abandonedGroundMap.at(29, 6).addItem(new Bloodberry("Bloodberry", '*', true));
 
         //Testing Puddle
