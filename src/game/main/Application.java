@@ -101,9 +101,10 @@ public class Application {
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
-        abandonedGroundMap.at(29, 6).addItem(new OldKey());
+//        abandonedGroundMap.at(29, 6).addItem(new OldKey());
 //        bossMap.at(15,3).addItem(new OldKey());
 //        abandonedGroundMap.at(29, 6).addItem(new Bloodberry("Bloodberry", '*', true));
+//        world.addPlayer(player, ancientWoodsMap.at(45, 7));
 
         //Testing Puddle
 //        player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 50);

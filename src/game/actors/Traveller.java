@@ -20,5 +20,4 @@ public class Traveller extends Trader {
         addItemToInventory(new RefreshingFlask().setPrice(75));
         addItemToInventory(new BroadSword().setPrice(250));
     }
-
 }
