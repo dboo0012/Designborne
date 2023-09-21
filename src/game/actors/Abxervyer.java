@@ -55,7 +55,7 @@ public class Abxervyer extends EnemyActor  {
     @Override
     public String unconscious(Actor actor, GameMap map) {
         Location currentLocation = map.locationOf(this);
-        currentLocation.setGround(new Gate(destination));
+        currentLocation.setGround(new Gate(destination, 20, 3));
         return "Abxervyer has been slain!"  + " " + super.unconscious(actor, map);
     }
 
