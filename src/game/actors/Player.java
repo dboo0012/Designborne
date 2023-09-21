@@ -16,6 +16,7 @@ import game.attributes.EntityTypes;
 import game.attributes.Status;
 import game.utilities.FancyMessageDisplay;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -39,11 +40,14 @@ public class Player extends Actor {
      */
     public Player(String name, char displayChar, int hitPoints, int stamina) {
         super(name, displayChar, hitPoints);
+
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina)); // New stamina attribute
         this.addCapability(EntityTypes.PLAYABLE);
         this.addCapability(Ability.CAN_ENTER_FLOOR);
         this.addCapability(Ability.TRAVEL);
+        this.addCapability(Ability.CONSUME);
+        this.addCapability(Ability.TRADE);
     }
 
     /**

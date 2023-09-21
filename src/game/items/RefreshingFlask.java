@@ -8,17 +8,20 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ChangeAttributeAction;
 import game.actions.RefreshAction;
+import game.attributes.Ability;
+import game.attributes.EntityTypes;
+import game.attributes.TradeCharacteristics;
 
 /**
  * An item that can be used to recover Player's stamina.
  */
-public class RefreshingFlask extends Item {
+public class RefreshingFlask extends TradeableItem {
     private ActionList actions = new ActionList();
     /***
      * Constructor.
      */
     public RefreshingFlask() {
-        super("Refreshing Flask", 'u', true);
+        super("Refreshing Flask", 'u', true, 25);
     }
 
     /**
@@ -29,13 +32,60 @@ public class RefreshingFlask extends Item {
      */
     @Override
     public ActionList allowableActions(Actor owner) {
-        int maxStamina = owner.getAttributeMaximum(BaseActorAttributes.STAMINA);
-        float increasePercentage = 0.2f;
+        ActionList actions = new ActionList();
 
-        // Create a ChangeAttributeAction to increase the actor's stamina
-        ChangeAttributeAction changeAttributeAction = new ChangeAttributeAction(this,
-                BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, (int) (maxStamina * increasePercentage), true);
+        if (owner.hasCapability(Ability.CONSUME)){
+            int maxStamina = owner.getAttributeMaximum(BaseActorAttributes.STAMINA);
+            float increasePercentage = 0.2f;
 
-        return new ActionList(changeAttributeAction);
+            // Create a ChangeAttributeAction to increase the actor's stamina
+            ChangeAttributeAction changeAttributeAction = new ChangeAttributeAction(this,
+                    BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, (int) (maxStamina * increasePercentage), true);
+
+            actions.add(changeAttributeAction);
+        }
+
+        return actions;
+    }
+
+    @Override
+    public Item spawn() {
+        return new RefreshingFlask();
+    }
+
+    /**
+     *
+     * @param seller the Actor selling, passed in because different seller types may have different probability
+     * @return a boolean indicating if the price is affected
+     */
+    @Override
+    public boolean isPriceAffected(Actor seller) {
+        double chance = 0;
+        if (seller.hasCapability(EntityTypes.TRADER)){
+            chance = 0.10;
+        } else if (seller.hasCapability(EntityTypes.PLAYABLE)){
+            chance = 0.5; //0.5
+        }
+        return Math.random() < chance;
+    }
+
+    @Override
+    public int affectedPrice(Actor seller) {
+        double affectedPercentage = 1;
+
+        if (seller.hasCapability(EntityTypes.TRADER)){
+            affectedPercentage = 0.8;
+        }
+
+        return (int) (getPrice() * affectedPercentage);
+    }
+
+    @Override
+    public Enum<TradeCharacteristics> getScamType(Actor seller) {
+        Enum<TradeCharacteristics> scamType = super.getScamType(seller);
+        if (seller.hasCapability(EntityTypes.PLAYABLE)){
+            scamType = TradeCharacteristics.STEAL_ITEMS;
+        }
+        return scamType;
     }
 }

@@ -74,10 +74,6 @@ public abstract class EnemyActor extends Actor implements Attackable{
             map.at(currentLocation.x(), currentLocation.y()).addItem(runes);
 
         }
-
-
-
-
     }
 
     /**
@@ -125,6 +121,7 @@ public abstract class EnemyActor extends Actor implements Attackable{
         }
         return actions;
     }
+
 // TODO: Every actor would drop runes, why still need enemydropactor class?
 
 //    @Override

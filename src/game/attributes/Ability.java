@@ -7,4 +7,7 @@ package game.attributes;
 public enum Ability {
     CAN_ENTER_FLOOR,
     TRAVEL,
+    TRADE,
+    TRADABLE, // Item with this ability can be traded
+    CONSUME, //Can consume items like runes, healing vial, refreshing flask
 }
