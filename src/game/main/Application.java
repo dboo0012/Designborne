@@ -1,22 +1,21 @@
 package game.main;
 
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.*;
-import game.actors.Traveller;
 import game.grounds.Gate;
 import game.grounds.Graveyard;
 import game.actions.FocusAction;
 import game.grounds.*;
 import game.grounds.Void;
 import game.items.Bloodberry;
-import game.items.HealingVial;
-import game.items.RefreshingFlask;
+import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
-import game.weapons.GiantHammer;
 
 /**
  * The main class to start the game.
@@ -43,7 +42,10 @@ public class Application {
         GameMap ancientWoodsMap = new GameMap(groundFactory, Maps.ANCIENT_WOODS);
         world.addGameMap(ancientWoodsMap);
 
-//        FancyMessageDisplay.createString(FancyMessage.TITLE); Uncomment
+        GameMap bossMap = new GameMap(groundFactory, Maps.BOSS_MAP);
+        world.addGameMap(bossMap);
+
+        FancyMessageDisplay.createString(FancyMessage.TITLE);
 
         // Graveyard
         abandonedGroundMap.at(25, 10).setGround(new Graveyard(abandonedGroundMap, new WanderingUndead()));
@@ -56,9 +58,12 @@ public class Application {
         // Empty Huts
         ancientWoodsMap.at(5, 2).setGround(new EmptyHuts(ancientWoodsMap, new ForestKeeper()));
         ancientWoodsMap.at(9, 2).setGround(new EmptyHuts(ancientWoodsMap, new ForestKeeper()));
+        bossMap.at(30, 1).setGround(new EmptyHuts(bossMap, new ForestKeeper()));
+        bossMap.at(32, 2).setGround(new EmptyHuts(bossMap, new ForestKeeper()));
 
         // Bushes
         ancientWoodsMap.at(3, 5).setGround(new Bush(ancientWoodsMap, new RedWolf()));
+        bossMap.at(3, 10).setGround(new Bush(bossMap, new RedWolf()));
 
         // Player
         Player player = new Player("The Abstracted One", '@', 150, 200);
@@ -69,11 +74,13 @@ public class Application {
         burialGroundMap.at(22, 6).setGround(new Gate(abandonedGroundMap)); // test: 20, 9,actual: 22, 6
         burialGroundMap.at(25, 9).setGround(new Gate(ancientWoodsMap)); // test: 28, 9, actual: 22, 9
         ancientWoodsMap.at(17, 9).setGround(new Gate(burialGroundMap)); // test: 40, 9, actual: 22, 9
+        ancientWoodsMap.at(17, 6).setGround(new Gate(bossMap)); // test: 40, 6, actual: 22, 6
+
 
         // Broadsword
         BroadSword broadSword = new BroadSword();
-//        broadSword.addAction(new FocusAction(broadSword, 1.0f,80,5));
-        abandonedGroundMap.at(29, 5).addItem(broadSword);
+//        broadSword.addAction(new FocusAction(broadSword));
+        abandonedGroundMap.at(29, 6).addItem(broadSword);
 
         // Bloodberry
         abandonedGroundMap.at(27, 5).addItem(new Bloodberry());
@@ -94,14 +101,6 @@ public class Application {
 //        player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 50);
 //        player.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 50);
 //        abandonedGroundMap.at(29, 5).setGround(new Puddle());
-
-        // Testing Traveller
-        abandonedGroundMap.at(29, 6).addActor(new Traveller());
-        player.addItemToInventory(new RefreshingFlask());
-        player.addBalance(1000);
-
-        GiantHammer giantHammer = new GiantHammer();
-        abandonedGroundMap.at(29, 5).addItem(giantHammer);
 
         // Extra features
 //        HealingVial healingVial = new HealingVial("Healing Vial", 'a', true);

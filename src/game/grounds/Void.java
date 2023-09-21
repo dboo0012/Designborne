@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.attributes.EntityTypes;
 
 /**
  * A type of Ground that represents a void. Actors stepping into this void become unconscious.
@@ -26,7 +27,7 @@ public class Void extends Ground {
      */
     @Override
     public void tick(Location location) {
-        if (location.containsAnActor()) {
+        if (location.containsAnActor() && !location.getActor().hasCapability(EntityTypes.BOSS)){
             Actor actor = location.getActor();
             GameMap map = location.map();
             // Make the actor unconscious when stepping into the void
