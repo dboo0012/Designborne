@@ -44,7 +44,7 @@ public class SellAction extends Action {
                 isScam = true;
             } else {
                 price = tradeableItem.affectedPrice(seller);
-                output += String.format("%s has scammed you by increasing the price to %d\n", seller, price);
+                output += String.format("%s hascammed you by increasing the price to %d\n", seller, price);
             }
         }
 
@@ -59,7 +59,7 @@ public class SellAction extends Action {
             } else if (actor.getBalance() > price){ // Normal Buying
                 actor.deductBalance(price);
                 actor.addItemToInventory(tradeableItem.spawn());
-                output += String.format("You have bought %s for %d.", itemName, price);
+                output += String.format("You have bought %s for $%d.", itemName, price);
             } else{ // Not enough Runes
                 output += String.format("You do not have enough Runes to buy %s.", itemName);
             }
