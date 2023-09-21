@@ -92,6 +92,9 @@ public class Application {
 
         burialGroundMap.at(28, 5).addItem(new Bloodberry());
 
+        //Trader
+//        ancientWoodsMap.at()
+
         //Boss
         bossMap.at(15, 1).addActor(new Abxervyer(ancientWoodsMap, new WeatherControl()));
 

@@ -17,6 +17,9 @@ public class Gate extends Ground {
     private GameMap destination;
     private ActionList actions = new ActionList();
 
+    private int x = -1;
+    private int y = -1;
+
     /**
      * Constructor.
      * @param destination The map where the actor will be spawned
@@ -25,6 +28,18 @@ public class Gate extends Ground {
         super('=');
         this.destination = destination;
         addCapability(Status.LOCKED);
+    }
+
+    /**
+     * Constructor.
+     * @param destination The map where the actor will be spawned
+     */
+    public Gate(GameMap destination, int x, int y){
+        super('=');
+        this.destination = destination;
+        addCapability(Status.LOCKED);
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -44,8 +59,10 @@ public class Gate extends Ground {
 //        }
         // If the gate is not locked, add a TravelAction to allow actor to pass through
         if (!this.hasCapability(Status.LOCKED)){
-            int x = location.x();
-            int y = location.y();
+            if (x < 0){
+                x = location.x();
+                y = location.y();
+            }
             actions.add(new TravelAction(this.destination, x, y));
         } else{
             actions.add(new UnlockAction(this));
