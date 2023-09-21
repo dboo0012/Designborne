@@ -69,7 +69,7 @@ public class Application {
         // Player
         Player player = new Player("The Abstracted One", '@', 15000, 200);
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
-//        world.addPlayer(player, bossMap.at(15,2));
+
 
         // Gate
         abandonedGroundMap.at(22, 3).setGround(new Gate(burialGroundMap, 22, 6)); // test: 12, 9, actual: 22, 3
@@ -93,8 +93,8 @@ public class Application {
 
         burialGroundMap.at(28, 5).addItem(new Bloodberry());
 
-        //Trader
-//        ancientWoodsMap.at()
+        //Traveller
+        ancientWoodsMap.at(45, 8).addActor(new Traveller());
 
         //Boss
         bossMap.at(15, 1).addActor(new Abxervyer(ancientWoodsMap, new WeatherControl()));
