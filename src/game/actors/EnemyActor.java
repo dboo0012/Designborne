@@ -17,7 +17,6 @@ import game.attributes.Status;
 import game.items.ItemDrop;
 import game.items.Runes;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -29,13 +28,21 @@ public abstract class EnemyActor extends Actor implements Attackable{
 
     private final Random rand = new Random();
 
-    protected Map<Integer, Behaviour> behaviours = new TreeMap<>();
-    //Pre-defined list of items to drop
-    protected final ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>();
-    //Array of chances to drop, with indices matching itemsToBeDropped
-    protected final ArrayList<Double> itemsToBeDroppedChance = new ArrayList<>();
-    protected ItemDrop itemDrop = new ItemDrop();
-    protected int runesDropped;
+    //    protected Map<Integer, Behaviour> behaviours = new TreeMap<>();
+//    //Pre-defined list of items to drop
+//    protected final ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>();
+//    //Array of chances to drop, with indices matching itemsToBeDropped
+//    protected final ArrayList<Double> itemsToBeDroppedChance = new ArrayList<>();
+//    protected ItemDrop itemDrop = new ItemDrop();
+//    protected int runesDropped;
+    private Map<Integer, Behaviour> behaviours = new TreeMap<>();
+    private  ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>();
+    private  ArrayList<Double> itemsToBeDroppedChance = new ArrayList<>();
+    private ItemDrop itemDrop = new ItemDrop();
+    private int runesDropped;
+    private final int WANDER_BEHAVIOUR_ID = 999;
+    private final int ATTACK_BEHAVIOUR_ID = 1;
+
     /**
      * Constructor for creating an EnemyActor object.
      *
@@ -46,13 +53,48 @@ public abstract class EnemyActor extends Actor implements Attackable{
     public EnemyActor(String name, char displayChar, int hitPoints, int runesDropped) {
         super(name, displayChar, hitPoints);
         this.runesDropped = runesDropped;
-        this.behaviours.put(999, new WanderBehaviour());
-        this.behaviours.put(1, new AttackBehaviour());
+        this.behaviours.put(WANDER_BEHAVIOUR_ID, new WanderBehaviour());
+        this.behaviours.put(ATTACK_BEHAVIOUR_ID, new AttackBehaviour());
         this.addCapability(EntityTypes.ENEMY);
     }
 
     public int getRunesDropped(){
         return this.runesDropped;
+    }
+    public void setRunesDropped(int runesDropped) {
+        this.runesDropped = runesDropped;
+    }
+
+    public Map<Integer, Behaviour> getBehaviours() {
+        return behaviours;
+    }
+
+    public void addBehaviour(int priority, Behaviour behaviour) {
+        this.behaviours.put(priority, behaviour);
+    }
+
+    public ArrayList<Class<? extends Item>> getItemsToBeDropped() {
+        return itemsToBeDropped;
+    }
+
+    public void setItemsToBeDropped(ArrayList<Class<? extends Item>> itemsToBeDropped) {
+        this.itemsToBeDropped = itemsToBeDropped;
+    }
+
+    public ArrayList<Double> getItemsToBeDroppedChance() {
+        return itemsToBeDroppedChance;
+    }
+
+    public void setItemsToBeDroppedChance(ArrayList<Double> itemsToBeDroppedChance) {
+        this.itemsToBeDroppedChance = itemsToBeDroppedChance;
+    }
+
+    public ItemDrop getItemDrop() {
+        return itemDrop;
+    }
+
+    public void setItemDrop(ItemDrop itemDrop) {
+        this.itemDrop = itemDrop;
     }
 
     public void addDroppableItem(Item item, double chance){
@@ -69,14 +111,11 @@ public abstract class EnemyActor extends Actor implements Attackable{
 
     public void dropRune(Actor actor, GameMap map){
         Location currentLocation = map.locationOf(actor);
-        if (runesDropped > 0){
-            Runes runes = new Runes(runesDropped);
+        if (getRunesDropped() > 0){
+            Runes runes = new Runes(getRunesDropped());
             map.at(currentLocation.x(), currentLocation.y()).addItem(runes);
 
         }
-
-
-
 
     }
 
@@ -87,7 +126,7 @@ public abstract class EnemyActor extends Actor implements Attackable{
      * @param map                  The map where the actor fell unconscious.
      */
     public void dropItems(Actor actor, GameMap map) {
-        itemDrop.dropItems(actor, map, this.itemsToBeDropped, this.itemsToBeDroppedChance);
+        getItemDrop().dropItems(actor, map, getItemsToBeDropped(), getItemsToBeDroppedChance());
     }
 
     /**
@@ -101,7 +140,7 @@ public abstract class EnemyActor extends Actor implements Attackable{
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour behaviour : behaviours.values()) {
+        for (Behaviour behaviour : getBehaviours().values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
                 return action;

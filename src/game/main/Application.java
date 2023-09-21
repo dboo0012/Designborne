@@ -16,6 +16,7 @@ import game.items.Bloodberry;
 import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
+import game.weather.WeatherControl;
 
 /**
  * The main class to start the game.
@@ -79,7 +80,6 @@ public class Application {
 
         // Broadsword
         BroadSword broadSword = new BroadSword();
-//        broadSword.addAction(new FocusAction(broadSword));
         abandonedGroundMap.at(29, 6).addItem(broadSword);
 
         // Bloodberry
@@ -91,6 +91,9 @@ public class Application {
         abandonedGroundMap.at(27, 9).addItem(new Bloodberry());
 
         burialGroundMap.at(28, 5).addItem(new Bloodberry());
+
+        //Boss
+        bossMap.at(15, 1).addActor(new Abxervyer(ancientWoodsMap, new WeatherControl()));
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
