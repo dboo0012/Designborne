@@ -31,21 +31,24 @@ public class GreatSlamAction extends Action {
             actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, (int) requiredStamina);
 
             // Slam
-            slam(target, map);
+            String slam = slam(target, map);
 
             // Attack
             String attack = new AttackAction(target, " slams ", giantHammer).attack(actor, map);
 
-            return attack + "\n" + String.format("Great Slam did AOE damage around %s", target);
+            return attack + slam;
         }
     }
 
-    public void slam(Actor otherActor, GameMap map){
+    public String slam(Actor otherActor, GameMap map){
         // get all the exits of the enemy, within those exits, if there is an actor, attack with 50% damage
         int originalDamage = giantHammer.damage();
         int splashDamage = (int) (originalDamage * 0.5);
 
         Location target = map.locationOf(otherActor); // Get exits around the target actor
+
+//        new Display().println(String.format("Great Slam did AOE damage around %s", target));
+        String result = String.format("\nGreat Slam did AOE damage around %s", target);
 
         for (Exit exit : target.getExits()) {
             Location destination = exit.getDestination();
@@ -53,13 +56,19 @@ public class GreatSlamAction extends Action {
             if (destination.containsAnActor()) {
                 Actor affectedActor = destination.getActor();
                 affectedActor.hurt(splashDamage);
-                new Display().println(String.format("%s is splashed by %d damage from Great Slam", affectedActor, splashDamage));
+//                new Display().println(String.format("%s is splashed by %d damage from Great Slam", affectedActor, splashDamage));
+                result += String.format("\n%s is splashed by %d damage from Great Slam", affectedActor, splashDamage);
+                if (!affectedActor.isConscious()) {
+                    result += String.format("\n%s", affectedActor.unconscious(otherActor, map));
+//                    new Display().println(affectedActor.unconscious(affectedActor, map));
+                }
             }
         }
+        return result;
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " activates the skill of Great Slam on " + giantHammer.toString();
+        return String.format("%s activates the skill of Great Slam on %s", actor, giantHammer.toString());
     }
 }
