@@ -28,7 +28,7 @@ public class Puddle extends Ground {
      */
     public ActionList allowableActions(Actor actor, Location location, String direction){
         ActionList actions = super.allowableActions(actor, location, direction);
-        if (actor.hasCapability(EntityTypes.PLAYABLE)){
+        if (actor.hasCapability(EntityTypes.PLAYABLE) && location.getActor() == actor){
             actions.add(new DrinkPuddleAction());
         }
         return actions;
