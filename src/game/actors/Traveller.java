@@ -14,7 +14,6 @@ import game.weapons.BroadSword;
 public class Traveller extends Trader {
     public Traveller(){
         super("Traveller", 'ඞ', 1);
-        this.addCapability(EntityTypes.TRADER);
 
         addItemToInventory(new HealingVial().setPrice(100));
         addItemToInventory(new RefreshingFlask().setPrice(75));
