@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.actions.addBalanceAction;
+import game.attributes.Ability;
 
 public class Runes extends Item {
 
@@ -24,8 +25,10 @@ public class Runes extends Item {
     @Override
     public ActionList allowableActions(Actor owner) {
         ActionList actions = super.allowableActions(owner);
-        System.out.println("Owner" + owner + "| Value: " + getValue());
-        actions.add(new addBalanceAction(this));
+            if (owner.hasCapability(Ability.CONSUME)) {
+                System.out.println("Owner" + owner + "| Value: " + getValue());
+                actions.add(new addBalanceAction(this));
+            }
         return actions;
     }
 }
