@@ -10,6 +10,7 @@ import game.attributes.EntityTypes;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
 import game.weapons.BroadSword;
+import game.weapons.GreatKnife;
 
 public class Traveller extends Trader {
     public Traveller(){
@@ -18,5 +19,6 @@ public class Traveller extends Trader {
         addItemToInventory(new HealingVial().setPrice(100));
         addItemToInventory(new RefreshingFlask().setPrice(75));
         addItemToInventory(new BroadSword().setPrice(250));
+        addItemToInventory(new GreatKnife().setPrice(300));
     }
 }
