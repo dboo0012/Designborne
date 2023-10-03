@@ -41,11 +41,6 @@ public class GiantHammer extends TradeableWeaponItem {
     }
 
     @Override
-    public Enum<TradeCharacteristics> getScamType(Actor seller) {
-        return TradeCharacteristics.STEAL_ITEMS;
-    }
-
-    @Override
     public int affectedPrice(Actor seller) {
         return 0;
     }
