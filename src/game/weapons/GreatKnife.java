@@ -68,6 +68,6 @@ public class GreatKnife extends TradeableWeaponItem {
 
     @Override
     public Item spawn() {
-        return null;
+        return new GreatKnife();
     }
 }
