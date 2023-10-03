@@ -84,12 +84,8 @@ public class Application {
         abandonedGroundMap.at(29, 6).addItem(broadSword);
 
         // Bloodberry
-        abandonedGroundMap.at(27, 5).addItem(new Bloodberry());
-        abandonedGroundMap.at(28, 5).addItem(new Bloodberry());
-        abandonedGroundMap.at(30, 8).addItem(new Bloodberry());
-        abandonedGroundMap.at(30, 9).addItem(new Bloodberry());
-        abandonedGroundMap.at(27, 8).addItem(new Bloodberry());
-        abandonedGroundMap.at(27, 9).addItem(new Bloodberry());
+        ancientWoodsMap.at(27, 5).addItem(new Bloodberry());
+        ancientWoodsMap.at(30, 9).addItem(new Bloodberry());
 
         burialGroundMap.at(28, 5).addItem(new Bloodberry());
 
