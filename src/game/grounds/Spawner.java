@@ -17,6 +17,7 @@ public abstract class Spawner extends Ground {
 
     /**
      * Constructor.
+     * @param displayChar The character to display
      * @param map The map where the actor will be spawned
      * @param actor The actor to be spawned (enemy)
      */

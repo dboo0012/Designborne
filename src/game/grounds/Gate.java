@@ -23,6 +23,8 @@ public class Gate extends Ground {
     /**
      * Constructor.
      * @param destination The map where the actor will be spawned
+     * @param x The x coordinate of the destination
+     * @param y The y coordinate of the destination
      */
     public Gate(GameMap destination, int x, int y){
         super('=');

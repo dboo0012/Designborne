@@ -16,6 +16,9 @@ import game.attributes.EntityTypes;
  * @author Meekal
  */
 public class Puddle extends Ground {
+    /**
+     * Constructor.
+     */
     public Puddle() {
         super('~');
     }
