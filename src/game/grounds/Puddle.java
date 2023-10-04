@@ -12,6 +12,8 @@ import game.attributes.EntityTypes;
 
 /**
  * A class that represents a puddle.
+ *
+ * @author Meekal
  */
 public class Puddle extends Ground {
     public Puddle() {

@@ -3,7 +3,7 @@ package game.items;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import game.actions.addBalanceAction;
+import game.actions.AddBalanceAction;
 import game.attributes.Ability;
 
 public class Runes extends Item {
@@ -27,7 +27,7 @@ public class Runes extends Item {
         ActionList actions = super.allowableActions(owner);
             if (owner.hasCapability(Ability.CONSUME)) {
                 System.out.println("Owner" + owner + "| Value: " + getValue());
-                actions.add(new addBalanceAction(this));
+                actions.add(new AddBalanceAction(this));
             }
         return actions;
     }

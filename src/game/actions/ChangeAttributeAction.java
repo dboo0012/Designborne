@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
  * An action that allows an actor to consume an item, resulting in a change to one of the actor's attributes.
+ *
+ * @author Meekal
  */
 public class ChangeAttributeAction extends Action {
 
