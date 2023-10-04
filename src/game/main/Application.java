@@ -101,6 +101,7 @@ public class Application {
 //        bossMap.at(15,3).addItem(new OldKey());
 //        abandonedGroundMap.at(29, 6).addItem(new Bloodberry("Bloodberry", '*', true));
 //        world.addPlayer(player, ancientWoodsMap.at(45, 7));
+//        world.addPlayer(player, bossMap.at(15, 2));
 
         //Testing Puddle
 //        player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 50);
