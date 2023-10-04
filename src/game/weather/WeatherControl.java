@@ -25,6 +25,11 @@ public class WeatherControl {
         return currentWeather;
     }
 
+    /**
+     * Sets the current weather condition.
+     *
+     * @param weather The weather condition to set.
+     */
     public void setCurrentWeather(Weather weather) {
     	currentWeather = weather;
     }
