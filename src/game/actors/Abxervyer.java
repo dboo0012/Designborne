@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.behaviours.FollowBehaviour;
 import game.attributes.EntityTypes;
 import game.grounds.Gate;
+import game.weather.Weather;
 import game.weather.WeatherControl;
 
 import static game.weather.WeatherControl.getCurrentWeather;
@@ -54,6 +55,7 @@ public class Abxervyer extends EnemyActor  {
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
+        weatherControl.setCurrentWeather(Weather.DEFAULT);
         Location currentLocation = map.locationOf(this);
         currentLocation.setGround(new Gate(destination, 20, 3));
         return "Abxervyer has been slain!"  + " " + super.unconscious(actor, map);

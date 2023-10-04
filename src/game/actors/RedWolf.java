@@ -74,6 +74,9 @@ public class RedWolf extends EnemyActor implements ActorSpawn {
         } else if (WeatherControl.getCurrentWeather() == Weather.RAINY){
             rate = DEFAULT_RATE * 1.5;
             damage = DEFAULT_DAMAGE;
+        } else if (WeatherControl.getCurrentWeather() == Weather.DEFAULT){
+            rate = DEFAULT_RATE;
+            damage = DEFAULT_DAMAGE;
         }
         return super.playTurn(actions, lastAction, map, display);
     }
