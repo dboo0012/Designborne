@@ -7,6 +7,12 @@ package game.attributes;
  * @author Riordan D. Alfredo
  */
 public enum Status {
+    /**
+     * Inicates that the actor can be attacked
+     */
     HOSTILE_TO_ENEMY,
+    /**
+     * Indicates that the ground is locked (gate)
+     */
     LOCKED,
 }

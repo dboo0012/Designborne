@@ -22,7 +22,7 @@ import game.weather.WeatherControl;
  * The main class to start the game.
  * Created by:
  * @author Adrian Kristanto
- * Modified by: Daryl Boon (32836899)
+ * Modified by: Daryl, Meekal, Jerry
  *
  */
 public class Application {
@@ -67,7 +67,7 @@ public class Application {
         bossMap.at(3, 10).setGround(new Bush(bossMap, new RedWolf()));
 
         // Player
-        Player player = new Player("The Abstracted One", '@', 15000, 200); // [Revert] health/stamina
+        Player player = new Player("The Abstracted One", '@', 150, 200); // [Revert] health/stamina
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
 
 

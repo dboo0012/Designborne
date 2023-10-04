@@ -10,6 +10,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.weapons.GiantHammer;
 
+/**
+ * The class represents a great slam action.
+ *
+ * @author Daryl
+ */
 public class GreatSlamAction extends Action {
     private final GiantHammer giantHammer;
     private final Actor target;

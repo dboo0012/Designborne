@@ -14,6 +14,8 @@ import game.attributes.TradeCharacteristics;
 
 /**
  * An item that can be used to heal the player.
+ *
+ * @author Daryl, Meekal, Jerry
  */
 public class HealingVial extends TradeableItem {
     /***
