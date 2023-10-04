@@ -10,6 +10,8 @@ import game.actors.EnemyActor;
 
 /**
  * An abstract class that represents a spawner.
+ *
+ * @author Daryl
  */
 public abstract class Spawner extends Ground {
     private ActorSpawn actorToSpawn;
