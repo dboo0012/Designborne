@@ -10,6 +10,8 @@ import game.items.OldKey;
 
 /**
  * Action for unlocking the gate.
+ *
+ * @author Daryl
  */
 public class UnlockAction extends Action {
     private final Gate gate;

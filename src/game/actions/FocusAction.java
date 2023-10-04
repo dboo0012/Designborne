@@ -11,6 +11,8 @@ import game.weapons.BroadSword;
 
 /**
  * An action to activate the skill of Broadsword (focus).
+ *
+ * @author Daryl
  */
 public class FocusAction extends TickableAction {
 
@@ -30,6 +32,7 @@ public class FocusAction extends TickableAction {
         } else {
             activate();
             resetCounter();
+
             // Broadswords new stats
             int newHitRate = 90;
             float increaseDamageMultiplierBy = 0.1f;
@@ -39,9 +42,6 @@ public class FocusAction extends TickableAction {
             // stamina decrease 20% of max
             actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, (int) requiredStamina);
 
-//            // Activates skill and reset counter
-//            focusActive = true;
-//            weaponItem.setFocusCounter();
             return actor + " has activated Focus on " + weaponItem.toString();
         }
     }

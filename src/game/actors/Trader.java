@@ -17,6 +17,11 @@ import javax.swing.*;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Class representing a trader actor.
+ *
+ * @author Meekal
+ */
 public abstract class Trader extends Actor {
 
     protected Map<Integer, Behaviour> behaviours = new TreeMap<>();
@@ -44,6 +49,12 @@ public abstract class Trader extends Actor {
         return new DoNothingAction();
     }
 
+    /**
+     * Returns a list of the Actions of all the items sold by the sellingActor which can be performed on the current actor.
+     *
+     * @param sellingActor The actor selling the items
+     * @return The list of actions to sell of all the items in the sellingActor's inventory
+     */
     public ActionList getItems(Actor sellingActor){
         ActionList actions = new ActionList(); //List of actions
 
@@ -78,6 +89,4 @@ public abstract class Trader extends Actor {
 
         return actions;
     }
-
-
 }

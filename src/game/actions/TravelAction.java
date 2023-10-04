@@ -6,6 +6,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
  * An action that allows the actor to travel to another map.
+ *
+ * @author Daryl
  */
 public class TravelAction extends Action {
     private final GameMap destination;

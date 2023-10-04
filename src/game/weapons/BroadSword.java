@@ -14,18 +14,17 @@ import game.items.TradeableWeaponItem;
 
 /**
  * A BroadSword weapon.
+ *
+ * @author Daryl
  */
 public class BroadSword extends TradeableWeaponItem {
     private static final float DEFAULT_DAMAGE_MULTIPLIER = 1.0f;
+    private final int initialHitRate;
     private float damageMultiplier;
-    private int focusCounter;
-    private int initialHitRate;
     private FocusAction focusAction;
-
 
     /**
      * Constructor.
-     *
      */
     public BroadSword() {
         super("BroadSword", '1', 110, "slashes", 80, 100);
@@ -33,27 +32,6 @@ public class BroadSword extends TradeableWeaponItem {
         this.damageMultiplier = DEFAULT_DAMAGE_MULTIPLIER;
         this.focusAction = new FocusAction(this, 1.0f,80,5);
     }
-
-//    public void reset(){
-//        setFocusCounter();
-//        this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
-//        this.updateHitRate(80);
-//    }
-//
-//    /**
-//     * Add a new FocusAction to the weapon.
-//     * @param newAction the new action to be added.
-//     */
-//    public void addAction(FocusAction newAction){
-//        this.focusAction = newAction;
-//    }
-
-//    /**
-//     * Initialise the focus counter.
-//     */
-//    public void setFocusCounter() {
-//        this.focusCounter = 0;
-//    }
 
     /**
      * Revert the BroadSword to its original stats if the weapon is dropped.

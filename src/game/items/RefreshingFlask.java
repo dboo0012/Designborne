@@ -16,7 +16,6 @@ import game.attributes.TradeCharacteristics;
  * An item that can be used to recover Player's stamina.
  */
 public class RefreshingFlask extends TradeableItem {
-    private ActionList actions = new ActionList();
     /***
      * Constructor.
      */
@@ -48,12 +47,17 @@ public class RefreshingFlask extends TradeableItem {
         return actions;
     }
 
+    /**
+     * Creates and returns a new Refreshing Flask.
+     * @return a Refreshing Flask object
+     */
     @Override
     public Item spawn() {
         return new RefreshingFlask();
     }
 
     /**
+     * Determines whether the price of Refreshing Flask is affected when sold by an actor.
      *
      * @param seller the Actor selling, passed in because different seller types may have different probability
      * @return a boolean indicating if the price is affected
@@ -69,6 +73,12 @@ public class RefreshingFlask extends TradeableItem {
         return Math.random() < chance;
     }
 
+    /**
+     * Calculate the affected price of Refreshing Flask.
+     *
+     * @param seller The actor representing the seller.
+     * @return the affected price of Refreshing Flask
+     */
     @Override
     public int affectedPrice(Actor seller) {
         double affectedPercentage = 1;
@@ -80,6 +90,12 @@ public class RefreshingFlask extends TradeableItem {
         return (int) (getPrice() * affectedPercentage);
     }
 
+    /**
+     * Returns the scam type of Refreshing Flask.
+     *
+     * @param seller The actor representing the seller.
+     * @return type of scam
+     */
     @Override
     public Enum<TradeCharacteristics> getScamType(Actor seller) {
         Enum<TradeCharacteristics> scamType = super.getScamType(seller);

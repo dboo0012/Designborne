@@ -16,6 +16,8 @@ import game.weather.WeatherControl;
 
 /**
  * A Forest Keeper  actor that has the ability to be spawned.
+ *
+ * @author Jerry
  */
 public class ForestKeeper extends EnemyActor implements ActorSpawn {
     private final double DEFAULT_RATE = 0.15;

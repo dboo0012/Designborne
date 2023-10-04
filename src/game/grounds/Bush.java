@@ -3,6 +3,11 @@ package game.grounds;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.ActorSpawn;
 
+/**
+ * A class that represents a bush that spawns enemies.
+ *
+ * @author Jerry
+ */
 public class Bush extends Spawner{
     private ActorSpawn actorToSpawn;
     private GameMap map;

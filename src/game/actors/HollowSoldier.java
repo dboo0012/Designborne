@@ -26,6 +26,8 @@ import java.util.Map;
 
 /**
  * A Hollow Soldier actor that has the ability to be spawned.
+ *
+ * @author Daryl
  */
 public class HollowSoldier extends EnemyActor implements ActorSpawn {
 

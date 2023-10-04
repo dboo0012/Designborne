@@ -25,6 +25,7 @@ public class Runes extends Item {
 
     /**
      * Sets the value of the runes.
+     *
      * @param value the value of the runes
      */
     public void setValue(int value){
@@ -33,6 +34,7 @@ public class Runes extends Item {
 
     /**
      * Gets the value of the runes.
+     *
      * @return the value of the runes
      */
     public int getValue(){

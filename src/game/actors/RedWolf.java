@@ -15,6 +15,8 @@ import game.weather.WeatherControl;
 
 /**
  * A Red Wolf  actor that has the ability to be spawned.
+ *
+ * @author Jerry
  */
 public class RedWolf extends EnemyActor implements ActorSpawn {
     private final int DEFAULT_DAMAGE = 15;
@@ -32,7 +34,7 @@ public class RedWolf extends EnemyActor implements ActorSpawn {
     }
 
     /**
-     * Intrinsic weapon for ForestKeeper
+     * Intrinsic weapon for RedWolf
      * @return a freshly-instantiated IntrinsicWeapon
      */
     @Override

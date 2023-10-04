@@ -21,20 +21,12 @@ import java.util.*;
 
 /**
  * Class representing an enemy actor in the game.
+ * The EnemyActor class extends the Actor class and represents an enemy character in the game.
+ * It includes behaviors such as wandering and attacking.
  *
- * The EnemyActor class extends the Actor class and represents an enemy character in the game. It includes behaviors such as wandering and attacking.
+ * @author Meekal, Daryl, Jerry
  */
 public abstract class EnemyActor extends Actor implements Attackable{
-
-    private final Random rand = new Random();
-
-    //    protected Map<Integer, Behaviour> behaviours = new TreeMap<>();
-//    //Pre-defined list of items to drop
-//    protected final ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>();
-//    //Array of chances to drop, with indices matching itemsToBeDropped
-//    protected final ArrayList<Double> itemsToBeDroppedChance = new ArrayList<>();
-//    protected ItemDrop itemDrop = new ItemDrop();
-//    protected int runesDropped;
     private Map<Integer, Behaviour> behaviours = new TreeMap<>();
     private  ArrayList<Class<? extends Item>> itemsToBeDropped = new ArrayList<>();
     private  ArrayList<Double> itemsToBeDroppedChance = new ArrayList<>();
@@ -52,56 +44,122 @@ public abstract class EnemyActor extends Actor implements Attackable{
      */
     public EnemyActor(String name, char displayChar, int hitPoints, int runesDropped) {
         super(name, displayChar, hitPoints);
-        this.runesDropped = runesDropped;
+        setRunesDropped(runesDropped);
         this.behaviours.put(WANDER_BEHAVIOUR_ID, new WanderBehaviour());
         this.behaviours.put(ATTACK_BEHAVIOUR_ID, new AttackBehaviour());
         this.addCapability(EntityTypes.ENEMY);
     }
 
+    /**
+     * Gets the number of runes dropped by the enemy actor.
+     *
+     * @return the number of runes dropped
+     */
     public int getRunesDropped(){
         return this.runesDropped;
     }
+
+    /**
+     * Sets the number of runes dropped by the enemy actor upon defeat.
+     *
+     * @param runesDropped the number of runes to be dropped
+     */
     public void setRunesDropped(int runesDropped) {
         this.runesDropped = runesDropped;
     }
 
+    /**
+     * Gets the map of behaviors associated with this enemy actor.
+     *
+     * @return the map of behaviors
+     */
     public Map<Integer, Behaviour> getBehaviours() {
         return behaviours;
     }
 
+    /**
+     * Adds a behavior to the enemy actor's list of behaviors.
+     *
+     * @param priority  the priority of the behavior
+     * @param behaviour the behavior to be added
+     */
     public void addBehaviour(int priority, Behaviour behaviour) {
         this.behaviours.put(priority, behaviour);
     }
 
+    /**
+     * Gets the list of item classes to be dropped by the enemy actor.
+     *
+     * @return the list of item classes to be dropped
+     */
     public ArrayList<Class<? extends Item>> getItemsToBeDropped() {
         return itemsToBeDropped;
     }
 
+    /**
+     * Sets the list of item classes to be dropped by the enemy actor.
+     *
+     * @param itemsToBeDropped the list of item classes to be dropped
+     */
     public void setItemsToBeDropped(ArrayList<Class<? extends Item>> itemsToBeDropped) {
         this.itemsToBeDropped = itemsToBeDropped;
     }
 
+    /**
+     * Gets the list of drop chances for the items to be dropped by the enemy actor.
+     *
+     * @return the list of drop chances
+     */
     public ArrayList<Double> getItemsToBeDroppedChance() {
         return itemsToBeDroppedChance;
     }
 
+    /**
+     * Sets the list of drop chances for the items to be dropped by the enemy actor.
+     *
+     * @param itemsToBeDroppedChance the list of drop chances
+     */
     public void setItemsToBeDroppedChance(ArrayList<Double> itemsToBeDroppedChance) {
         this.itemsToBeDroppedChance = itemsToBeDroppedChance;
     }
 
+    /**
+     * Gets the ItemDrop object associated with the enemy actor.
+     *
+     * @return the ItemDrop object
+     */
     public ItemDrop getItemDrop() {
         return itemDrop;
     }
 
+    /**
+     * Sets the ItemDrop object associated with the enemy actor.
+     *
+     * @param itemDrop the ItemDrop object to be set
+     */
     public void setItemDrop(ItemDrop itemDrop) {
         this.itemDrop = itemDrop;
     }
 
+    /**
+     * Adds an item to be dropped by the enemy actor with a specified drop chance.
+     *
+     * @param item   the item to be dropped
+     * @param chance the drop chance for the item
+     */
     public void addDroppableItem(Item item, double chance){
         this.itemsToBeDropped.add(item.getClass());
         this.itemsToBeDroppedChance.add(chance);
     }
 
+    /**
+     * Overrides the unconscious method to handle additional actions upon an enemy actor becoming unconscious.
+     * This includes dropping items and runes.
+     *
+     * @param actor the actor performing the action
+     * @param map   the game map where the action is executed
+     * @return the outcome of the unconscious action
+     */
     @Override
     public String unconscious(Actor actor, GameMap map) {
         dropItems(this, map);
@@ -109,6 +167,12 @@ public abstract class EnemyActor extends Actor implements Attackable{
         return super.unconscious(actor, map);
     }
 
+    /**
+     * Drops runes at the location of the enemy actor upon defeat, if any runes are to be dropped.
+     *
+     * @param actor the actor representing the enemy
+     * @param map   the game map where the action is executed
+     */
     public void dropRune(Actor actor, GameMap map){
         Location currentLocation = map.locationOf(actor);
         if (getRunesDropped() > 0){
@@ -164,58 +228,4 @@ public abstract class EnemyActor extends Actor implements Attackable{
         }
         return actions;
     }
-// TODO: Every actor would drop runes, why still need enemydropactor class?
-
-//    @Override
-//    public String unconscious(Actor actor, GameMap map) {
-//        dropRunes(actor, map);
-//        return super.unconscious(actor, map);
-//    }
-
-//    public void dropRunes(Actor actor, GameMap map){
-//        Location currentLocation = map.locationOf(actor);
-//
-//        map.at(currentLocation.x(), currentLocation.y()).addItem(new Runes(runesDropped));
-//    }
-
-    //    /**
-//     * Handles what happens when the actor is unconscious due to the action of another actor.
-//     *
-//     * @param actor The perpetrator actor.
-//     * @param map   The map where the actor fell unconscious.
-//     * @return A string describing what happened when the actor is unconscious.
-//     */
-//    public String unconscious(Actor actor, GameMap map) {
-//        map.removeActor(this);
-//        return this + " met their demise at the hands of " + actor;
-//    }
-
-//    /**
-//     * Drops items when the actor becomes unconscious.
-//     *
-//     * @param actor                The actor that became unconscious.
-//     * @param map                  The map where the actor fell unconscious.
-//     * @param itemsToBeDropped     A list of items to be dropped.
-//     * @param itemsToBeDroppedChance An array of chances to drop items, with indices matching itemsToBeDropped.
-//     */
-//    public void dropItems(Actor actor, GameMap map, ArrayList<Class<? extends Item>> itemsToBeDropped, int[] itemsToBeDroppedChance) {
-//        Location currentLocation = map.locationOf(this);
-//
-//        for (int i = 0; i < itemsToBeDropped.size(); i++) {
-//            if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-//                Class<? extends Item> item = itemsToBeDropped.get(i);
-//                int chanceToSpawn = itemsToBeDroppedChance[i];
-//                System.out.println(item + "|" + chanceToSpawn);
-//                if (rand.nextInt(100) < chanceToSpawn) {
-//                    try {
-//                        map.at(currentLocation.x(), currentLocation.y()).addItem(item.getConstructor().newInstance());
-//                    } catch (InstantiationException | NoSuchMethodException | IllegalAccessException |
-//                             InvocationTargetException e) {
-//                        // Handle exceptions if necessary
-//                    }
-//
-//                }
-//            }
-//        }
-//    }
 }

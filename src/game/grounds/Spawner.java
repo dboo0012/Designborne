@@ -8,7 +8,10 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actors.ActorSpawn;
 import game.actors.EnemyActor;
 
-public class Spawner extends Ground {
+/**
+ * An abstract class that represents a spawner.
+ */
+public abstract class Spawner extends Ground {
     private ActorSpawn actorToSpawn;
     private GameMap map;
 
@@ -32,6 +35,9 @@ public class Spawner extends Ground {
         spawnEnemy(location, actorToSpawn);
     }
 
+    /**
+     * Spawns an instance of the actor around the object if the spawn probability allows.
+     */
     public void spawnEnemy(Location location, ActorSpawn actorToSpawn) {
     	Actor actor = actorToSpawn.spawn(); // Spawn an instance of the actor
 
@@ -46,6 +52,4 @@ public class Spawner extends Ground {
             }
         }
     }
-
-
 }

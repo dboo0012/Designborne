@@ -23,6 +23,7 @@ public class Bloodberry extends TradeableItem {
 
     /**
      * Generates an allowable action for the owner of the Bloodberry, which is to use it and increase their maximum health.
+     *
      * @param owner the actor that owns the item
      * @return a list of Actions
      */
@@ -39,6 +40,7 @@ public class Bloodberry extends TradeableItem {
 
     /**
      * Instantiates a new Bloodberry and returns it.
+     *
      * @return a new Bloodberry object
      */
     @Override
@@ -58,6 +60,7 @@ public class Bloodberry extends TradeableItem {
 
     /**
      * The affected price of Bloodberry
+     *
      * @param seller The actor representing the seller.
      * @return the price of Bloodberry
      */

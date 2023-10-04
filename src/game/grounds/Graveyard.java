@@ -24,5 +24,4 @@ public class Graveyard extends Spawner {
         this.map = map;
         this.actorToSpawn = actorToSpawn;
     }
-
 }
