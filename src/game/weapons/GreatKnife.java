@@ -4,18 +4,21 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
-import game.actions.FocusAction;
-import game.actions.GreatSlamAction;
 import game.actions.StabStepAction;
 import game.attributes.EntityTypes;
 import game.attributes.TradeCharacteristics;
 import game.items.TradeableWeaponItem;
 
+/**
+ * A Great Knife weapon.
+ *
+ * @author Daryl
+ */
+
 public class GreatKnife extends TradeableWeaponItem {
     /**
-     * Constructor.
+     * Constructor for a great knife.
      */
     public GreatKnife() {
         super("Great Knife", '>', 75, "slashes", 70, 175);
@@ -38,12 +41,24 @@ public class GreatKnife extends TradeableWeaponItem {
         return actions;
     }
 
+    /**
+     *The affected price of Great Knife.
+     *
+     * @param seller The actor representing the seller.
+     * @return Whether the price is affected by the scam.
+     */
     @Override
     public boolean isPriceAffected(Actor seller) {
         double traderScamChance = 0.05;
         return Math.random() < traderScamChance;
     }
 
+    /**
+     * The scam type of Great Knife.
+     *
+     * @param seller The actor representing the seller.
+     * @return The enum scam type of the Great Knife.
+     */
     @Override
     public Enum<TradeCharacteristics> getScamType(Actor seller) {
         Enum<TradeCharacteristics> scamType = super.getScamType(seller);
@@ -53,6 +68,12 @@ public class GreatKnife extends TradeableWeaponItem {
         return scamType;
     }
 
+    /**
+     * The affected price of Great Knife.
+     *
+     * @param seller The actor representing the seller.
+     * @return The affected price of Great Knife.
+     */
     @Override
     public int affectedPrice(Actor seller) {
         double affectedPercentage = 1;
@@ -66,6 +87,11 @@ public class GreatKnife extends TradeableWeaponItem {
         return (int) (getPrice() * affectedPercentage);
     }
 
+    /**
+     * Spawn a new instance of the tradeable item.
+     *
+     * @return a new Great Knife instance.
+     */
     @Override
     public Item spawn() {
         return new GreatKnife();

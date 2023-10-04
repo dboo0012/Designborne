@@ -12,15 +12,34 @@ import game.weapons.GreatKnife;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * The class represents a stab and step action.
+ *
+ * @author Daryl
+ */
 public class StabStepAction extends Action {
     private final GreatKnife greatKnife;
     private final Actor target;
     private final Random random = new Random();
+
+    /**
+     * Constructor for StabStepAction.
+     *
+     * @param greatKnife the great knife
+     * @param otherActor the actor that the action is performed on
+     */
     public StabStepAction(GreatKnife greatKnife, Actor otherActor){
         this.greatKnife = greatKnife;
         this.target = otherActor;
     }
 
+    /**
+     * Executes the Stab & Step action, which involves performing a stab attack with a Great Knife and stepping to a nearby location.
+     *
+     * @param actor the actor performing the action
+     * @param map the game map where the action is executed
+     * @return a description of the action's outcome
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         double requiredStamina = actor.getAttributeMaximum(BaseActorAttributes.STAMINA)*0.25; // 25% of maximum stamina
@@ -43,6 +62,13 @@ public class StabStepAction extends Action {
         }
     }
 
+    /**
+     * Determines a valid nearby location for the actor to step to.
+     *
+     * @param actor the actor performing the action
+     * @param map the game map where the action is executed
+     * @return a valid nearby location for the actor to step to
+     */
     public Location step(Actor actor, GameMap map){
         ArrayList<Location> locations = new ArrayList<>(); // A list of all possible locations the actor can go
 
@@ -63,6 +89,12 @@ public class StabStepAction extends Action {
         }
     }
 
+    /**
+     * Provides a description of the action for display in the game menu.
+     *
+     * @param actor the actor performing the action
+     * @return a description of the action
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " activates the skill of Stab & Step on " + greatKnife.toString();

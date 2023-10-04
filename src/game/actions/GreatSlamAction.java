@@ -14,11 +14,24 @@ public class GreatSlamAction extends Action {
     private final GiantHammer giantHammer;
     private final Actor target;
 
+    /**
+     * Constructor for a GreatSlamAction.
+     *
+     * @param giantHammer the Giant Hammer weapon used for the slam action
+     * @param otherActor the target actor to perform the slam attack on
+     */
     public GreatSlamAction(GiantHammer giantHammer, Actor otherActor){
         this.giantHammer = giantHammer;
         this.target = otherActor;
     }
 
+    /**
+     * Executes the Great Slam action, which involves performing a slam attack with a Giant Hammer and dealing area-of-effect damage to nearby actors.
+     *
+     * @param actor the actor performing the action
+     * @param map the game map where the action is executed
+     * @return a description of the action's outcome
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         double requiredStamina = actor.getAttributeMaximum(BaseActorAttributes.STAMINA)*0.05; // 5% of maximum stamina
@@ -40,6 +53,13 @@ public class GreatSlamAction extends Action {
         }
     }
 
+    /**
+     * Performs the area-of-effect slam attack on nearby actors.
+     *
+     * @param otherActor the target actor around which the slam attack is performed
+     * @param map the game map where the action is executed
+     * @return a description of the area-of-effect damage
+     */
     public String slam(Actor otherActor, GameMap map){
         // get all the exits of the enemy, within those exits, if there is an actor, attack with 50% damage
         int originalDamage = giantHammer.damage();
@@ -67,6 +87,12 @@ public class GreatSlamAction extends Action {
         return result;
     }
 
+    /**
+     * Provides a description of the action for display in the game menu.
+     *
+     * @param actor the actor performing the action
+     * @return a description of the action
+     */
     @Override
     public String menuDescription(Actor actor) {
         return String.format("%s activates the skill of Great Slam on %s", actor, giantHammer.toString());

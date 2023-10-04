@@ -16,7 +16,6 @@ import game.attributes.TradeCharacteristics;
  * An item that can be used to heal the player.
  */
 public class HealingVial extends TradeableItem {
-    private ActionList actions = new ActionList();
     /***
      * Constructor.
      */
@@ -47,6 +46,11 @@ public class HealingVial extends TradeableItem {
         return actions;
     }
 
+    /**
+     * Instantiates a new Healing vial and returns it.
+     *
+     * @return a HealingVial object
+     */
     @Override
     public Item spawn() {
         return new HealingVial();
@@ -68,6 +72,12 @@ public class HealingVial extends TradeableItem {
         return Math.random() < chance;
     }
 
+    /**
+     * The price if the item is scammed.
+     *
+     * @param seller The actor representing the seller.
+     * @return the scam price
+     */
     @Override
     public int affectedPrice(Actor seller) {
         double affectedPercentage = 1;
