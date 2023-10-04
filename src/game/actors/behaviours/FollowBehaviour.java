@@ -8,6 +8,11 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
+/**
+ * A class that represents a behaviour that allows the actor to follow another actor.
+ *
+ * @author Jerry
+ */
 public class FollowBehaviour implements Behaviour {
 
     private final Actor target;

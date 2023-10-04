@@ -17,6 +17,8 @@ import static game.weather.WeatherControl.getCurrentWeather;
 
 /**
  * A Abxervyer actor that has the ability to be spawned.
+ *
+ * @author Jerry
  */
 public class Abxervyer extends EnemyActor  {
     private WeatherControl weatherControl;
@@ -91,8 +93,6 @@ public class Abxervyer extends EnemyActor  {
             addBehaviour(FOLLOW_BEHAVIOUR_ID, new FollowBehaviour(otherActor));
         }
         return super.allowableActions(otherActor, direction, map);
-
-
     }
 
 }

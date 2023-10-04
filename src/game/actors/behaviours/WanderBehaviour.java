@@ -17,7 +17,6 @@ import edu.monash.fit2099.engine.actors.Behaviour;
  *
  */
 public class WanderBehaviour implements Behaviour {
-
     private final Random random = new Random();
 
     /**

@@ -1,7 +1,5 @@
 package game.main;
 
-import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -13,7 +11,6 @@ import game.actions.FocusAction;
 import game.grounds.*;
 import game.grounds.Void;
 import game.items.Bloodberry;
-import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
 import game.weather.WeatherControl;
@@ -70,14 +67,12 @@ public class Application {
         Player player = new Player("The Abstracted One", '@', 150, 200); // [Revert] health/stamina
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
 
-
         // Gate
         abandonedGroundMap.at(22, 3).setGround(new Gate(burialGroundMap, 22, 6)); // test: 12, 9, actual: 22, 3
         burialGroundMap.at(6, 2).setGround(new Gate(abandonedGroundMap, 29, 5)); // test: 20, 9,actual: 22, 6
         burialGroundMap.at(25, 12).setGround(new Gate(ancientWoodsMap, 20, 3)); // test: 28, 9, actual: 22, 9
         ancientWoodsMap.at(0, 8).setGround(new Gate(burialGroundMap, 22, 6)); // test: 40, 9, actual: 22, 9
         ancientWoodsMap.at(27, 6).setGround(new Gate(bossMap, 0, 9)); // test: 40, 6, actual: 22, 6
-
 
         // Broadsword
         BroadSword broadSword = new BroadSword();

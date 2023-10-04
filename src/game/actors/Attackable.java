@@ -10,6 +10,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * Implementing classes should provide a list of allowable actions for an actor
  * to attack the object, given the actor's position and the direction of the
  * object.
+ *
+ * @author Daryl
  */
 public interface Attackable {
     /**
