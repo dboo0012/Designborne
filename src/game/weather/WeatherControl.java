@@ -12,7 +12,7 @@ public class WeatherControl {
      * Initializes the WeatherControl with an initial sunny weather condition.
      */
     public WeatherControl() {
-        currentWeather = Weather.SUNNY; // Initial weather condition
+        setCurrentWeather(Weather.SUNNY); // Initial weather condition
         turnsSinceLastChange = 0;
     }
 
@@ -23,6 +23,15 @@ public class WeatherControl {
      */
     public static Weather getCurrentWeather() {
         return currentWeather;
+    }
+
+    /**
+     * Sets the current weather condition.
+     *
+     * @param weather The weather condition to set.
+     */
+    public void setCurrentWeather(Weather weather) {
+    	currentWeather = weather;
     }
 
     /**

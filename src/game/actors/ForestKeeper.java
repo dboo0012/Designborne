@@ -20,7 +20,6 @@ import game.weather.WeatherControl;
 public class ForestKeeper extends EnemyActor implements ActorSpawn {
     private final double DEFAULT_RATE = 0.15;
     private double rate = DEFAULT_RATE;
-    private int healAmount = 10;
     private final int FOLLOW_BEHAVIOUR_ID = 997;
     public ForestKeeper() {
         super("Forest Keeper", '8', 125, 50);
@@ -68,7 +67,10 @@ public class ForestKeeper extends EnemyActor implements ActorSpawn {
             rate = DEFAULT_RATE * 2;
         } else if (WeatherControl.getCurrentWeather() == Weather.RAINY){
             rate = DEFAULT_RATE;
-            this.modifyAttribute((BaseActorAttributes.HEALTH), ActorAttributeOperations.INCREASE, 10);
+            int healAmount = 10;
+            this.modifyAttribute((BaseActorAttributes.HEALTH), ActorAttributeOperations.INCREASE, healAmount);
+        } else if (WeatherControl.getCurrentWeather() == Weather.DEFAULT){
+            rate = DEFAULT_RATE;
         }
         return super.playTurn(actions, lastAction, map, display);
     }
