@@ -15,7 +15,7 @@ import game.weapons.BroadSword;
  * @author Daryl
  */
 public class FocusAction extends TickableAction {
-
+    private WeaponItem weaponItem = getWeaponItem();
     private boolean focusActive = false;
 
     public FocusAction(WeaponItem weaponItem, float defDmgMultiplier, int defHitRate, int maxFocusCounter) {
@@ -30,6 +30,8 @@ public class FocusAction extends TickableAction {
         if(currentStamina < requiredStamina){
             return actor + " does not have enough stamina to activate Focus";
         } else {
+
+
             activate();
             resetCounter();
 
@@ -55,8 +57,8 @@ public class FocusAction extends TickableAction {
     public void reset() {
         deactivate();
         resetCounter();
-        weaponItem.updateDamageMultiplier(defDmgMultiplier);
-        weaponItem.updateHitRate(defHitRate);
+        weaponItem.updateDamageMultiplier(getDefDmgMultiplier());
+        weaponItem.updateHitRate(getDefHitRate());
     }
 
 }

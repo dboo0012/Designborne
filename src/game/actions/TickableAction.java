@@ -12,13 +12,13 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
  * @author Daryl
  */
 public abstract class TickableAction extends Action {
-    protected final float defDmgMultiplier;
-    protected final int defHitRate;
-    protected WeaponItem weaponItem;
-    protected int counter;
-    protected int maxCounter;
-    protected boolean active = false;
-    protected String actionName;
+    private final float defDmgMultiplier;
+    private final int defHitRate;
+    private WeaponItem weaponItem;
+    private int counter;
+    private int maxCounter;
+    private boolean active = false;
+    private String actionName;
 
     /**
      * Constructor.
@@ -30,6 +30,18 @@ public abstract class TickableAction extends Action {
         this.defHitRate = defHitRate;
         this.maxCounter = maxCounter;
         this.counter = 0;
+    }
+
+    public WeaponItem getWeaponItem() {
+        return weaponItem;
+    }
+
+    public float getDefDmgMultiplier() {
+        return defDmgMultiplier;
+    }
+
+    public int getDefHitRate() {
+        return defHitRate;
     }
 
     /**
