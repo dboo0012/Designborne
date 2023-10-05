@@ -1,7 +1,5 @@
 package game.main;
 
-import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -13,7 +11,6 @@ import game.actions.FocusAction;
 import game.grounds.*;
 import game.grounds.Void;
 import game.items.Bloodberry;
-import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
 import game.weather.WeatherControl;
@@ -22,7 +19,7 @@ import game.weather.WeatherControl;
  * The main class to start the game.
  * Created by:
  * @author Adrian Kristanto
- * Modified by: Daryl Boon (32836899)
+ * Modified by: Daryl, Meekal, Jerry
  *
  */
 public class Application {
@@ -67,9 +64,8 @@ public class Application {
         bossMap.at(3, 10).setGround(new Bush(bossMap, new RedWolf()));
 
         // Player
-        Player player = new Player("The Abstracted One", '@', 15000, 200); // [Revert] health/stamina
+        Player player = new Player("The Abstracted One", '@', 150, 200); // [Revert] health/stamina
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
-
 
         // Gate
         abandonedGroundMap.at(22, 3).setGround(new Gate(burialGroundMap, 22, 6)); // test: 12, 9, actual: 22, 3
@@ -77,7 +73,6 @@ public class Application {
         burialGroundMap.at(25, 12).setGround(new Gate(ancientWoodsMap, 20, 3)); // test: 28, 9, actual: 22, 9
         ancientWoodsMap.at(0, 8).setGround(new Gate(burialGroundMap, 22, 6)); // test: 40, 9, actual: 22, 9
         ancientWoodsMap.at(27, 6).setGround(new Gate(bossMap, 0, 9)); // test: 40, 6, actual: 22, 6
-
 
         // Broadsword
         BroadSword broadSword = new BroadSword();

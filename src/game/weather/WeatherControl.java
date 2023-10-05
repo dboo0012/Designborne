@@ -2,6 +2,8 @@ package game.weather;
 
 /**
  * A class that controls the game's weather conditions.
+ *
+ * @author Jerry
  */
 public class WeatherControl {
     private static Weather currentWeather;

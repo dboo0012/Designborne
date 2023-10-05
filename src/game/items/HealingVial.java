@@ -14,6 +14,8 @@ import game.attributes.TradeCharacteristics;
 
 /**
  * An item that can be used to heal the player.
+ *
+ * @author Daryl, Meekal, Jerry
  */
 public class HealingVial extends TradeableItem {
     /***
@@ -57,6 +59,7 @@ public class HealingVial extends TradeableItem {
     }
 
     /**
+     * Returns whether the price of this item is affected when sold by an actor.
      *
      * @param seller the Actor selling, passed in because different seller types may have different probability
      * @return a boolean indicating if the price is affected

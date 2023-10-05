@@ -6,6 +6,11 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 
+/**
+ * A class that represents a tickable action.
+ *
+ * @author Daryl
+ */
 public abstract class TickableAction extends Action {
     protected final float defDmgMultiplier;
     protected final int defHitRate;
@@ -15,6 +20,9 @@ public abstract class TickableAction extends Action {
     protected boolean active = false;
     protected String actionName;
 
+    /**
+     * Constructor.
+     */
     public TickableAction(WeaponItem weaponItem, String actionName, float defDmgMultiplier, int defHitRate, int maxCounter){
         this.weaponItem = weaponItem;
         this.actionName = actionName;
@@ -24,35 +32,67 @@ public abstract class TickableAction extends Action {
         this.counter = 0;
     }
 
+    /**
+     * Executes the TickableAction, but this abstract class does not provide a concrete implementation.
+     *
+     * @param actor the actor performing the action
+     * @param map   the game map where the action is executed
+     * @return a description of the action's outcome (null in this abstract class)
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         return null;
     }
 
+    /**
+     * Provides a menu description for the TickableAction, but this abstract class does not provide a concrete implementation.
+     *
+     * @param actor the actor performing the action
+     * @return a description of the action for display in the game menu (null in this abstract class)
+     */
     @Override
     public String menuDescription(Actor actor) {
         return null;
     }
 
+    /**
+     * Resets the state of the TickableAction. Subclasses should implement this method to reset specific attributes.
+     */
     public abstract void reset();
 
+    /**
+     * Activates the TickableAction, making it active.
+     */
     public void activate(){
         active = true;
     }
 
+    /**
+     * Deactivates the TickableAction, making it inactive.
+     */
     public void deactivate(){
         active = false;
     }
 
+    /**
+     * Checks if the TickableAction is currently active.
+     *
+     * @return true if the action is active, false otherwise
+     */
     public Boolean isActive(){
         return active;
     }
 
+    /**
+     * Resets the counter for the TickableAction to 0.
+     */
     public void resetCounter(){
         counter = 0;
     }
 
-
+    /**
+     * Logic for the TickableAction to be executed every tick.
+     */
     public void tick(){
         // Increase counter by 1
         if (isActive()){
@@ -66,6 +106,5 @@ public abstract class TickableAction extends Action {
                 reset();  // Reset the weapon
             }
         }
-
     }
 }

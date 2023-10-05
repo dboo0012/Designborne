@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Class representing the Player.
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Daryl, Meekal, Jerry
  *
  */
 public class Player extends Actor {
@@ -120,7 +120,6 @@ public class Player extends Actor {
     public String unconscious(GameMap map) {
         FancyMessageDisplay.createString(FancyMessage.YOU_DIED);
         return super.unconscious(map);
-        //ToDo: The sequence of You Died is incorrect
     }
 
     /**

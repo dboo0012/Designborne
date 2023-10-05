@@ -14,6 +14,8 @@ import java.util.Random;
 
 /**
  * Attacking behaviour of an NPC.
+ *
+ * @author Daryl
  */
 public class AttackBehaviour implements Behaviour {
     private final Random random = new Random();

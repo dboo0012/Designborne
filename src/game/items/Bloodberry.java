@@ -8,6 +8,11 @@ import edu.monash.fit2099.engine.items.Item;
 import game.actions.IncreaseMaxAttributeAction;
 import game.attributes.TradeCharacteristics;
 
+/**
+ * A Bloodberry that increases the player's maximum health when used.
+ *
+ * @author Daryl
+ */
 public class Bloodberry extends TradeableItem {
     /***
      * Constructor.
@@ -16,6 +21,12 @@ public class Bloodberry extends TradeableItem {
         super("Bloodberry", '*', true, 10);
     }
 
+    /**
+     * Generates an allowable action for the owner of the Bloodberry, which is to use it and increase their maximum health.
+     *
+     * @param owner the actor that owns the item
+     * @return a list of Actions
+     */
     @Override
     public ActionList allowableActions(Actor owner) {
         int increaseValue = 5;
@@ -27,6 +38,11 @@ public class Bloodberry extends TradeableItem {
         return new ActionList(changeAttributeAction);
     }
 
+    /**
+     * Instantiates a new Bloodberry and returns it.
+     *
+     * @return a new Bloodberry object
+     */
     @Override
     public Item spawn() {
         return new Bloodberry();
@@ -42,6 +58,12 @@ public class Bloodberry extends TradeableItem {
         return false;
     }
 
+    /**
+     * The affected price of Bloodberry
+     *
+     * @param seller The actor representing the seller.
+     * @return the price of Bloodberry
+     */
     public int affectedPrice(Actor seller) {
         return getPrice();
     }

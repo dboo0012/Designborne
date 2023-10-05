@@ -3,6 +3,12 @@ package game.main;
 import java.util.Arrays;
 import java.util.List;
 
+
+/**
+ * A class that represents the maps in the game.
+ *
+ * @author Jerry
+ */
 public class Maps {
 
     public static List<String> ABANDONED_VILLAGE = Arrays.asList(

@@ -5,9 +5,24 @@ package game.attributes;
  * Example #1: if the player is capable jumping over walls, you can attach Ability.WALL_JUMP to the player class
  */
 public enum Ability {
+    /**
+     * The ability to enter a floor
+     */
     CAN_ENTER_FLOOR,
+    /**
+     * The ability to travel
+     */
     TRAVEL,
+    /**
+     * The ability to Trade
+     */
     TRADE,
-    TRADABLE, // Item with this ability can be traded
-    CONSUME, //Can consume items like runes, healing vial, refreshing flask
+    /**
+     * Item with this ability can be traded
+     */
+    TRADABLE,
+    /**
+     * Can consume items like runes, healing vial, refreshing flask
+     */
+    CONSUME,
 }

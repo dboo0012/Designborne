@@ -3,6 +3,9 @@ package game.grounds;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.ActorSpawn;
 
+/**
+ * A class that represents an empty hut that spawns enemies.
+ */
 public class EmptyHuts extends Spawner{
     private ActorSpawn actorToSpawn;
     private GameMap map;

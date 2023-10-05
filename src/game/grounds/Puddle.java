@@ -16,12 +16,15 @@ import game.attributes.EntityTypes;
  * @author Meekal
  */
 public class Puddle extends Ground {
+    /**
+     * Constructor.
+     */
     public Puddle() {
         super('~');
     }
 
     /**
-     * Returns a DrinkPuddleAction
+     * Returns a list of actions that can be performed on the Puddle.
      *
      * @param actor the Actor acting
      * @param location the current Location

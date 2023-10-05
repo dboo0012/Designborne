@@ -2,6 +2,8 @@ package game.weather;
 
 /**
  * An enumeration representing different weather conditions in the game.
+ *
+ * @author Jerry
  */
 public enum Weather {
     /**
