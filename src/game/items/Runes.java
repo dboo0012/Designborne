@@ -26,7 +26,6 @@ public class Runes extends Item {
     public ActionList allowableActions(Actor owner) {
         ActionList actions = super.allowableActions(owner);
             if (owner.hasCapability(Ability.CONSUME)) {
-                System.out.println("Owner" + owner + "| Value: " + getValue());
                 actions.add(new AddBalanceAction(this));
             }
         return actions;

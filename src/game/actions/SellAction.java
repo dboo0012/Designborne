@@ -76,11 +76,10 @@ public class SellAction extends Action {
                 output += String.format("You do not have enough Runes to buy %s.", itemName);
             }
         }
-
         // Player selling
         else if (seller.hasCapability(EntityTypes.PLAYABLE)) {
 
-            if (isScam) { // Take item without paying
+            if (isScam) { // It's a scam!
                 if (scamType == TradeCharacteristics.STEAL_RUNES) {
                     seller.deductBalance(price);
                     return String.format("SCAMMED! %s took your Runes instead of your %s!", seller, itemName);
