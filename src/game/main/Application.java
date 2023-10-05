@@ -114,7 +114,7 @@ public class Application {
 //        abandonedGroundMap.at(29, 6).addItem(oldKey1);
 
         //Testing Abxervyer
-        abandonedGroundMap.at(29, 6).addActor(new Abxervyer(ancientWoodsMap, new WeatherControl()));
+//        abandonedGroundMap.at(29, 6).addActor(new Abxervyer(ancientWoodsMap, new WeatherControl()));
 
 
         world.run();

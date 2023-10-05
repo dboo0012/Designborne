@@ -34,7 +34,7 @@ public class Abxervyer extends EnemyActor  {
      * @param weatherControl The WeatherControl object to manage weather conditions.
      */
     public Abxervyer(GameMap destination, WeatherControl weatherControl) {
-        super("Abxervyer", 'Y', 2, 5000); // [Revert] health: 2000
+        super("Abxervyer", 'Y', 2000, 5000);
         addCapability(EntityTypes.BOSS);
         this.destination = destination;
         this.weatherControl = weatherControl;
