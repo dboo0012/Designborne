@@ -27,4 +27,7 @@ public class FancyMessage {
                     "     MM    MM.      ,MP MM       M        MM     ,MP MM    MM   Y  ,   MM     ,MP \n" +
                     "     MM    `Mb.    ,dP' YM.     ,M        MM    ,dP' MM    MM     ,M   MM    ,dP' \n" +
                     "   .JMML.    `\"bmmd\"'    `bmmmmd\"'      .JMMmmmdP' .JMML..JMMmmmmMMM .JMMmmmdP'   \n";
+    public static String ABEXERVYER_SLAIN = "ＡＢＥＸＥＲＶＹＥＲ ＳＬＡＩＮ！";
+
+
 }

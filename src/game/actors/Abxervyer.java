@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.behaviours.FollowBehaviour;
 import game.attributes.EntityTypes;
 import game.grounds.Gate;
+import game.main.FancyMessage;
+import game.utilities.FancyMessageDisplay;
 import game.weather.Weather;
 import game.weather.WeatherControl;
 
@@ -32,7 +34,7 @@ public class Abxervyer extends EnemyActor  {
      * @param weatherControl The WeatherControl object to manage weather conditions.
      */
     public Abxervyer(GameMap destination, WeatherControl weatherControl) {
-        super("Abxervyer", 'Y', 2000, 5000);
+        super("Abxervyer", 'Y', 2, 5000); // [Revert] health: 2000
         addCapability(EntityTypes.BOSS);
         this.destination = destination;
         this.weatherControl = weatherControl;
@@ -60,6 +62,7 @@ public class Abxervyer extends EnemyActor  {
         weatherControl.setCurrentWeather(Weather.DEFAULT);
         Location currentLocation = map.locationOf(this);
         currentLocation.setGround(new Gate(destination, 20, 3));
+        FancyMessageDisplay.createString(FancyMessage.ABEXERVYER_SLAIN);
         return "Abxervyer has been slain!"  + " " + super.unconscious(actor, map);
     }
 
