@@ -4,7 +4,7 @@
 
 Assignment members:
 * dboo0012@student.monash.edu (Daryl Boon Yang 32836899)
-* mche0170@student.monash.edu (Jerry Chew Ming Kang)
+* mche0170@student.monash.edu (Chew Ming Khang 32837259)
 * szai0011@student.monash.edu (Syed Meekal Hussain Zaidi)
 
 Contribution Log:
