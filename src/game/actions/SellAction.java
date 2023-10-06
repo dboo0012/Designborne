@@ -56,14 +56,13 @@ public class SellAction extends Action {
                 isScam = true;
             } else {
                 price = tradeableItem.affectedPrice(seller);
-                output += String.format("%s has scammed you by increasing the price to %d\n", seller, price);
+                output += String.format("%s changed the price to $%d while selling.\n", seller, price);
             }
         }
 
         // Trader selling
         if (seller.hasCapability(EntityTypes.TRADER)) {
             if (isScam) { // Take runes without giving item
-                System.out.println(tradeableItem + " " + scamType);
                 if (scamType == TradeCharacteristics.STEAL_RUNES) {
                     actor.deductBalance(price);
                     return String.format("SCAMMED! %s took your money ($ %d) without giving you a %s", seller, price, itemName);

@@ -70,7 +70,7 @@ public class HealingVial extends TradeableItem {
         if (seller.hasCapability(EntityTypes.TRADER)){
             chance = 0.25; //0.25
         } else if (seller.hasCapability(EntityTypes.PLAYABLE)){
-            chance = 0.10; //0.25
+            chance = 0.10; //0.10
         }
         return Math.random() < chance;
     }

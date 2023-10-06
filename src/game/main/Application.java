@@ -104,7 +104,7 @@ public class Application {
 //        world.addPlayer(player, ancientWoodsMap.at(45, 7));
 //        world.addPlayer(player, bossMap.at(15, 2));
 
-        //Testing Puddle
+//        //Testing Puddle
 //        player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 50);
 //        player.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 50);
 //        abandonedGroundMap.at(29, 5).setGround(new Puddle());
@@ -121,6 +121,11 @@ public class Application {
 
         //Testing Abxervyer
 //        abandonedGroundMap.at(29, 6).addActor(new Abxervyer(ancientWoodsMap, new WeatherControl()));
+
+//        //Testing Traveller
+//        abandonedGroundMap.at(29, 6).addActor(new Traveller());
+//        player.addBalance(10000);
+
 
 
         world.run();
