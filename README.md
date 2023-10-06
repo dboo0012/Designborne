@@ -7,6 +7,9 @@ Assignment members:
 * mche0170@student.monash.edu (Jerry Chew Ming Kang)
 * szai0011@student.monash.edu (Syed Meekal Hussain Zaidi)
 
+Contribution Log:
+https://docs.google.com/spreadsheets/d/1vj8J0GAtlLftseKgvPqccp7mSe9SyKv6kHdS1xSvJjk/edit?usp=sharing
+
 TODO:
 
 - Tasks
