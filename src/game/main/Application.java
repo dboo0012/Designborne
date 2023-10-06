@@ -61,7 +61,13 @@ public class Application {
 
         // Bushes
         ancientWoodsMap.at(3, 5).setGround(new Bush(ancientWoodsMap, new RedWolf()));
+        ancientWoodsMap.at(3, 6).setGround(new Bush(ancientWoodsMap, new RedWolf()));
+        ancientWoodsMap.at(3, 7).setGround(new Bush(ancientWoodsMap, new RedWolf()));
+        ancientWoodsMap.at(3, 8).setGround(new Bush(ancientWoodsMap, new RedWolf()));
         bossMap.at(3, 10).setGround(new Bush(bossMap, new RedWolf()));
+        bossMap.at(4, 10).setGround(new Bush(bossMap, new RedWolf()));
+        bossMap.at(5, 10).setGround(new Bush(bossMap, new RedWolf()));
+
 
         // Player
         Player player = new Player("The Abstracted One", '@', 150, 200); // [Revert] health/stamina
