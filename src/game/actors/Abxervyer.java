@@ -8,12 +8,14 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.behaviours.FollowBehaviour;
 import game.attributes.EntityTypes;
-import game.grounds.Destination;
 import game.grounds.Gate;
 import game.main.FancyMessage;
 import game.utilities.FancyMessageDisplay;
 import game.weather.Weather;
 import game.weather.WeatherControl;
+import game.grounds.Destination;
+
+import java.util.List;
 
 import static game.weather.WeatherControl.getCurrentWeather;
 
@@ -25,19 +27,21 @@ import static game.weather.WeatherControl.getCurrentWeather;
  */
 public class Abxervyer extends EnemyActor  {
     private WeatherControl weatherControl;
-    private GameMap destination;
+    private GameMap ancientWoodsMap;
+    private GameMap overgrownSanctuaryMap;
     private final int FOLLOW_BEHAVIOUR_ID = 997;
 
     /**
      * Constructor for Abxervyer.
      *
-     * @param destination   The destination GameMap where Abxervyer spawns gates.
+     * @param ancientWoodsMap   The destination GameMap where Abxervyer spawns gates.
      * @param weatherControl The WeatherControl object to manage weather conditions.
      */
-    public Abxervyer(GameMap destination, WeatherControl weatherControl) {
+    public Abxervyer(GameMap ancientWoodsMap, GameMap overgrownSanctuaryMap, WeatherControl weatherControl) {
         super("Abxervyer", 'Y', 2000, 5000);
         addCapability(EntityTypes.BOSS);
-        this.destination = destination;
+        this.ancientWoodsMap = ancientWoodsMap;
+        this.overgrownSanctuaryMap = overgrownSanctuaryMap;
         this.weatherControl = weatherControl;
     }
 
@@ -62,7 +66,7 @@ public class Abxervyer extends EnemyActor  {
     public String unconscious(Actor actor, GameMap map) {
         weatherControl.setCurrentWeather(Weather.DEFAULT);
         Location currentLocation = map.locationOf(this);
-        currentLocation.setGround(new Gate(new Destination(destination, "Ancient Woods", 20, 3)));
+        currentLocation.setGround(new Gate(List.of(new Destination(ancientWoodsMap, "Ancient Woods", 20, 3), new Destination(overgrownSanctuaryMap, "Overgrown Sanctuary"))));
         FancyMessageDisplay.createString(FancyMessage.ABEXERVYER_SLAIN);
         return "Abxervyer has been slain!"  + " " + super.unconscious(actor, map);
     }

@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.*;
+import game.actors.behaviours.AttackBehaviour;
 import game.grounds.Gate;
 import game.grounds.Graveyard;
 import game.actions.FocusAction;
@@ -35,6 +36,7 @@ public class Application {
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
                 new Wall(), new Floor(), new Puddle(), new Void());
 
+        //Maps
         GameMap abandonedGroundMap = new GameMap(groundFactory, Maps.ABANDONED_VILLAGE);
         world.addGameMap(abandonedGroundMap);
 
@@ -46,6 +48,9 @@ public class Application {
 
         GameMap bossMap = new GameMap(groundFactory, Maps.BOSS_MAP);
         world.addGameMap(bossMap);
+
+        GameMap overgrownSanctuary = new GameMap(groundFactory, Maps.OVERGROWN_SANCTUARY);
+        world.addGameMap(overgrownSanctuary);
 
         FancyMessageDisplay.createString(FancyMessage.TITLE);
 
@@ -83,6 +88,7 @@ public class Application {
         burialGroundMap.at(25, 12).setGround(new Gate(new Destination(ancientWoodsMap, "Ancient Woods", 20, 3))); // test: 28, 9, actual: 22, 9
         ancientWoodsMap.at(0, 8).setGround(new Gate(new Destination(burialGroundMap, "Burial Ground",22, 6))); // test: 40, 9, actual: 22, 9
         ancientWoodsMap.at(27, 6).setGround(new Gate(new Destination(bossMap, "Boss Map",0, 9))); // test: 40, 6, actual: 22, 6
+        overgrownSanctuary.at(13, 12).setGround(new Gate(new Destination(bossMap, "Boss Map")));
 
         // Broadsword
         BroadSword broadSword = new BroadSword();
@@ -98,7 +104,10 @@ public class Application {
         ancientWoodsMap.at(45, 8).addActor(new Traveller());
 
         //Boss
-        bossMap.at(15, 1).addActor(new Abxervyer(ancientWoodsMap, new WeatherControl()));
+        bossMap.at(15, 1).addActor(new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl()));
+
+        //Overgrown Sanctuary
+
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
@@ -131,8 +140,9 @@ public class Application {
 //        player.addBalance(10000);
 
         //Testing new Gates
-        player.addItemToInventory(new OldKey());
-        abandonedGroundMap.at(29, 6).setGround(new Gate(List.of(new Destination(burialGroundMap, "Burial Ground"), new Destination(ancientWoodsMap, "Ancient Woods"))));
+//        player.addItemToInventory(new OldKey());
+//        abandonedGroundMap.at(29,6).addActor(new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl()));
+//        abandonedGroundMap.at(29, 6).setGround(new Gate(List.of(new Destination(burialGroundMap, "Burial Ground"), new Destination(ancientWoodsMap, "Ancient Woods"))));
 
 
         world.run();
