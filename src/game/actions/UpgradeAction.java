@@ -2,24 +2,35 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.attributes.Ability;
 import game.items.Upgradable;
 
 public class UpgradeAction extends Action {
+    private Item item;
+    private boolean singleUpgrade;
     private Upgradable upgradableItem;
     private int upgradePrice;
-    public UpgradeAction(Upgradable upgradableItem, int upgradePrice) {
+    public UpgradeAction(Item item, Upgradable upgradableItem, int upgradePrice, boolean singleUpgrade) {
+        this.item = item;
         this.upgradableItem = upgradableItem;
         this.upgradePrice = upgradePrice;
+        this.singleUpgrade = singleUpgrade;
     }
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        if(actor.getBalance() >= upgradePrice){
+        if(actor.getBalance() >= upgradePrice) {
             actor.deductBalance(upgradePrice);
             upgradableItem.upgrade();
+            if (singleUpgrade) {
+                item.removeCapability(Ability.UPGRADE);
+            }
+            return String.format("%s upgraded %s for $%d", actor, upgradableItem, upgradePrice);
+        }else{
+            return String.format("%s does not have enough money to upgrade %s", actor, upgradableItem);
         }
-        return String.format("%s upgraded %s for $%d", actor, upgradableItem, upgradePrice);
     }
 
     @Override

@@ -18,7 +18,8 @@ import game.attributes.TradeCharacteristics;
  * @author Daryl, Meekal, Jerry
  */
 public class HealingVial extends TradeableItem implements Upgradable{
-    float increasePercentage = 0.1f;
+    private float increasePercentage = 0.1f;
+    private int maxHealth;
     /***
      * Constructor.
      */
@@ -36,9 +37,9 @@ public class HealingVial extends TradeableItem implements Upgradable{
     public ActionList allowableActions(Actor owner) {
         ActionList actions = new ActionList();
 
-        if (owner.hasCapability(Ability.CONSUME)) {
-            int maxHealth = owner.getAttributeMaximum(BaseActorAttributes.HEALTH);
+        maxHealth = owner.getAttributeMaximum(BaseActorAttributes.HEALTH);
 
+        if (owner.hasCapability(Ability.CONSUME)) {
 
             // Create a ChangeAttributeAction to increase the actor's health
             ChangeAttributeAction changeAttributeAction = new ChangeAttributeAction(this, BaseActorAttributes.HEALTH,
@@ -101,11 +102,16 @@ public class HealingVial extends TradeableItem implements Upgradable{
         float upgradePercentage = 0.8f;
         increasePercentage = upgradePercentage;
         removeCapability(Ability.UPGRADE); // Single upgrade only
-        return String.format("Healing Vial has been upgraded to heal %d%%.", (int) (upgradePercentage * 100));
+        return String.format("%s has been upgraded to heal %d%%.", this, (int) (maxHealth * upgradePercentage));
     }
 
     @Override
     public int upgradePrice() {
         return 250;
+    }
+
+    @Override
+    public boolean singleUpgrade() {
+        return true;
     }
 }
