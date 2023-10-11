@@ -23,11 +23,11 @@ public class UpgradeAction extends Action {
     public String execute(Actor actor, GameMap map) {
         if(actor.getBalance() >= upgradePrice) {
             actor.deductBalance(upgradePrice);
-            upgradableItem.upgrade();
+            String upgrade = upgradableItem.upgrade();
             if (singleUpgrade) {
                 item.removeCapability(Ability.UPGRADE);
             }
-            return String.format("%s upgraded %s for $%d", actor, upgradableItem, upgradePrice);
+            return String.format("%s\n%s upgraded %s for $%d",upgrade, actor, upgradableItem, upgradePrice);
         }else{
             return String.format("%s does not have enough money to upgrade %s", actor, upgradableItem);
         }

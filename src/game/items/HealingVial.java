@@ -101,8 +101,7 @@ public class HealingVial extends TradeableItem implements Upgradable{
     public String upgrade() {
         float upgradePercentage = 0.8f;
         increasePercentage = upgradePercentage;
-        removeCapability(Ability.UPGRADE); // Single upgrade only
-        return String.format("%s has been upgraded to heal %d%%.", this, (int) (maxHealth * upgradePercentage));
+        return String.format("%s has been upgraded to heal %d HEALTH.", this, (int) (maxHealth * upgradePercentage));
     }
 
     @Override

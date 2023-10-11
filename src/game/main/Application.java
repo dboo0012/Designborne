@@ -134,6 +134,7 @@ public class Application {
         // Test upgrade
 //        abandonedGroundMap.at(29, 5).addItem(new Runes(1000));
         player.addBalance(1000);
+        player.hurt(121);
         abandonedGroundMap.at(29, 5).addItem(new HealingVial());
         abandonedGroundMap.at(29, 5).addItem(new HealingVial());
 

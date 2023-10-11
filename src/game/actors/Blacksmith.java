@@ -30,10 +30,9 @@ public class Blacksmith extends Actor {
 
             if (item.hasCapability(Ability.UPGRADE)){ // IF that item is tradeable
                 Upgradable upgradableItem = ((Upgradable) item); //[Code Smell (Downcasting)]
-//                int price = tradeableItem.getPrice(); // Get price
-//                actions.add(new SellAction(item, tradeableItem, price, sellingActor)); // Create upgrade action
-                actions.add(new UpgradeAction(item, upgradableItem, upgradableItem.upgradePrice(),
-                        upgradableItem.singleUpgrade())); // Create upgrade action
+                int price = upgradableItem.upgradePrice();
+                boolean singleUpgrade = upgradableItem.singleUpgrade();
+                actions.add(new UpgradeAction(item, upgradableItem, price, singleUpgrade)); // Create upgrade action),
             }
         }
 
