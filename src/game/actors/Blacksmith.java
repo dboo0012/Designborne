@@ -22,13 +22,14 @@ public class Blacksmith extends Actor {
         return new DoNothingAction();
     }
 
-    public ActionList getItems(Actor sellingActor){
+    public ActionList getItems(Actor otherActor){
         ActionList actions = new ActionList(); //List of actions
 
-        for (int i = 0; i < sellingActor.getItemInventory().size(); i++){ // For each item to sell
-            Item item = sellingActor.getItemInventory().get(i); // Get Item
+        for (int i = 0; i < otherActor.getItemInventory().size(); i++){ // For each item to sell
+            Item item = otherActor.getItemInventory().get(i); // Get Item
 
             if (item.hasCapability(Ability.UPGRADE)){ // IF that item is tradeable
+                new Display().println("Upgradable item found! - " + item);
                 Upgradable upgradableItem = ((Upgradable) item); //[Code Smell (Downcasting)]
                 int price = upgradableItem.upgradePrice();
                 boolean singleUpgrade = upgradableItem.singleUpgrade();

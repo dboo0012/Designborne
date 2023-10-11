@@ -16,6 +16,8 @@ import game.attributes.TradeCharacteristics;
  * An item that can be used to recover Player's stamina.
  */
 public class RefreshingFlask extends TradeableItem {
+    private float increasePercentage = 0.2f;
+    private int maxStamina;
     /***
      * Constructor.
      */

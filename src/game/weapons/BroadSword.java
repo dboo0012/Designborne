@@ -11,26 +11,33 @@ import game.attributes.Ability;
 import game.attributes.EntityTypes;
 import game.attributes.TradeCharacteristics;
 import game.items.TradeableWeaponItem;
+import game.items.Upgradable;
 
 /**
  * A BroadSword weapon.
  *
  * @author Daryl
  */
-public class BroadSword extends TradeableWeaponItem {
+public class BroadSword extends TradeableWeaponItem implements Upgradable {
+    private static final int INITIAL_DAMAGE = 110;
+    private static final int INITIAL_HIT_RATE = 80;
     private static final float DEFAULT_DAMAGE_MULTIPLIER = 1.0f;
-    private final int initialHitRate;
+    private int damage;
+    private int hitRate;
     private float damageMultiplier;
     private FocusAction focusAction;
+    private boolean isUpgraded = false;
 
     /**
      * Constructor.
      */
     public BroadSword() {
-        super("BroadSword", '1', 110, "slashes", 80, 100);
-        this.initialHitRate = 80;
+        super("BroadSword", '1', INITIAL_DAMAGE, "slashes", INITIAL_HIT_RATE, 100);
+        this.damage = INITIAL_DAMAGE;
+        this.hitRate = INITIAL_HIT_RATE;
         this.damageMultiplier = DEFAULT_DAMAGE_MULTIPLIER;
-        this.focusAction = new FocusAction(this, 1.0f,80,5);
+        this.focusAction = new FocusAction(this, DEFAULT_DAMAGE_MULTIPLIER, this.hitRate,5);
+        addCapability(Ability.UPGRADE);
     }
 
     /**
@@ -38,7 +45,6 @@ public class BroadSword extends TradeableWeaponItem {
      * @param location The location of the ground on which we lie.
      */
     public void tick (Location location){
-//        reset();
         focusAction.reset();
     }
 
@@ -98,12 +104,54 @@ public class BroadSword extends TradeableWeaponItem {
     }
 
     @Override
+    public int damage() {
+        int finalDamage = Math.round(INITIAL_DAMAGE * damageMultiplier);
+
+        System.out.println("Damage multiplier: " + damageMultiplier);
+        System.out.println("Damage: " + damage);
+        System.out.println("Before adding: " + finalDamage);
+
+        // Add upgraded damage without multiplier
+//        if (this.damage > INITIAL_DAMAGE){
+//            finalDamage += (this.damage - INITIAL_DAMAGE);
+//        }
+        if (isUpgraded){
+            int change = damage - INITIAL_DAMAGE;
+            System.out.println("DAMAGE ADDED: " + change);
+            finalDamage += change;
+        }
+        System.out.println("After adding: " + finalDamage);
+        this.damage = finalDamage;
+        return finalDamage;
+    }
+
+    @Override
     public Enum<TradeCharacteristics> getScamType(Actor seller) {
         Enum<TradeCharacteristics> scamType = super.getScamType(seller);
         if (seller.hasCapability(EntityTypes.TRADER)){
             scamType = TradeCharacteristics.STEAL_RUNES;
         }
         return scamType;
+    }
+
+    @Override
+    public String upgrade() {
+        // Increase damage and set to isUpgraded
+        int upgradeValue = 10;
+        this.damage += upgradeValue;
+        isUpgraded = true;
+
+        return String.format("%s has been upgraded to +%d damage, total dealing %d DAMAGE.", this, upgradeValue,this.damage);
+    }
+
+    @Override
+    public int upgradePrice() {
+        return 1000;
+    }
+
+    @Override
+    public boolean singleUpgrade() {
+        return false;
     }
 }
 

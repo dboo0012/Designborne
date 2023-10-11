@@ -12,9 +12,11 @@ import game.grounds.*;
 import game.grounds.Void;
 import game.items.Bloodberry;
 import game.items.HealingVial;
+import game.items.RefreshingFlask;
 import game.items.Runes;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
+import game.weapons.GreatKnife;
 import game.weather.WeatherControl;
 
 /**
@@ -84,7 +86,7 @@ public class Application {
 
         // Broadsword
         BroadSword broadSword = new BroadSword();
-        abandonedGroundMap.at(29, 6).addItem(broadSword);
+        abandonedGroundMap.at(29, 5).addItem(broadSword);
 
         // Bloodberry
         ancientWoodsMap.at(27, 5).addItem(new Bloodberry());
@@ -133,10 +135,12 @@ public class Application {
 
         // Test upgrade
 //        abandonedGroundMap.at(29, 5).addItem(new Runes(1000));
-        player.addBalance(1000);
-        player.hurt(121);
+        player.addBalance(4000);
+//        player.hurt(121);
+        abandonedGroundMap.at(29, 5).addItem(new RefreshingFlask());
         abandonedGroundMap.at(29, 5).addItem(new HealingVial());
-        abandonedGroundMap.at(29, 5).addItem(new HealingVial());
+        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
+        abandonedGroundMap.at(29, 5).addItem(new GreatKnife());
 
 
 
