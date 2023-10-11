@@ -7,10 +7,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actions.SellAction;
+import game.actions.UpgradeAction;
 import game.attributes.Ability;
 import game.attributes.EntityTypes;
-import game.items.Tradeable;
+import game.items.Upgradable;
 
 public class Blacksmith extends Actor {
     public Blacksmith() {
@@ -29,9 +29,10 @@ public class Blacksmith extends Actor {
             Item item = sellingActor.getItemInventory().get(i); // Get Item
 
             if (item.hasCapability(Ability.UPGRADE)){ // IF that item is tradeable
-//                Tradeable tradeableItem = ((Tradeable) item); //[Code Smell (Downcasting)]
+                Upgradable upgradableItem = ((Upgradable) item); //[Code Smell (Downcasting)]
 //                int price = tradeableItem.getPrice(); // Get price
 //                actions.add(new SellAction(item, tradeableItem, price, sellingActor)); // Create upgrade action
+                actions.add(new UpgradeAction(upgradableItem, upgradableItem.upgradePrice())); // Create upgrade action
             }
         }
 
