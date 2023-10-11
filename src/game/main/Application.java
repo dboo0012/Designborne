@@ -11,9 +11,13 @@ import game.actions.FocusAction;
 import game.grounds.*;
 import game.grounds.Void;
 import game.items.Bloodberry;
+import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
 import game.weather.WeatherControl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The main class to start the game.
@@ -74,11 +78,11 @@ public class Application {
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
 
         // Gate
-        abandonedGroundMap.at(22, 3).setGround(new Gate(burialGroundMap, 22, 6)); // test: 12, 9, actual: 22, 3
-        burialGroundMap.at(6, 2).setGround(new Gate(abandonedGroundMap, 29, 5)); // test: 20, 9,actual: 22, 6
-        burialGroundMap.at(25, 12).setGround(new Gate(ancientWoodsMap, 20, 3)); // test: 28, 9, actual: 22, 9
-        ancientWoodsMap.at(0, 8).setGround(new Gate(burialGroundMap, 22, 6)); // test: 40, 9, actual: 22, 9
-        ancientWoodsMap.at(27, 6).setGround(new Gate(bossMap, 0, 9)); // test: 40, 6, actual: 22, 6
+        abandonedGroundMap.at(22, 3).setGround(new Gate(new Destination(burialGroundMap, "Burial Ground",22, 6))); // test: 12, 9, actual: 22, 3
+        burialGroundMap.at(6, 2).setGround(new Gate(new Destination(abandonedGroundMap, "Abandoned Ground",29, 5))); // test: 20, 9,actual: 22, 6
+        burialGroundMap.at(25, 12).setGround(new Gate(new Destination(ancientWoodsMap, "Ancient Woods", 20, 3))); // test: 28, 9, actual: 22, 9
+        ancientWoodsMap.at(0, 8).setGround(new Gate(new Destination(burialGroundMap, "Burial Ground",22, 6))); // test: 40, 9, actual: 22, 9
+        ancientWoodsMap.at(27, 6).setGround(new Gate(new Destination(bossMap, "Boss Map",0, 9))); // test: 40, 6, actual: 22, 6
 
         // Broadsword
         BroadSword broadSword = new BroadSword();
@@ -126,6 +130,9 @@ public class Application {
 //        abandonedGroundMap.at(29, 6).addActor(new Traveller());
 //        player.addBalance(10000);
 
+        //Testing new Gates
+        player.addItemToInventory(new OldKey());
+        abandonedGroundMap.at(29, 6).setGround(new Gate(List.of(new Destination(burialGroundMap, "Burial Ground"), new Destination(ancientWoodsMap, "Ancient Woods"))));
 
 
         world.run();

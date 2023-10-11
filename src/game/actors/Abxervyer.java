@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.behaviours.FollowBehaviour;
 import game.attributes.EntityTypes;
+import game.grounds.Destination;
 import game.grounds.Gate;
 import game.main.FancyMessage;
 import game.utilities.FancyMessageDisplay;
@@ -61,7 +62,7 @@ public class Abxervyer extends EnemyActor  {
     public String unconscious(Actor actor, GameMap map) {
         weatherControl.setCurrentWeather(Weather.DEFAULT);
         Location currentLocation = map.locationOf(this);
-        currentLocation.setGround(new Gate(destination, 20, 3));
+        currentLocation.setGround(new Gate(new Destination(destination, "Ancient Woods", 20, 3)));
         FancyMessageDisplay.createString(FancyMessage.ABEXERVYER_SLAIN);
         return "Abxervyer has been slain!"  + " " + super.unconscious(actor, map);
     }
