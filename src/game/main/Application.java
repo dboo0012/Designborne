@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actions.MonologueAction;
 import game.actors.*;
 import game.actors.behaviours.AttackBehaviour;
 import game.grounds.Gate;
@@ -15,6 +16,8 @@ import game.items.Bloodberry;
 import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
+import game.weapons.GiantHammer;
+import game.weapons.GreatKnife;
 import game.weather.WeatherControl;
 
 import java.util.ArrayList;
@@ -91,7 +94,7 @@ public class Application {
 
         // Player
         Player player = new Player("The Abstracted One", '@', 1000000000, 200); // [Revert] health/stamina
-        world.addPlayer(player, overgrownSanctuary.at(29, 5));
+        world.addPlayer(player, abandonedGroundMap.at(29, 5));
 
         // Gate
         abandonedGroundMap.at(22, 3).setGround(new Gate(new Destination(burialGroundMap, "Burial Ground",22, 6))); // test: 12, 9, actual: 22, 3
@@ -111,11 +114,15 @@ public class Application {
 
         burialGroundMap.at(28, 5).addItem(new Bloodberry());
 
-        //Traveller
-        ancientWoodsMap.at(45, 8).addActor(new Traveller());
-
         //Boss
-        bossMap.at(15, 1).addActor(new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl()));
+        Abxervyer abxervyer = new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl());
+        bossMap.at(15, 1).addActor(abxervyer);
+
+        //Traveller
+        abandonedGroundMap.at(29, 6).addActor(new Traveller(abxervyer)); // 45, 8, ancient woods
+
+        //Blacksmith
+        abandonedGroundMap.at(28, 6).addActor(new Blacksmith(abxervyer));
 
         //Overgrown Sanctuary
 

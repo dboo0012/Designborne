@@ -25,4 +25,8 @@ public enum Ability {
      * Can consume items like runes, healing vial, refreshing flask
      */
     CONSUME,
+    /**
+     * Can upgrade items
+     */
+    UPGRADE,
 }
