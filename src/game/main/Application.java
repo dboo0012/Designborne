@@ -90,8 +90,8 @@ public class Application {
 
 
         // Player
-        Player player = new Player("The Abstracted One", '@', 1000000000, 200); // [Revert] health/stamina
-        world.addPlayer(player, overgrownSanctuary.at(29, 5));
+        Player player = new Player("The Abstracted One", '@', 150, 200); // [Revert] health/stamina
+        world.addPlayer(player, abandonedGroundMap.at(29, 5));
 
         // Gate
         abandonedGroundMap.at(22, 3).setGround(new Gate(new Destination(burialGroundMap, "Burial Ground",22, 6))); // test: 12, 9, actual: 22, 3
@@ -117,7 +117,8 @@ public class Application {
         //Boss
         bossMap.at(15, 1).addActor(new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl()));
 
-        //Overgrown Sanctuary
+        // Blacksmith
+        abandonedGroundMap.at(28, 6).addActor(new Blacksmith());
 
 
         // TESTING CODE
