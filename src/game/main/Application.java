@@ -112,15 +112,16 @@ public class Application {
 
         burialGroundMap.at(28, 5).addItem(new Bloodberry());
 
-        //Traveller
-        ancientWoodsMap.at(45, 8).addActor(new Traveller());
-
         //Boss
         Abxervyer abxervyer = new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl());
         bossMap.at(15, 1).addActor(abxervyer);
 
+        //Traveller
+        ancientWoodsMap.at(45, 8).addActor(new Traveller(abxervyer));
+
         //Blacksmith
         abandonedGroundMap.at(29, 6).addActor(new Blacksmith(abxervyer));
+
         //Overgrown Sanctuary
 
 

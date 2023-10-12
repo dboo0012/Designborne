@@ -17,7 +17,7 @@ import game.weapons.GreatKnife;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 
-public class Blacksmith extends Actor {
+public class Blacksmith extends Actor implements Monologue{
     private ArrayList monologueOptions;
     private Abxervyer abxervyer;
     public Blacksmith(Abxervyer abxervyer) {
@@ -48,7 +48,7 @@ public class Blacksmith extends Actor {
         return actions;
     }
 
-    public void monologues(){
+    public void monologue(){
         monologueOptions = new ArrayList<String>();
         monologueOptions.add("I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.");
         monologueOptions.add("It’s dangerous to go alone. Take my creation with you on your adventure!");
@@ -62,15 +62,16 @@ public class Blacksmith extends Actor {
         if (otherActor.hasCapability(EntityTypes.PLAYABLE)){ // Only player can upgrade items
             actions.add(getItems(otherActor)); // Add the items that the player can upgrade
 
-            monologues();
-            String monologue = "Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. " +
+            monologue();
+
+            String monologue1 = "Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. " +
                     "Use my creation to slay them and proceed further!";
             if (abxervyer.isConscious()) {
-                monologueOptions.add(monologue);
+                monologueOptions.add(monologue1);
             }
 
             if (!abxervyer.isConscious()){
-                monologueOptions.remove(monologue);
+                monologueOptions.remove(monologue1);
                 monologueOptions.add("Somebody once told me that a sacred tree rules the land beyond the ancient woods until this day.");
             }
 
@@ -85,6 +86,7 @@ public class Blacksmith extends Actor {
                 monologueOptions.add("Hey now, that’s a weapon from a foreign land that I have not seen for so long." +
                         "I can upgrade it for you if you wish.");
             }
+
             actions.add(new MonologueAction(monologueOptions, abxervyer));
             System.out.println(monologueOptions);
         }
