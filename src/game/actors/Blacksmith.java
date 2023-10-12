@@ -20,8 +20,9 @@ import java.util.ArrayList;
 public class Blacksmith extends Actor {
     private ArrayList monologueOptions;
     private Abxervyer abxervyer;
-    public Blacksmith() {
+    public Blacksmith(Abxervyer abxervyer) {
         super("Blacksmith", 'B', 1);
+        this.abxervyer = abxervyer;
     }
 
     @Override
@@ -84,7 +85,7 @@ public class Blacksmith extends Actor {
                 monologueOptions.add("Hey now, that’s a weapon from a foreign land that I have not seen for so long." +
                         "I can upgrade it for you if you wish.");
             }
-            actions.add(new MonologueAction(monologueOptions));
+            actions.add(new MonologueAction(monologueOptions, abxervyer));
             System.out.println(monologueOptions);
         }
 

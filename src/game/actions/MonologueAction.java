@@ -15,9 +15,10 @@ import java.util.HashMap;
 
 public class MonologueAction extends Action {
     private ArrayList monologueOptions;
-
-    public MonologueAction(ArrayList monologueOptions) {
+    private Abxervyer abxervyer;
+    public MonologueAction(ArrayList monologueOptions, Abxervyer abxervyer) {
         this.monologueOptions = monologueOptions;
+        this.abxervyer = abxervyer;
     }
 
     public ArrayList<String> getMonologueOptions() {
@@ -25,7 +26,7 @@ public class MonologueAction extends Action {
     }
     @Override
     public String execute(Actor actor, GameMap map) {
-        String monologue = getMonologueOptions().get((int)(Math.random() * getMonologueOptions().size() + 1));
+        String monologue = getMonologueOptions().get((int)(Math.random() * getMonologueOptions().size() - 1));
         return monologue;
     }
 
