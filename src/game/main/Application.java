@@ -37,20 +37,27 @@ public class Application {
                 new Wall(), new Floor(), new Puddle(), new Void());
 
         //Maps
+        List<GameMap> activeGameMaps = new ArrayList<>();
+
         GameMap abandonedGroundMap = new GameMap(groundFactory, Maps.ABANDONED_VILLAGE);
         world.addGameMap(abandonedGroundMap);
+        activeGameMaps.add(abandonedGroundMap);
 
         GameMap burialGroundMap = new GameMap(groundFactory, Maps.BURIAL_GROUND);
         world.addGameMap(burialGroundMap);
+        activeGameMaps.add(burialGroundMap);
 
         GameMap ancientWoodsMap = new GameMap(groundFactory, Maps.ANCIENT_WOODS);
         world.addGameMap(ancientWoodsMap);
+        activeGameMaps.add(ancientWoodsMap);
 
         GameMap bossMap = new GameMap(groundFactory, Maps.BOSS_MAP);
         world.addGameMap(bossMap);
+        activeGameMaps.add(bossMap);
 
         GameMap overgrownSanctuary = new GameMap(groundFactory, Maps.OVERGROWN_SANCTUARY);
         world.addGameMap(overgrownSanctuary);
+        activeGameMaps.add(overgrownSanctuary);
 
         FancyMessageDisplay.createString(FancyMessage.TITLE);
 
@@ -90,7 +97,7 @@ public class Application {
 
 
         // Player
-        Player player = new Player("The Abstracted One", '@', 1000000000, 200); // [Revert] health/stamina
+        Player player = new Player("The Abstracted One", '@', 1000000000, 200, activeGameMaps); // [Revert] health/stamina
         world.addPlayer(player, overgrownSanctuary.at(29, 5));
 
         // Gate
