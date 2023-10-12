@@ -13,13 +13,10 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.NumberRange;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.attributes.Ability;
-import game.attributes.GroundTypes;
+import game.attributes.*;
 import game.grounds.Gate;
 import game.items.Runes;
 import game.main.FancyMessage;
-import game.attributes.EntityTypes;
-import game.attributes.Status;
 import game.utilities.FancyMessageDisplay;
 
 import javax.swing.*;
@@ -140,15 +137,16 @@ public class Player extends Actor {
     public String respawn(Location deathLocaton){
         //Respawn
         activeGameMaps.get(0).at(29, 5).addActor(this); //add actor back to spawn point
-        // Runes & Balance
-        int runesAmount = this.getBalance();
-        deathLocaton.addItem(new Runes(runesAmount)); //drop runes at death location
-        this.deductBalance(runesAmount); //reset balance
 
         //Remove enemies except boss
         for (GameMap map: activeGameMaps){
             removeEnemies(map); //remove any actor that isn't a boss or player
         }
+
+        // Runes & Balance
+        int runesAmount = this.getBalance();
+        deathLocaton.addItem(new Runes(runesAmount)); //drop runes at death location
+        this.deductBalance(runesAmount); //reset balance
 
         return "";
 
@@ -158,12 +156,14 @@ public class Player extends Actor {
         NumberRange x_range = map.getXRange();
         NumberRange y_range = map.getYRange();
 
-        //For each Location in the GameMap, remove any actor that isn't a boss or player
+        //For each Location in the GameMap
         for (int x: x_range){
             for (int y: y_range){
 
                 Location currentLocation = new Location(map, x, y);
                 Ground currentGround = currentLocation.getGround();
+
+                //Remove any actor that isn't a boss or player
                 if (map.isAnActorAt(currentLocation)){
                     Actor actor = map.getActorAt(currentLocation);
                     if (!actor.hasCapability(EntityTypes.BOSS) || !actor.hasCapability(EntityTypes.PLAYABLE)){
@@ -177,6 +177,15 @@ public class Player extends Actor {
                 if (currentGround.hasCapability(GroundTypes.GATE) && !currentGround.hasCapability(Status.LOCKED)){
                     currentGround.addCapability(Status.LOCKED);
                 }
+
+                //Remove all runes
+                List<Item> currentLocationItems = currentLocation.getItems();
+                for (Item item: currentLocationItems){
+                    if (item.hasCapability(ItemTypes.RUNES)){
+                        currentLocation.removeItem(item);
+                    }
+                }
+
 
             }
         }
