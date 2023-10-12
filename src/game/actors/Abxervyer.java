@@ -66,7 +66,8 @@ public class Abxervyer extends EnemyActor  {
     public String unconscious(Actor actor, GameMap map) {
         weatherControl.setCurrentWeather(Weather.DEFAULT);
         Location currentLocation = map.locationOf(this);
-        currentLocation.setGround(new Gate(List.of(new Destination(ancientWoodsMap, "Ancient Woods", 20, 3), new Destination(overgrownSanctuaryMap, "Overgrown Sanctuary"))));
+        currentLocation.setGround(new Gate(List.of(new Destination(ancientWoodsMap, "Ancient Woods", 20, 3),
+                new Destination(overgrownSanctuaryMap, "Overgrown Sanctuary", 5, 1))));
         FancyMessageDisplay.createString(FancyMessage.ABEXERVYER_SLAIN);
         return "Abxervyer has been slain!"  + " " + super.unconscious(actor, map);
     }

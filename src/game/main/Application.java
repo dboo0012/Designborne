@@ -60,6 +60,9 @@ public class Application {
         abandonedGroundMap.at(42, 5).setGround(new Graveyard(abandonedGroundMap, new WanderingUndead()));
         burialGroundMap.at(5, 10).setGround(new Graveyard(burialGroundMap, new HollowSoldier()));
         burialGroundMap.at(36, 2).setGround(new Graveyard(burialGroundMap, new HollowSoldier()));
+        overgrownSanctuary.at(44,8).setGround(new Graveyard(overgrownSanctuary, new HollowSoldier()));
+        overgrownSanctuary.at(45,8).setGround(new Graveyard(overgrownSanctuary, new HollowSoldier()));
+        overgrownSanctuary.at(44,9).setGround(new Graveyard(overgrownSanctuary, new HollowSoldier()));
 
 
         // Empty Huts
@@ -67,6 +70,8 @@ public class Application {
         ancientWoodsMap.at(9, 2).setGround(new EmptyHuts(ancientWoodsMap, new ForestKeeper()));
         bossMap.at(30, 1).setGround(new EmptyHuts(bossMap, new ForestKeeper()));
         bossMap.at(32, 2).setGround(new EmptyHuts(bossMap, new ForestKeeper()));
+        overgrownSanctuary.at(44,1).setGround(new EmptyHuts(overgrownSanctuary, new ForestKeeper()));
+        overgrownSanctuary.at(45,1).setGround(new EmptyHuts(overgrownSanctuary, new ForestKeeper()));
 
         // Bushes
         ancientWoodsMap.at(3, 5).setGround(new Bush(ancientWoodsMap, new RedWolf()));
@@ -76,6 +81,8 @@ public class Application {
         bossMap.at(3, 10).setGround(new Bush(bossMap, new RedWolf()));
         bossMap.at(4, 10).setGround(new Bush(bossMap, new RedWolf()));
         bossMap.at(5, 10).setGround(new Bush(bossMap, new RedWolf()));
+        overgrownSanctuary.at(33,5).setGround(new Bush(overgrownSanctuary, new RedWolf()));
+        overgrownSanctuary.at(33,6).setGround(new Bush(overgrownSanctuary, new RedWolf()));
 
 
         // Player
