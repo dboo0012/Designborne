@@ -15,7 +15,7 @@ import game.attributes.TradeCharacteristics;
 /**
  * An item that can be used to recover Player's stamina.
  */
-public class RefreshingFlask extends TradeableItem {
+public class RefreshingFlask extends TradeableItem implements Upgradable{
     private float increasePercentage = 0.2f;
     private int maxStamina;
     /***
@@ -23,6 +23,7 @@ public class RefreshingFlask extends TradeableItem {
      */
     public RefreshingFlask() {
         super("Refreshing Flask", 'u', true, 25);
+        addCapability(Ability.UPGRADE);
     }
 
     /**
@@ -35,9 +36,10 @@ public class RefreshingFlask extends TradeableItem {
     public ActionList allowableActions(Actor owner) {
         ActionList actions = new ActionList();
 
+//        maxStamina = owner.getAttributeMaximum(BaseActorAttributes.STAMINA);
+
         if (owner.hasCapability(Ability.CONSUME)){
-            int maxStamina = owner.getAttributeMaximum(BaseActorAttributes.STAMINA);
-            float increasePercentage = 0.2f;
+            maxStamina = owner.getAttributeMaximum(BaseActorAttributes.STAMINA);
 
             // Create a ChangeAttributeAction to increase the actor's stamina
             ChangeAttributeAction changeAttributeAction = new ChangeAttributeAction(this,
@@ -105,5 +107,22 @@ public class RefreshingFlask extends TradeableItem {
             scamType = TradeCharacteristics.STEAL_ITEMS;
         }
         return scamType;
+    }
+
+    @Override
+    public String upgrade() {
+        float upgradePercentage = 1.0f;
+        increasePercentage = upgradePercentage;
+        return String.format("%s has been upgraded to regenerate %d STAMINA.", this, (int) (maxStamina * upgradePercentage));
+    }
+
+    @Override
+    public int upgradePrice() {
+        return 175;
+    }
+
+    @Override
+    public boolean singleUpgrade() {
+        return true;
     }
 }

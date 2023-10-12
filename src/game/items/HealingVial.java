@@ -37,9 +37,8 @@ public class HealingVial extends TradeableItem implements Upgradable{
     public ActionList allowableActions(Actor owner) {
         ActionList actions = new ActionList();
 
-        maxHealth = owner.getAttributeMaximum(BaseActorAttributes.HEALTH);
-
         if (owner.hasCapability(Ability.CONSUME)) {
+            maxHealth = owner.getAttributeMaximum(BaseActorAttributes.HEALTH);
 
             // Create a ChangeAttributeAction to increase the actor's health
             ChangeAttributeAction changeAttributeAction = new ChangeAttributeAction(this, BaseActorAttributes.HEALTH,
