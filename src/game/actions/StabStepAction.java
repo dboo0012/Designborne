@@ -1,6 +1,7 @@
 package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
@@ -56,7 +57,12 @@ public class StabStepAction extends Action {
 
             // Step
             Location step = step(actor, map);
-            map.moveActor(actor, step);
+            if (step != map.locationOf(actor)){
+                map.moveActor(actor, step);
+            }else{
+                new DoNothingAction(); // Stay put if no exits can be found
+            }
+//            map.moveActor(actor, step);
 
             return attack + "\n" + String.format("%s stabbed %s and stepped to %s", actor, target, step.toString());
         }
@@ -77,10 +83,14 @@ public class StabStepAction extends Action {
         for (Exit exit : target.getExits()) {
             Location destination = exit.getDestination();
 
-            if (destination.canActorEnter(actor)) {
+            // Player can enter and there is no actor on the destination
+            if (destination.canActorEnter(actor) && !destination.containsAnActor()) { //&& !destination.containsAnActor()
                 locations.add(destination);
             }
         }
+
+        System.out.println("List of locations: " +locations);
+
         if (!locations.isEmpty()) {
             return locations.get(random.nextInt(locations.size())); // A random exit is chosen
         }
