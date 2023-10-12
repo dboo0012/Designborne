@@ -39,7 +39,7 @@ public class Abxervyer extends EnemyActor  {
      */
     public Abxervyer(GameMap ancientWoodsMap, GameMap overgrownSanctuaryMap, WeatherControl weatherControl) {
         super("Abxervyer", 'Y', 2000, 5000);
-        addCapability(EntityTypes.BOSS);
+        addCapability(EntityTypes.VOID);
         this.ancientWoodsMap = ancientWoodsMap;
         this.overgrownSanctuaryMap = overgrownSanctuaryMap;
         this.weatherControl = weatherControl;

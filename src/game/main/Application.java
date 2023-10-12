@@ -72,6 +72,8 @@ public class Application {
         bossMap.at(32, 2).setGround(new EmptyHuts(bossMap, new ForestKeeper()));
         overgrownSanctuary.at(44,1).setGround(new EmptyHuts(overgrownSanctuary, new ForestKeeper()));
         overgrownSanctuary.at(45,1).setGround(new EmptyHuts(overgrownSanctuary, new ForestKeeper()));
+        overgrownSanctuary.at(44,2).setGround(new EmptyHuts(overgrownSanctuary, new EldentreeGuardian()));
+        overgrownSanctuary.at(45,2).setGround(new EmptyHuts(overgrownSanctuary, new EldentreeGuardian()));
 
         // Bushes
         ancientWoodsMap.at(3, 5).setGround(new Bush(ancientWoodsMap, new RedWolf()));
@@ -83,11 +85,13 @@ public class Application {
         bossMap.at(5, 10).setGround(new Bush(bossMap, new RedWolf()));
         overgrownSanctuary.at(33,5).setGround(new Bush(overgrownSanctuary, new RedWolf()));
         overgrownSanctuary.at(33,6).setGround(new Bush(overgrownSanctuary, new RedWolf()));
+        overgrownSanctuary.at(32,5).setGround(new Bush(overgrownSanctuary, new LivingBranch()));
+        overgrownSanctuary.at(32,6).setGround(new Bush(overgrownSanctuary, new LivingBranch()));
 
 
         // Player
-        Player player = new Player("The Abstracted One", '@', 150, 200); // [Revert] health/stamina
-        world.addPlayer(player, abandonedGroundMap.at(29, 5));
+        Player player = new Player("The Abstracted One", '@', 1000000000, 200); // [Revert] health/stamina
+        world.addPlayer(player, overgrownSanctuary.at(29, 5));
 
         // Gate
         abandonedGroundMap.at(22, 3).setGround(new Gate(new Destination(burialGroundMap, "Burial Ground",22, 6))); // test: 12, 9, actual: 22, 3
