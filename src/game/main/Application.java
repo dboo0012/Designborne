@@ -16,6 +16,8 @@ import game.items.Bloodberry;
 import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
+import game.weapons.GiantHammer;
+import game.weapons.GreatKnife;
 import game.weather.WeatherControl;
 
 import java.util.ArrayList;
@@ -117,10 +119,10 @@ public class Application {
         bossMap.at(15, 1).addActor(abxervyer);
 
         //Traveller
-        ancientWoodsMap.at(45, 8).addActor(new Traveller(abxervyer));
+        abandonedGroundMap.at(29, 6).addActor(new Traveller(abxervyer)); // 45, 8, ancient woods
 
         //Blacksmith
-        abandonedGroundMap.at(29, 6).addActor(new Blacksmith(abxervyer));
+        abandonedGroundMap.at(28, 6).addActor(new Blacksmith(abxervyer));
 
         //Overgrown Sanctuary
 

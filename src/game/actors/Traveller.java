@@ -9,6 +9,7 @@ import game.attributes.Ability;
 import game.attributes.EntityTypes;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
+import game.utilities.HasItem;
 import game.weapons.BroadSword;
 import game.weapons.GiantHammer;
 import game.weapons.GreatKnife;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  * @author Meekal
  */
 public class Traveller extends Trader implements Monologue{
-    private ArrayList monologueOptions;
+    private ArrayList<String> monologueOptions;
     private Abxervyer abxervyer;
     /**
      * Constructor for a Traveller.
@@ -64,23 +65,33 @@ public class Traveller extends Trader implements Monologue{
         }
 
         // Has Giant Hammer
-        boolean hasGiantHammer = false;
-        for(Item item: otherActor.getItemInventory()){
-            if(item instanceof GiantHammer){
-                hasGiantHammer = true;
-                break;
-            }
-        }
-        if(hasGiantHammer){ // Actor has old key in inventory
-            monologueOptions.add("Ooh, that’s a fascinating weapon you got there. I will pay a good price for it. You wouldn't get this price from any other guy.");
+//        boolean hasGiantHammer = false;
+//        for(Item item: otherActor.getItemInventory()){
+//            if(item instanceof GiantHammer){
+//                hasGiantHammer = true;
+//                break;
+//            }
+//        }
+        boolean hasGiantHammer = new HasItem(otherActor, new GiantHammer()).actorHasItem();
+
+        String monologue2 = "Ooh, that’s a fascinating weapon you got there. I will pay a good price for it. You wouldn't get this price from any other guy.";
+        if(hasGiantHammer){ // Actor has GiantHammer in inventory
+            monologueOptions.add(monologue2);
+        } else{
+            monologueOptions.remove(monologue2);
         }
 
+        String monologue3 = "Congratulations on defeating the lord of this area. I noticed you still hold on to that hammer. Why don’t you sell it to me? We've known each other for so long. I can tell you probably don’t need that weapon any longer.";
         if (!bossAlive && hasGiantHammer){
-            monologueOptions.add("Congratulations on defeating the lord of this area. I noticed you still hold on to that hammer. Why don’t you sell it to me? We've known each other for so long. I can tell you probably don’t need that weapon any longer.");
+            monologueOptions.add(monologue3);
+        } else {
+            monologueOptions.remove(monologue3);
         }
 
         if (otherActor.hasCapability(EntityTypes.PLAYABLE)){
-            actions.add(new MonologueAction(monologueOptions, abxervyer));
+            actions.add(new MonologueAction(this, monologueOptions, abxervyer));
+            System.out.println(monologueOptions.size());
+            System.out.println(monologueOptions);
         }
 
         return actions;

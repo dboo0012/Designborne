@@ -12,13 +12,14 @@ import game.actions.UpgradeAction;
 import game.attributes.Ability;
 import game.attributes.EntityTypes;
 import game.items.Upgradable;
+import game.utilities.HasItem;
 import game.weapons.GreatKnife;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Blacksmith extends Actor implements Monologue{
-    private ArrayList monologueOptions;
+    private ArrayList<String> monologueOptions;
     private Abxervyer abxervyer;
     public Blacksmith(Abxervyer abxervyer) {
         super("Blacksmith", 'B', 1);
@@ -59,35 +60,29 @@ public class Blacksmith extends Actor implements Monologue{
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
 
+        monologue();
+
+        String monologue1 = "Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. " +
+                "Use my creation to slay them and proceed further!";
+        if (abxervyer.isConscious()) {
+            monologueOptions.add(monologue1);
+        }
+
+        if (!abxervyer.isConscious()){
+            monologueOptions.remove(monologue1);
+            monologueOptions.add("Somebody once told me that a sacred tree rules the land beyond the ancient woods until this day.");
+        }
+
+        boolean hasGreatKnife = new HasItem(otherActor, new GreatKnife()).actorHasItem();
+
+        if(hasGreatKnife){ // Actor has GreatKnife in inventory
+            monologueOptions.add("Hey now, that’s a weapon from a foreign land that I have not seen for so long." +
+                    "I can upgrade it for you if you wish.");
+        }
+
         if (otherActor.hasCapability(EntityTypes.PLAYABLE)){ // Only player can upgrade items
             actions.add(getItems(otherActor)); // Add the items that the player can upgrade
-
-            monologue();
-
-            String monologue1 = "Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. " +
-                    "Use my creation to slay them and proceed further!";
-            if (abxervyer.isConscious()) {
-                monologueOptions.add(monologue1);
-            }
-
-            if (!abxervyer.isConscious()){
-                monologueOptions.remove(monologue1);
-                monologueOptions.add("Somebody once told me that a sacred tree rules the land beyond the ancient woods until this day.");
-            }
-
-            boolean hasGreatKnife = false;
-            for(Item item: otherActor.getItemInventory()){
-                if(item instanceof GreatKnife){
-                    hasGreatKnife = true;
-                    break;
-                }
-            }
-            if(hasGreatKnife){ // Actor has old key in inventory
-                monologueOptions.add("Hey now, that’s a weapon from a foreign land that I have not seen for so long." +
-                        "I can upgrade it for you if you wish.");
-            }
-
-            actions.add(new MonologueAction(monologueOptions, abxervyer));
+            actions.add(new MonologueAction(this, monologueOptions, abxervyer));
             System.out.println(monologueOptions);
         }
 
