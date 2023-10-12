@@ -13,6 +13,7 @@ import game.grounds.Void;
 import game.items.Bloodberry;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
+import game.weapons.GreatKnife;
 import game.weather.WeatherControl;
 
 /**
@@ -70,7 +71,7 @@ public class Application {
 
 
         // Player
-        Player player = new Player("The Abstracted One", '@', 150, 200); // [Revert] health/stamina
+        Player player = new Player("The Abstracted One", '@', 1500, 200); // [Revert] health/stamina
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
 
         // Gate
@@ -100,7 +101,7 @@ public class Application {
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
 //        abandonedGroundMap.at(29, 6).addItem(new OldKey());
 //        bossMap.at(15,3).addItem(new OldKey());
-//        abandonedGroundMap.at(29, 6).addItem(new Bloodberry("Bloodberry", '*', true));
+//        abandonedGroundMap.at(29, 6).addItem(new Bloodberry());
 //        world.addPlayer(player, ancientWoodsMap.at(45, 7));
 //        world.addPlayer(player, bossMap.at(15, 2));
 
@@ -126,6 +127,14 @@ public class Application {
 //        abandonedGroundMap.at(29, 6).addActor(new Traveller());
 //        player.addBalance(10000);
 
+        // Testing Stab step
+//        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
+//        abandonedGroundMap.at(28, 6).addActor(new WanderingUndead());
+//        abandonedGroundMap.at(28, 5).addActor(new WanderingUndead());
+//        abandonedGroundMap.at(30, 5).addActor(new WanderingUndead());
+//        abandonedGroundMap.at(30, 6).addActor(new WanderingUndead());
+//
+//        abandonedGroundMap.at(29, 5).addItem(new GreatKnife());
 
 
         world.run();
