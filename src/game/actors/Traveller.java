@@ -57,6 +57,7 @@ public class Traveller extends Trader implements Monologue{
 
         boolean bossAlive = abxervyer.isConscious();
 
+        // Boss alive
         String monologue1 = "You know the rules of this world, and so do I. Each area is ruled by a lord. Defeat the lord of this area, Abxervyer, and you may proceed to the next area.";
         if(bossAlive){ // Boss not defeated
             monologueOptions.add(monologue1);
@@ -65,15 +66,7 @@ public class Traveller extends Trader implements Monologue{
         }
 
         // Has Giant Hammer
-//        boolean hasGiantHammer = false;
-//        for(Item item: otherActor.getItemInventory()){
-//            if(item instanceof GiantHammer){
-//                hasGiantHammer = true;
-//                break;
-//            }
-//        }
         boolean hasGiantHammer = new HasItem(otherActor, new GiantHammer()).actorHasItem();
-
         String monologue2 = "Ooh, that’s a fascinating weapon you got there. I will pay a good price for it. You wouldn't get this price from any other guy.";
         if(hasGiantHammer){ // Actor has GiantHammer in inventory
             monologueOptions.add(monologue2);
@@ -81,6 +74,7 @@ public class Traveller extends Trader implements Monologue{
             monologueOptions.remove(monologue2);
         }
 
+        // Boss dead and has GiantHammer
         String monologue3 = "Congratulations on defeating the lord of this area. I noticed you still hold on to that hammer. Why don’t you sell it to me? We've known each other for so long. I can tell you probably don’t need that weapon any longer.";
         if (!bossAlive && hasGiantHammer){
             monologueOptions.add(monologue3);
