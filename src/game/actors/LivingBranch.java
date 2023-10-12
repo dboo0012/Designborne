@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.behaviours.WanderBehaviour;
+import game.attributes.Ability;
 import game.attributes.EntityTypes;
 import game.items.Bloodberry;
 import game.items.HealingVial;
@@ -28,7 +29,7 @@ public class LivingBranch extends EnemyActor implements ActorSpawn {
     public LivingBranch() {
         super("Living Branch", '?', 75, 500);
         addDroppableItem(new Bloodberry(), 0.5);
-        addCapability(EntityTypes.VOID);
+        addCapability(Ability.VOID_IMMUNITY);
     }
 
     /**

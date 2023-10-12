@@ -16,5 +16,5 @@ public enum EntityTypes {
     /**
      * Indicates that the actor is a boss.
      */
-    VOID,
+    BOSS,
 }

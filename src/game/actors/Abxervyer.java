@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.behaviours.FollowBehaviour;
+import game.attributes.Ability;
 import game.attributes.EntityTypes;
 import game.grounds.Gate;
 import game.main.FancyMessage;
@@ -39,7 +40,8 @@ public class Abxervyer extends EnemyActor  {
      */
     public Abxervyer(GameMap ancientWoodsMap, GameMap overgrownSanctuaryMap, WeatherControl weatherControl) {
         super("Abxervyer", 'Y', 2000, 5000);
-        addCapability(EntityTypes.VOID);
+        addCapability(EntityTypes.BOSS);
+        addCapability(Ability.VOID_IMMUNITY);
         this.ancientWoodsMap = ancientWoodsMap;
         this.overgrownSanctuaryMap = overgrownSanctuaryMap;
         this.weatherControl = weatherControl;

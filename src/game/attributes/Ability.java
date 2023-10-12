@@ -25,4 +25,6 @@ public enum Ability {
      * Can consume items like runes, healing vial, refreshing flask
      */
     CONSUME,
+
+    VOID_IMMUNITY,
 }

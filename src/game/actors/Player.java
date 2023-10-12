@@ -9,8 +9,11 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.positions.NumberRange;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.attributes.Ability;
+import game.items.Runes;
 import game.main.FancyMessage;
 import game.attributes.EntityTypes;
 import game.attributes.Status;
@@ -18,6 +21,7 @@ import game.utilities.FancyMessageDisplay;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class representing the Player.
@@ -30,6 +34,8 @@ public class Player extends Actor {
     private int maxStamina;
     private int currentStamina;
 
+    private List<GameMap> activeGameMaps;
+
     /**
      * Constructor for the Player class.
      *
@@ -38,8 +44,9 @@ public class Player extends Actor {
      * @param hitPoints    The initial hit points of the player.
      * @param stamina      The initial stamina of the player.
      */
-    public Player(String name, char displayChar, int hitPoints, int stamina) {
+    public Player(String name, char displayChar, int hitPoints, int stamina, List<GameMap> activeGameMaps) {
         super(name, displayChar, hitPoints);
+        this.activeGameMaps = activeGameMaps;
 
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina)); // New stamina attribute
@@ -118,9 +125,49 @@ public class Player extends Actor {
      */
     @Override
     public String unconscious(GameMap map) {
-        FancyMessageDisplay.createString(FancyMessage.YOU_DIED);
-        return super.unconscious(map);
+//        FancyMessageDisplay.createString(FancyMessage.YOU_DIED);
+        String output = "";
+        Location deathLocaton = map.locationOf(this);
+        output += super.unconscious(map); //remove actor from the map he died at
+        output += respawn(deathLocaton);
     }
+
+    public String respawn(Location deathLocaton){
+        //Respawn
+        activeGameMaps.get(0).at(29, 5).addActor(this); //add actor back to spawn point
+        // Runes & Balance
+        int runesAmount = this.getBalance();
+        deathLocaton.addItem(new Runes(runesAmount)); //drop runes at death location
+        this.deductBalance(runesAmount); //reset balance
+
+        //Remove enemies except boss
+        for (GameMap map: activeGameMaps){
+            removeEnemies(map); //remove any actor that isn't a boss or player
+        }
+
+
+    }
+
+    public void removeEnemies(GameMap map){
+        NumberRange x_range = map.getXRange();
+        NumberRange y_range = map.getYRange();
+
+        //For each Location in the GameMap, remove any actor that isn't a boss or player
+        for (int x: x_range){
+            for (int y: y_range){
+
+                Location currentLocation = new Location(map, x, y);
+                if (map.isAnActorAt(currentLocation)){
+                    Actor actor = map.getActorAt(currentLocation);
+                    if (!actor.hasCapability(EntityTypes.) || !actor.hasCapability(EntityTypes.PLAYABLE)){
+                        map.removeActor(actor);
+                    }
+                }
+
+            }
+        }
+    }
+
 
     /**
      * Override of the unconscious method to handle player's unconscious state.
