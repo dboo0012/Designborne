@@ -10,28 +10,35 @@ import game.actions.UnlockAction;
 import game.attributes.Ability;
 import game.attributes.Status;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A class that represents a gate.
  *
  * @author Daryl, Jerry
  */
 public class Gate extends Ground {
-    private GameMap destination;
-    private int x;
-    private int y;
+    private List<Destination> destinationList = new ArrayList<>();
 
     /**
      * Constructor.
      * @param destination The map where the actor will be spawned
-     * @param x The x coordinate of the destination
-     * @param y The y coordinate of the destination
      */
-    public Gate(GameMap destination, int x, int y){
+    public Gate(Destination destination){
         super('=');
-        this.destination = destination;
+        destinationList.add(destination);
         addCapability(Status.LOCKED);
-        this.x = x;
-        this.y = y;
+    }
+
+    public Gate(List<Destination> destinationList){
+        super('=');
+        this.destinationList = destinationList;
+        addCapability(Status.LOCKED);
+    }
+
+    public void addDestination(Destination destination){
+        destinationList.add(destination);
     }
 
     /**
@@ -47,11 +54,16 @@ public class Gate extends Ground {
         ActionList actions = new ActionList();
         // If the gate is not locked, add a TravelAction to allow actor to pass through
         if (!this.hasCapability(Status.LOCKED)){
-            if (x < 0){
-                x = location.x();
-                y = location.y();
+            for (Destination destination: destinationList) {
+                int x = destination.getX();
+                int y = destination.getY();
+                GameMap destinationMap = destination.getDestinationMap();
+                if (x < 0 || y < 0){ //If x/y value is not set (x/y is automatically set to -1)
+                    x = location.x();
+                    y = location.y();
+                }
+                actions.add(new TravelAction(destination, x, y));
             }
-            actions.add(new TravelAction(this.destination, x, y));
         } else{
             actions.add(new UnlockAction(this));
         }

@@ -3,6 +3,7 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.grounds.Destination;
 
 /**
  * An action that allows the actor to travel to another map.
@@ -10,7 +11,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * @author Daryl
  */
 public class TravelAction extends Action {
-    private final GameMap destination;
+    private final Destination destination;
     private final int x;
     private final int y;
 
@@ -20,7 +21,7 @@ public class TravelAction extends Action {
      * @param x the x coordinate of the destination
      * @param y the y coordinate of the destination
      */
-    public TravelAction(GameMap destination, int x, int y){
+    public TravelAction(Destination destination, int x, int y){
         super();
         this.destination = destination;
         this.x = x;
@@ -36,13 +37,14 @@ public class TravelAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
+        GameMap destinationMap = destination.getDestinationMap();
         // Travel to next map
-        map.moveActor(actor, destination.at(x, y));
-        return String.format("Welcome to %s, %s", destination.locationOf(actor), actor);
+        map.moveActor(actor, destinationMap.at(x, y));
+        return String.format("Welcome to %s, %s", destinationMap.locationOf(actor), actor);
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " travels through the Gate";
+        return actor + " travels through the gate to " + destination.getMapName();
     }
 }

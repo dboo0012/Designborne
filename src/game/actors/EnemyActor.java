@@ -86,6 +86,9 @@ public abstract class EnemyActor extends Actor implements Attackable{
     public void addBehaviour(int priority, Behaviour behaviour) {
         this.behaviours.put(priority, behaviour);
     }
+    public void removeBehaviour(int priority){
+        this.behaviours.remove(priority);
+    }
 
     /**
      * Gets the list of item classes to be dropped by the enemy actor.
