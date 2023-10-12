@@ -27,7 +27,7 @@ public class Void extends Ground {
      */
     @Override
     public void tick(Location location) {
-        if (location.containsAnActor() && !location.getActor().hasCapability(EntityTypes.BOSS)){
+        if (location.containsAnActor() && !location.getActor().hasCapability(EntityTypes.VOID)){
             Actor actor = location.getActor();
             GameMap map = location.map();
             // Make the actor unconscious when stepping into the void
