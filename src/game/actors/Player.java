@@ -33,7 +33,6 @@ import java.util.List;
 public class Player extends Actor {
     private int maxStamina;
     private int currentStamina;
-
     private List<GameMap> activeGameMaps;
 
     /**
@@ -48,8 +47,9 @@ public class Player extends Actor {
         super(name, displayChar, hitPoints);
         this.activeGameMaps = activeGameMaps;
 
-        this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina)); // New stamina attribute
+
+        this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addCapability(EntityTypes.PLAYABLE);
         this.addCapability(Ability.CAN_ENTER_FLOOR);
         this.addCapability(Ability.TRAVEL);
@@ -116,6 +116,25 @@ public class Player extends Actor {
     }
 
     /**
+     * Override of the unconscious method to handle player's unconscious state.
+     * It displays a special message and then invokes the super method to handle the unconscious state.
+     *
+     * @param actor The actor representing the player.
+     * @param map   The map containing the player.
+     * @return The result of handling the player's unconscious state.
+     */
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+        String output = "";
+        Location deathLocation = map.locationOf(this);
+
+        output += super.unconscious(map); //remove actor from the map he died at
+        respawn(deathLocation);
+
+        return output;
+    }
+
+    /**
      * Override of the unconscious method to handle the player's unconscious state.
      * This method displays a special "You Died" message line by line, simulating a dramatic effect,
      * and then invokes the super method to handle the unconscious state.
@@ -126,52 +145,54 @@ public class Player extends Actor {
     @Override
     public String unconscious(GameMap map) {
 //        FancyMessageDisplay.createString(FancyMessage.YOU_DIED);
-        String output = "";
-        Location deathLocaton = map.locationOf(this);
-        output += super.unconscious(map); //remove actor from the map he died at
-        output += respawn(deathLocaton);
+        Location deathLocation = map.locationOf(this);
 
-        return output;
+        super.unconscious(map); //remove actor from the map he died at
+        respawn(deathLocation);
+
+        FancyMessageDisplay.createString(FancyMessage.RESPAWN);
+
+        return "Player was respawned at Abandoned Village";
     }
 
-    public String respawn(Location deathLocaton){
+    public void respawn(Location deathLocation){
         //Respawn
+        this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, this.getAttributeMaximum(BaseActorAttributes.HEALTH));
+        this.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.UPDATE, this.getAttributeMaximum(BaseActorAttributes.STAMINA));
         activeGameMaps.get(0).at(29, 5).addActor(this); //add actor back to spawn point
 
         //Remove enemies except boss
         for (GameMap map: activeGameMaps){
-            removeEnemies(map); //remove any actor that isn't a boss or player
+            resetMaps(map); //remove any actor that isn't a boss or player
         }
 
         // Runes & Balance
         int runesAmount = this.getBalance();
-        deathLocaton.addItem(new Runes(runesAmount)); //drop runes at death location
+        deathLocation.addItem(new Runes(runesAmount)); //drop runes at death location
         this.deductBalance(runesAmount); //reset balance
-
-        return "";
 
     }
 
-    public void removeEnemies(GameMap map){
+    public void resetMaps(GameMap map){
         NumberRange x_range = map.getXRange();
         NumberRange y_range = map.getYRange();
 
         //For each Location in the GameMap
         for (int x: x_range){
             for (int y: y_range){
-
-                Location currentLocation = new Location(map, x, y);
+                Location currentLocation = map.at(x, y);
                 Ground currentGround = currentLocation.getGround();
 
                 //Remove any actor that isn't a boss or player
                 if (map.isAnActorAt(currentLocation)){
                     Actor actor = map.getActorAt(currentLocation);
-                    if (!actor.hasCapability(EntityTypes.BOSS) || !actor.hasCapability(EntityTypes.PLAYABLE)){
+                    if (!actor.hasCapability(EntityTypes.BOSS) && !actor.hasCapability(EntityTypes.PLAYABLE)){
                         map.removeActor(actor);
                     } else if (actor.hasCapability(EntityTypes.BOSS)){ //Reset boss health to maximum
                         actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, actor.getAttributeMaximum(BaseActorAttributes.HEALTH));
                     }
                 }
+
 
                 //Lock all gates
                 if (currentGround.hasCapability(GroundTypes.GATE) && !currentGround.hasCapability(Status.LOCKED)){
@@ -180,11 +201,17 @@ public class Player extends Actor {
 
                 //Remove all runes
                 List<Item> currentLocationItems = currentLocation.getItems();
+                List<Item> itemsToRemove = new ArrayList<>();
                 for (Item item: currentLocationItems){
                     if (item.hasCapability(ItemTypes.RUNES)){
-                        currentLocation.removeItem(item);
+                        itemsToRemove.add(item);
                     }
                 }
+
+                for (Item item: itemsToRemove){
+                    currentLocation.removeItem(item);
+                }
+
 
 
             }
@@ -192,17 +219,5 @@ public class Player extends Actor {
     }
 
 
-    /**
-     * Override of the unconscious method to handle player's unconscious state.
-     * It displays a special message and then invokes the super method to handle the unconscious state.
-     *
-     * @param actor The actor representing the player.
-     * @param map   The map containing the player.
-     * @return The result of handling the player's unconscious state.
-     */
-    @Override
-    public String unconscious(Actor actor, GameMap map) {
-        FancyMessageDisplay.createString(FancyMessage.YOU_DIED);
-        return super.unconscious(actor, map);
-    }
+
 }

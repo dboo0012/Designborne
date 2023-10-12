@@ -1,5 +1,8 @@
 package game.main;
 
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -97,8 +100,8 @@ public class Application {
 
 
         // Player
-        Player player = new Player("The Abstracted One", '@', 1000000000, 200, activeGameMaps); // [Revert] health/stamina
-        world.addPlayer(player, overgrownSanctuary.at(29, 5));
+        Player player = new Player("The Abstracted One", '@', 1, 200, activeGameMaps); // [Revert] health
+//        world.addPlayer(player, overgrownSanctuary.at(29, 5));
 
         // Gate
         abandonedGroundMap.at(22, 3).setGround(new Gate(new Destination(burialGroundMap, "Burial Ground",22, 6))); // test: 12, 9, actual: 22, 3
@@ -122,7 +125,7 @@ public class Application {
         ancientWoodsMap.at(45, 8).addActor(new Traveller());
 
         //Boss
-        bossMap.at(15, 1).addActor(new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl()));
+//        bossMap.at(15, 1).addActor(new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl()));
 
         //Overgrown Sanctuary
 
@@ -161,6 +164,27 @@ public class Application {
 //        player.addItemToInventory(new OldKey());
 //        abandonedGroundMap.at(29,6).addActor(new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl()));
 //        abandonedGroundMap.at(29, 6).setGround(new Gate(List.of(new Destination(burialGroundMap, "Burial Ground"), new Destination(ancientWoodsMap, "Ancient Woods"))));
+
+        //Testing Respawn
+        world.addPlayer(player, abandonedGroundMap.at(29,5));
+            //Testing max attribute after respawn
+//            player.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, 10);
+//            player.modifyAttributeMaximum(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, 10);
+//            player.unconscious(abandonedGroundMap);
+            //Testing rune drop
+//            player.addBalance(1000);
+//            player.unconscious(abandonedGroundMap); //Should have 1000 runes to pick up
+//            player.unconscious(abandonedGroundMap); //Should have no runes to pick up
+            //Testing boss respawn
+//            Actor boss = new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl());
+//            abandonedGroundMap.at(29, 7).addActor(boss);
+//            boss.unconscious(abandonedGroundMap);
+
+            //Testing locked gates
+//            player.addItemToInventory(new OldKey());
+//            abandonedGroundMap.at(29, 6).setGround(new Gate(new Destination(burialGroundMap, "Burial Ground")));
+
+
 
 
         world.run();
