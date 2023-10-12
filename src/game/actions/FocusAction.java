@@ -15,11 +15,13 @@ import game.weapons.BroadSword;
  * @author Daryl
  */
 public class FocusAction extends TickableAction {
-    private WeaponItem weaponItem = getWeaponItem();
+//    private WeaponItem weaponItem = getWeaponItem();
+    private BroadSword broadSword;
     private boolean focusActive = false;
 
-    public FocusAction(WeaponItem weaponItem, float defDmgMultiplier, int defHitRate, int maxFocusCounter) {
-        super(weaponItem, "Focus", defDmgMultiplier, defHitRate, maxFocusCounter); // counter starts at 0 (not activated
+    public FocusAction(BroadSword broadSword, float defDmgMultiplier, int defHitRate, int maxFocusCounter) {
+        super(broadSword, "Focus", defDmgMultiplier, defHitRate, maxFocusCounter); // counter starts at 0 (not activated
+        this.broadSword = broadSword;
     }
 
     @Override
@@ -38,27 +40,27 @@ public class FocusAction extends TickableAction {
             // Broadswords new stats
             int newHitRate = 90;
             float increaseDamageMultiplierBy = 0.1f;
-            weaponItem.updateHitRate(newHitRate);
-            weaponItem.increaseDamageMultiplier(increaseDamageMultiplierBy);
+            broadSword.updateHitRate(newHitRate);
+            broadSword.increaseDamageMultiplier(increaseDamageMultiplierBy);
 
             // stamina decrease 20% of max
             actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, (int) requiredStamina);
 
-            return actor + " has activated Focus on " + weaponItem.toString();
+            return actor + " has activated Focus on " + broadSword.toString();
         }
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " activates the skill of Focus on " + weaponItem.toString();
+        return actor + " activates the skill of Focus on " + broadSword.toString();
     }
 
     @Override
     public void reset() {
         deactivate();
         resetCounter();
-        weaponItem.updateDamageMultiplier(getDefDmgMultiplier());
-        weaponItem.updateHitRate(getDefHitRate());
+        broadSword.updateDamageMultiplier(getDefDmgMultiplier());
+        broadSword.updateHitRate(getDefHitRate());
     }
 
 }

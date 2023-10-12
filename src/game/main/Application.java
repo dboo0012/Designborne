@@ -103,7 +103,7 @@ public class Application {
 
         // Broadsword
         BroadSword broadSword = new BroadSword();
-        abandonedGroundMap.at(29, 6).addItem(broadSword);
+        abandonedGroundMap.at(29, 5).addItem(broadSword); // TESTING Intital is 29,6
 
         // Bloodberry
         ancientWoodsMap.at(27, 5).addItem(new Bloodberry());
@@ -156,7 +156,7 @@ public class Application {
 //        abandonedGroundMap.at(29,6).addActor(new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl()));
 //        abandonedGroundMap.at(29, 6).setGround(new Gate(List.of(new Destination(burialGroundMap, "Burial Ground"), new Destination(ancientWoodsMap, "Ancient Woods"))));
 
-
+    abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
         world.run();
     }
 }
