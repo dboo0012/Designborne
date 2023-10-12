@@ -93,7 +93,7 @@ public class Application {
 
 
         // Player
-        Player player = new Player("The Abstracted One", '@', 1000000000, 200); // [Revert] health/stamina
+        Player player = new Player("The Abstracted One", '@', 150, 200); // [Revert] health/stamina
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
 
         // Gate
@@ -119,13 +119,10 @@ public class Application {
         bossMap.at(15, 1).addActor(abxervyer);
 
         //Traveller
-        abandonedGroundMap.at(29, 6).addActor(new Traveller(abxervyer)); // 45, 8, ancient woods
+        ancientWoodsMap.at(45, 8).addActor(new Traveller(abxervyer)); // 45, 8, ancient woods
 
         //Blacksmith
         abandonedGroundMap.at(28, 6).addActor(new Blacksmith(abxervyer));
-
-        //Overgrown Sanctuary
-
 
         // TESTING CODE
 //        abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
