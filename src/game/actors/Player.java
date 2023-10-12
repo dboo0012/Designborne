@@ -9,10 +9,13 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.NumberRange;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.attributes.Ability;
+import game.attributes.GroundTypes;
+import game.grounds.Gate;
 import game.items.Runes;
 import game.main.FancyMessage;
 import game.attributes.EntityTypes;
@@ -130,6 +133,8 @@ public class Player extends Actor {
         Location deathLocaton = map.locationOf(this);
         output += super.unconscious(map); //remove actor from the map he died at
         output += respawn(deathLocaton);
+
+        return output;
     }
 
     public String respawn(Location deathLocaton){
@@ -145,6 +150,7 @@ public class Player extends Actor {
             removeEnemies(map); //remove any actor that isn't a boss or player
         }
 
+        return "";
 
     }
 
@@ -157,11 +163,19 @@ public class Player extends Actor {
             for (int y: y_range){
 
                 Location currentLocation = new Location(map, x, y);
+                Ground currentGround = currentLocation.getGround();
                 if (map.isAnActorAt(currentLocation)){
                     Actor actor = map.getActorAt(currentLocation);
-                    if (!actor.hasCapability(EntityTypes.) || !actor.hasCapability(EntityTypes.PLAYABLE)){
+                    if (!actor.hasCapability(EntityTypes.BOSS) || !actor.hasCapability(EntityTypes.PLAYABLE)){
                         map.removeActor(actor);
+                    } else if (actor.hasCapability(EntityTypes.BOSS)){ //Reset boss health to maximum
+                        actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, actor.getAttributeMaximum(BaseActorAttributes.HEALTH));
                     }
+                }
+
+                //Lock all gates
+                if (currentGround.hasCapability(GroundTypes.GATE) && !currentGround.hasCapability(Status.LOCKED)){
+                    currentGround.addCapability(Status.LOCKED);
                 }
 
             }
