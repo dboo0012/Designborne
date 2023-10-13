@@ -64,6 +64,8 @@ public class Blacksmith extends Actor implements Monologue{
 
         String monologue1 = "Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. " +
                 "Use my creation to slay them and proceed further!";
+        String monologue2 = "Hey now, that’s a weapon from a foreign land that I have not seen for so long." +
+                "I can upgrade it for you if you wish.";
         if (abxervyer.isConscious()) {
             monologueOptions.add(monologue1);
         }
@@ -76,8 +78,9 @@ public class Blacksmith extends Actor implements Monologue{
         boolean hasGreatKnife = new HasItem(otherActor, new GreatKnife()).actorHasItem();
 
         if(hasGreatKnife){ // Actor has GreatKnife in inventory
-            monologueOptions.add("Hey now, that’s a weapon from a foreign land that I have not seen for so long." +
-                    "I can upgrade it for you if you wish.");
+            monologueOptions.add(monologue2);
+        } else {
+            monologueOptions.remove(monologue2);
         }
 
         if (otherActor.hasCapability(EntityTypes.PLAYABLE)){ // Only player can upgrade items
