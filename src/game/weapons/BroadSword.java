@@ -104,23 +104,34 @@ public class BroadSword extends TradeableWeaponItem implements Upgradable {
     }
 
     @Override
+    public void increaseDamageMultiplier(float damageMultiplier) {
+        this.damageMultiplier += damageMultiplier;
+    }
+
+    @Override
+    public void updateDamageMultiplier(float newDamageMultiplier) {
+        this.damageMultiplier = newDamageMultiplier;
+    }
+
+    @Override
     public int damage() {
-        int finalDamage = Math.round(INITIAL_DAMAGE * damageMultiplier);
+        int finalDamage = Math.round(INITIAL_DAMAGE * damageMultiplier); // Multiply the initial damage by damage multiplier
 
-        System.out.println("Damage multiplier: " + damageMultiplier);
-        System.out.println("Damage: " + damage);
-        System.out.println("Before adding: " + finalDamage);
+//        System.out.println("Damage multiplier: " + damageMultiplier);
+//        System.out.println("Damage: " + damage);
+//        System.out.println("Before adding: " + finalDamage);
 
-        // Add upgraded damage without multiplier
-//        if (this.damage > INITIAL_DAMAGE){
-//            finalDamage += (this.damage - INITIAL_DAMAGE);
-//        }
-        if (isUpgraded){
-            int change = damage - INITIAL_DAMAGE;
-            System.out.println("DAMAGE ADDED: " + change);
-            finalDamage += change;
+        // Add upgraded damage (non multiplied damage) to the final damage
+        if (this.damage > INITIAL_DAMAGE){
+            finalDamage += (this.damage - INITIAL_DAMAGE);
         }
-        System.out.println("After adding: " + finalDamage);
+//        if (isUpgraded){
+//            int change = damage - INITIAL_DAMAGE;
+//            finalDamage += change;
+//        }
+//        System.out.println("After adding: " + finalDamage);
+
+        // Set and return the final damage value
         this.damage = finalDamage;
         return finalDamage;
     }
@@ -136,7 +147,7 @@ public class BroadSword extends TradeableWeaponItem implements Upgradable {
 
     @Override
     public String upgrade() {
-        // Increase damage and set to isUpgraded
+        // Increase damage by the upgrade value and set to isUpgraded
         int upgradeValue = 10;
         this.damage += upgradeValue;
         isUpgraded = true;
