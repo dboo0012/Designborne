@@ -21,6 +21,7 @@ public class UpgradeAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
+        // Upgrade the weapon if the actor has enough balance
         if(actor.getBalance() >= upgradePrice) {
             actor.deductBalance(upgradePrice);
             String upgrade = upgradableItem.upgrade();
