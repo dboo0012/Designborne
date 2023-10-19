@@ -93,7 +93,7 @@ public class Application {
 
 
         // Player
-        Player player = new Player("The Abstracted One", '@', 150, 200); // [Revert] health/stamina
+        Player player = new Player("The Abstracted One", '@', 1500, 200); // [Revert] health/stamina
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
 
         // Gate
@@ -158,6 +158,7 @@ public class Application {
 //        player.addItemToInventory(new OldKey());
 //        abandonedGroundMap.at(29,6).addActor(new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl()));
 //        abandonedGroundMap.at(29, 6).setGround(new Gate(List.of(new Destination(burialGroundMap, "Burial Ground"), new Destination(ancientWoodsMap, "Ancient Woods"))));
+//        player.addBalance(1000);
 
 
         world.run();

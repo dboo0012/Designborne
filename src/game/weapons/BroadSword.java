@@ -132,7 +132,7 @@ public class BroadSword extends TradeableWeaponItem implements Upgradable {
 //        System.out.println("After adding: " + finalDamage);
 
         // Set and return the final damage value
-        this.damage = finalDamage;
+//        this.damage = finalDamage;
         return finalDamage;
     }
 

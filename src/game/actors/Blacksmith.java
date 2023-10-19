@@ -38,7 +38,7 @@ public class Blacksmith extends Actor implements Monologue{
             Item item = otherActor.getItemInventory().get(i); // Get Item
 
             if (item.hasCapability(Ability.UPGRADE)){ // IF that item is tradeable
-                new Display().println("Upgradable item found! - " + item); // TESTING
+//                new Display().println("Upgradable item found! - " + item); // TESTING
                 Upgradable upgradableItem = ((Upgradable) item); //[Code Smell (Downcasting)]
                 int price = upgradableItem.upgradePrice();
                 boolean singleUpgrade = upgradableItem.singleUpgrade();
