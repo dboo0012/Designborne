@@ -83,7 +83,7 @@ public class Blacksmith extends Actor implements Monologue{
         if (otherActor.hasCapability(EntityTypes.PLAYABLE)){ // Only player can upgrade items
             actions.add(getItems(otherActor)); // Add the items that the player can upgrade
             actions.add(new MonologueAction(this, monologueOptions, abxervyer));
-            System.out.println(monologueOptions);
+//            System.out.println(monologueOptions);
         }
 
         return actions;
