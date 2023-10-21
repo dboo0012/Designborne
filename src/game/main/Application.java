@@ -1,24 +1,18 @@
 package game.main;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.*;
-import game.actors.behaviours.AttackBehaviour;
 import game.grounds.Gate;
 import game.grounds.Graveyard;
-import game.actions.FocusAction;
 import game.grounds.*;
 import game.grounds.Void;
 import game.items.Bloodberry;
-import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
+import game.actors.Respawner;
 import game.weapons.BroadSword;
-import game.weather.WeatherControl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,10 +92,12 @@ public class Application {
         overgrownSanctuary.at(32,5).setGround(new Bush(overgrownSanctuary, new LivingBranch()));
         overgrownSanctuary.at(32,6).setGround(new Bush(overgrownSanctuary, new LivingBranch()));
 
-
         // Player
-        Player player = new Player("The Abstracted One", '@', 1, 200, activeGameMaps); // [Revert] health
-//        world.addPlayer(player, overgrownSanctuary.at(29, 5));
+        Player player = new Player("The Abstracted One", '@', 1, 200); // [Revert] health
+        world.addPlayer(player, abandonedGroundMap.at(29, 5));
+
+        //Respawner
+        player.setRespawner(new Respawner(player, activeGameMaps));
 
         // Gate
         abandonedGroundMap.at(22, 3).setGround(new Gate(new Destination(burialGroundMap, "Burial Ground",22, 6))); // test: 12, 9, actual: 22, 3
@@ -166,7 +162,7 @@ public class Application {
 //        abandonedGroundMap.at(29, 6).setGround(new Gate(List.of(new Destination(burialGroundMap, "Burial Ground"), new Destination(ancientWoodsMap, "Ancient Woods"))));
 
         //Testing Respawn
-        world.addPlayer(player, abandonedGroundMap.at(29,5));
+//        world.addPlayer(player, abandonedGroundMap.at(29,5));
             //Testing max attribute after respawn
 //            player.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, 10);
 //            player.modifyAttributeMaximum(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, 10);
