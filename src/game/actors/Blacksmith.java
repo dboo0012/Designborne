@@ -50,10 +50,14 @@ public class Blacksmith extends Actor implements Monologue{
     }
 
     public void monologue(){
-        monologueOptions = new ArrayList<String>();
         monologueOptions.add("I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.");
         monologueOptions.add("It’s dangerous to go alone. Take my creation with you on your adventure!");
         monologueOptions.add("Ah, it’s you. Let’s get back to make your weapons stronger.");
+    }
+
+    @Override
+    public ArrayList<String> MonologueOptions() {
+        return this.monologueOptions = new ArrayList<String>();
     }
 
     @Override
