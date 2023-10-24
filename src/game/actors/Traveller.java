@@ -40,7 +40,7 @@ public class Traveller extends Trader implements Monologue{
 
     @Override
     public void monologue() {
-        monologueOptions = new ArrayList<String>();
+//        monologueOptions = new ArrayList<String>();
         monologueOptions.add("Of course, I will never give you up, valuable customer!");
         monologueOptions.add("I promise I will never let you down with the quality of the items that I sell.");
         monologueOptions.add("You can always find me here. I'm never gonna run around and desert you, dear customer!");
@@ -50,9 +50,15 @@ public class Traveller extends Trader implements Monologue{
     }
 
     @Override
+    public ArrayList<String> monologueOptions() {
+        return this.monologueOptions = new ArrayList<String>();
+    }
+
+    @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
 
+        monologueOptions();
         monologue();
 
         boolean bossAlive = abxervyer.isConscious();
@@ -83,7 +89,7 @@ public class Traveller extends Trader implements Monologue{
         }
 
         if (otherActor.hasCapability(EntityTypes.PLAYABLE)){
-            actions.add(new MonologueAction(this, monologueOptions, abxervyer));
+            actions.add(new MonologueAction(this, monologueOptions));
             System.out.println(monologueOptions.size());
             System.out.println(monologueOptions);
         }

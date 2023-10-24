@@ -17,10 +17,9 @@ public class MonologueAction extends Action {
     private Actor monologueActor;
     private ArrayList monologueOptions;
     private Abxervyer abxervyer;
-    public MonologueAction(Actor monologueActor, ArrayList monologueOptions, Abxervyer abxervyer) {
+    public MonologueAction(Actor monologueActor, ArrayList monologueOptions) {
         this.monologueActor = monologueActor;
         this.monologueOptions = monologueOptions;
-        this.abxervyer = abxervyer;
     }
 
     public ArrayList<String> getMonologueOptions() {

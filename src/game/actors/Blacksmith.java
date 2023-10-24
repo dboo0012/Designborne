@@ -50,25 +50,32 @@ public class Blacksmith extends Actor implements Monologue{
     }
 
     public void monologue(){
-        monologueOptions = new ArrayList<String>();
         monologueOptions.add("I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.");
         monologueOptions.add("It’s dangerous to go alone. Take my creation with you on your adventure!");
         monologueOptions.add("Ah, it’s you. Let’s get back to make your weapons stronger.");
     }
 
     @Override
+    public ArrayList<String> monologueOptions() {
+        return this.monologueOptions = new ArrayList<String>();
+    }
+
+    @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
 
+        monologueOptions();
         monologue();
+
+        boolean bossAlive = abxervyer.isConscious();
 
         String monologue1 = "Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. " +
                 "Use my creation to slay them and proceed further!";
-        if (abxervyer.isConscious()) {
+        if (bossAlive) {
             monologueOptions.add(monologue1);
         }
 
-        if (!abxervyer.isConscious()){
+        if (!bossAlive){
             monologueOptions.remove(monologue1);
             monologueOptions.add("Somebody once told me that a sacred tree rules the land beyond the ancient woods until this day.");
         }
@@ -82,7 +89,7 @@ public class Blacksmith extends Actor implements Monologue{
 
         if (otherActor.hasCapability(EntityTypes.PLAYABLE)){ // Only player can upgrade items
             actions.add(getItems(otherActor)); // Add the items that the player can upgrade
-            actions.add(new MonologueAction(this, monologueOptions, abxervyer));
+            actions.add(new MonologueAction(this, monologueOptions));
 //            System.out.println(monologueOptions);
         }
 
