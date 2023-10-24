@@ -50,7 +50,7 @@ public class Traveller extends Trader implements Monologue{
     }
 
     @Override
-    public ArrayList<String> MonologueOptions() {
+    public ArrayList<String> monologueOptions() {
         return this.monologueOptions = new ArrayList<String>();
     }
 
@@ -58,6 +58,7 @@ public class Traveller extends Trader implements Monologue{
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
 
+        monologueOptions();
         monologue();
 
         boolean bossAlive = abxervyer.isConscious();
