@@ -73,8 +73,8 @@ public class Application {
         ancientWoodsMap.at(9, 2).setGround(new EmptyHuts(ancientWoodsMap, new ForestKeeper()));
         bossMap.at(30, 1).setGround(new EmptyHuts(bossMap, new ForestKeeper()));
         bossMap.at(32, 2).setGround(new EmptyHuts(bossMap, new ForestKeeper()));
-        overgrownSanctuary.at(44,1).setGround(new EmptyHuts(overgrownSanctuary, new ForestKeeper()));
-        overgrownSanctuary.at(45,1).setGround(new EmptyHuts(overgrownSanctuary, new ForestKeeper()));
+        overgrownSanctuary.at(44,1).setGround(new EmptyHuts(overgrownSanctuary, new EldentreeGuardian()));
+        overgrownSanctuary.at(45,1).setGround(new EmptyHuts(overgrownSanctuary, new EldentreeGuardian()));
         overgrownSanctuary.at(44,2).setGround(new EmptyHuts(overgrownSanctuary, new EldentreeGuardian()));
         overgrownSanctuary.at(45,2).setGround(new EmptyHuts(overgrownSanctuary, new EldentreeGuardian()));
 
@@ -86,8 +86,8 @@ public class Application {
         bossMap.at(3, 10).setGround(new Bush(bossMap, new RedWolf()));
         bossMap.at(4, 10).setGround(new Bush(bossMap, new RedWolf()));
         bossMap.at(5, 10).setGround(new Bush(bossMap, new RedWolf()));
-        overgrownSanctuary.at(33,5).setGround(new Bush(overgrownSanctuary, new RedWolf()));
-        overgrownSanctuary.at(33,6).setGround(new Bush(overgrownSanctuary, new RedWolf()));
+        overgrownSanctuary.at(33,5).setGround(new Bush(overgrownSanctuary, new LivingBranch()));
+        overgrownSanctuary.at(33,6).setGround(new Bush(overgrownSanctuary, new LivingBranch()));
         overgrownSanctuary.at(32,5).setGround(new Bush(overgrownSanctuary, new LivingBranch()));
         overgrownSanctuary.at(32,6).setGround(new Bush(overgrownSanctuary, new LivingBranch()));
 
