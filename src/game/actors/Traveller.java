@@ -90,8 +90,6 @@ public class Traveller extends Trader implements Monologue{
 
         if (otherActor.hasCapability(EntityTypes.PLAYABLE)){
             actions.add(new MonologueAction(this, monologueOptions));
-            System.out.println(monologueOptions.size());
-            System.out.println(monologueOptions);
         }
 
         return actions;

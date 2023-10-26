@@ -38,7 +38,6 @@ public class Blacksmith extends Actor implements Monologue{
             Item item = otherActor.getItemInventory().get(i); // Get Item
 
             if (item.hasCapability(Ability.UPGRADE)){ // IF that item is tradeable
-//                new Display().println("Upgradable item found! - " + item); // TESTING
                 Upgradable upgradableItem = ((Upgradable) item); //[Code Smell (Downcasting)]
                 int price = upgradableItem.upgradePrice();
                 boolean singleUpgrade = upgradableItem.singleUpgrade();
@@ -75,22 +74,24 @@ public class Blacksmith extends Actor implements Monologue{
             monologueOptions.add(monologue1);
         }
 
+        String monologue2 = "Somebody once told me that a sacred tree rules the land beyond the ancient woods until this day.";
         if (!bossAlive){
             monologueOptions.remove(monologue1);
-            monologueOptions.add("Somebody once told me that a sacred tree rules the land beyond the ancient woods until this day.");
+            monologueOptions.add(monologue2);
         }
 
         boolean hasGreatKnife = new HasItem(otherActor, new GreatKnife()).actorHasItem();
 
+        String monologue3 = "Hey now, that’s a weapon from a foreign land that I have not seen for so long. I can upgrade it for you if you wish.";
         if(hasGreatKnife){ // Actor has GreatKnife in inventory
-            monologueOptions.add("Hey now, that’s a weapon from a foreign land that I have not seen for so long." +
-                    "I can upgrade it for you if you wish.");
+            monologueOptions.add(monologue3);
+        } else{
+            monologueOptions.remove(monologue3);
         }
 
         if (otherActor.hasCapability(EntityTypes.PLAYABLE)){ // Only player can upgrade items
             actions.add(getItems(otherActor)); // Add the items that the player can upgrade
             actions.add(new MonologueAction(this, monologueOptions));
-//            System.out.println(monologueOptions);
         }
 
         return actions;
