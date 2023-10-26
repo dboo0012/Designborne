@@ -50,17 +50,12 @@ public class Traveller extends Trader implements Monologue{
     }
 
     @Override
-    public ArrayList<String> monologueOptions() {
+    public ArrayList<String> setMonologueList() {
         return this.monologueOptions = new ArrayList<String>();
     }
 
     @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = super.allowableActions(otherActor, direction, map);
-
-        monologueOptions();
-        monologue();
-
+    public void monologueConditions(Actor otherActor) {
         boolean bossAlive = abxervyer.isConscious();
 
         // Boss alive
@@ -87,6 +82,15 @@ public class Traveller extends Trader implements Monologue{
         } else {
             monologueOptions.remove(monologue3);
         }
+    }
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = super.allowableActions(otherActor, direction, map);
+
+        setMonologueList();
+        monologue();
+        monologueConditions(otherActor);
 
         if (otherActor.hasCapability(EntityTypes.PLAYABLE)){
             actions.add(new MonologueAction(this, monologueOptions));

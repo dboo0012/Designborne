@@ -55,17 +55,12 @@ public class Blacksmith extends Actor implements Monologue{
     }
 
     @Override
-    public ArrayList<String> monologueOptions() {
+    public ArrayList<String> setMonologueList() {
         return this.monologueOptions = new ArrayList<String>();
     }
 
     @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = super.allowableActions(otherActor, direction, map);
-
-        monologueOptions();
-        monologue();
-
+    public void monologueConditions(Actor otherActor){
         boolean bossAlive = abxervyer.isConscious();
 
         String monologue1 = "Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. " +
@@ -88,6 +83,15 @@ public class Blacksmith extends Actor implements Monologue{
         } else{
             monologueOptions.remove(monologue3);
         }
+    }
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = super.allowableActions(otherActor, direction, map);
+
+        setMonologueList();
+        monologue();
+        monologueConditions(otherActor);
 
         if (otherActor.hasCapability(EntityTypes.PLAYABLE)){ // Only player can upgrade items
             actions.add(getItems(otherActor)); // Add the items that the player can upgrade
