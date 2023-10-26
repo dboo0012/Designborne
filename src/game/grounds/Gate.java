@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * A class that represents a gate.
  *
- * @author Daryl, Jerry
+ * @author Daryl, Jerry, Meekal
  */
 public class Gate extends Ground {
     private List<Destination> destinationList = new ArrayList<>();

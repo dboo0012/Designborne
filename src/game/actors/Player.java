@@ -25,7 +25,7 @@ import java.util.ArrayList;
  * Modified by: Daryl, Meekal, Jerry
  *
  */
-public class Player extends Actor {
+public class Player extends Actor implements Respawnable {
     private int maxStamina;
     private int currentStamina;
     private Respawner respawner;
@@ -127,7 +127,7 @@ public class Player extends Actor {
         Location deathLocation = map.locationOf(this);
 
         String output = super.unconscious(map); //remove actor from the map he died at
-        respawner.respawn(deathLocation);
+        respawnActor(deathLocation);
         dropRunes(deathLocation);
 
         FancyMessageDisplay.createString(FancyMessage.RESPAWN);
@@ -148,7 +148,7 @@ public class Player extends Actor {
         Location deathLocation = map.locationOf(this);
 
         String output = super.unconscious(map); //remove actor from the map he died at
-        respawner.respawn(deathLocation);
+        respawnActor(deathLocation);
         dropRunes(deathLocation);
 
         FancyMessageDisplay.createString(FancyMessage.RESPAWN);
@@ -164,9 +164,8 @@ public class Player extends Actor {
     }
 
 
-
-
-
-
-
+    @Override
+    public void respawnActor(Location deathLocation) {
+        respawner.respawn(deathLocation);
+    }
 }

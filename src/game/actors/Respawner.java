@@ -12,6 +12,7 @@ import game.attributes.EntityTypes;
 import game.attributes.GroundTypes;
 import game.attributes.ItemTypes;
 import game.attributes.Status;
+import game.grounds.Destination;
 import game.items.Runes;
 
 import java.util.ArrayList;
@@ -21,10 +22,12 @@ public class Respawner {
 
     private Actor player;
     private List<GameMap> activeGameMaps;
+    private Destination respawnPoint;
 
-    public Respawner(Actor player, List<GameMap> activeGameMaps){
+    public Respawner(Actor player, List<GameMap> activeGameMaps, Destination respawnPoint){
         this.player = player;
         this.activeGameMaps = activeGameMaps;
+        this.respawnPoint = respawnPoint;
 
     }
 
@@ -32,7 +35,11 @@ public class Respawner {
         //Respawn
         player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, player.getAttributeMaximum(BaseActorAttributes.HEALTH));
         player.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.UPDATE, player.getAttributeMaximum(BaseActorAttributes.STAMINA));
-        activeGameMaps.get(0).at(29, 5).addActor(player); //add actor back to spawn point
+//        activeGameMaps.get(0).at(29, 5).addActor(player); //add actor back to spawn point
+        GameMap respawn_map = respawnPoint.getDestinationMap();
+        int respawn_x = respawnPoint.getX();
+        int respawn_y =  respawnPoint.getY();
+        respawn_map.at(respawn_x, respawn_y).addActor(player);
 
         //Remove enemies except boss, remove runes, lock gates
         for (GameMap map: activeGameMaps){
