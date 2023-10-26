@@ -38,9 +38,11 @@ public class Traveller extends Trader implements Monologue{
         addItemToInventory(new GreatKnife().setPrice(300));
     }
 
+    /**
+     * Adds the monologues that does not require any conditions.
+     */
     @Override
     public void monologue() {
-//        monologueOptions = new ArrayList<String>();
         monologueOptions.add("Of course, I will never give you up, valuable customer!");
         monologueOptions.add("I promise I will never let you down with the quality of the items that I sell.");
         monologueOptions.add("You can always find me here. I'm never gonna run around and desert you, dear customer!");
@@ -49,11 +51,19 @@ public class Traveller extends Trader implements Monologue{
         monologueOptions.add("Don't worry, I’m never gonna tell a lie and hurt you.");
     }
 
+    /**
+     * Initiates the list of monologues.
+     * @return the list of monologues
+     */
     @Override
     public ArrayList<String> setMonologueList() {
         return this.monologueOptions = new ArrayList<String>();
     }
 
+    /**
+     * Checks and add/remove the monologues that require conditions.
+     * @param otherActor the actor that the monologue is directed to
+     */
     @Override
     public void monologueConditions(Actor otherActor) {
         boolean bossAlive = abxervyer.isConscious();

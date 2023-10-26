@@ -4,8 +4,26 @@ import edu.monash.fit2099.engine.actors.Actor;
 
 import java.util.ArrayList;
 
+/**
+ * Interface that allows an actor to have a monologue conversation.
+ *
+ * @author Daryl
+ */
 public interface Monologue {
-    void monologue(); // Stores all the monologue without conditions
+    /**
+     * Stores all the monologue without conditions
+     */
+    void monologue();
+
+    /**
+     * Initializes the monologue list as an Arraylist of Strings
+     * @return the monologue list
+     */
     ArrayList<String> setMonologueList();
-    void monologueConditions(Actor otherActor); // Stores all the monologue with conditions
+
+    /**
+     * Stores all the monologue with conditions, as well as the conditions
+     * @param otherActor the actor that the monologue is directed to
+     */
+    void monologueConditions(Actor otherActor);
 }

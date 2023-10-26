@@ -14,7 +14,7 @@ public enum EntityTypes {
      */
     TRADER,
     /**
-     * Indicates that the actor is a boss.
+     * Indicates that the actor is immune to the void.
      */
     VOID,
 }

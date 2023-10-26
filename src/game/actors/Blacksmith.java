@@ -18,6 +18,9 @@ import game.weapons.GreatKnife;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 
+/**
+ * Class representing the Blacksmith.
+ */
 public class Blacksmith extends Actor implements Monologue{
     private ArrayList<String> monologueOptions;
     private Abxervyer abxervyer;
@@ -31,6 +34,11 @@ public class Blacksmith extends Actor implements Monologue{
         return new DoNothingAction();
     }
 
+    /**
+     * Returns a list of Upgrade Actions for all the items that can be upgraded in the actor's inventory.
+     * @param otherActor The actor that is upgrading the items
+     * @return The list of actions to upgrade for all the items in the otherActor's inventory
+     */
     public ActionList getItems(Actor otherActor){
         ActionList actions = new ActionList(); //List of actions
 
@@ -48,17 +56,27 @@ public class Blacksmith extends Actor implements Monologue{
         return actions;
     }
 
+    /**
+     * Adds the monologues that does not require any conditions.
+     */
     public void monologue(){
         monologueOptions.add("I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.");
         monologueOptions.add("It’s dangerous to go alone. Take my creation with you on your adventure!");
         monologueOptions.add("Ah, it’s you. Let’s get back to make your weapons stronger.");
     }
 
+    /**
+     * Initiates the list of monologues.
+     */
     @Override
     public ArrayList<String> setMonologueList() {
         return this.monologueOptions = new ArrayList<String>();
     }
 
+    /**
+     * Checks and add/remove the monologues that require conditions.
+     * @param otherActor the actor that the monologue is directed to
+     */
     @Override
     public void monologueConditions(Actor otherActor){
         boolean bossAlive = abxervyer.isConscious();

@@ -19,11 +19,24 @@ public class FocusAction extends TickableAction {
     private BroadSword broadSword;
     private boolean focusActive = false;
 
+    /**
+     * Constructor.
+     * @param broadSword The broadsword weapon item.
+     * @param defDmgMultiplier The default damage multiplier.
+     * @param defHitRate     The default hit rate.
+     * @param maxFocusCounter The maximum counter for the focus skill.
+     */
     public FocusAction(BroadSword broadSword, float defDmgMultiplier, int defHitRate, int maxFocusCounter) {
         super(broadSword, "Focus", defDmgMultiplier, defHitRate, maxFocusCounter); // counter starts at 0 (not activated
         this.broadSword = broadSword;
     }
 
+    /**
+     * Activates the focus skill.
+     * @param actor the actor performing the action
+     * @param map   the game map where the action is executed
+     * @return
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         double requiredStamina = actor.getAttributeMaximum(BaseActorAttributes.STAMINA)*0.2; // 20% of maximum stamina
@@ -55,6 +68,9 @@ public class FocusAction extends TickableAction {
         return actor + " activates the skill of Focus on " + broadSword.toString();
     }
 
+    /**
+     * Resets the broadsword's stats to default.
+     */
     @Override
     public void reset() {
         deactivate();

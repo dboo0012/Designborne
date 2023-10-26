@@ -109,6 +109,10 @@ public class RefreshingFlask extends TradeableItem implements Upgradable{
         return scamType;
     }
 
+    /**
+     * Upgrade the refreshing flask to increase the amount of stamina it can regenerate.
+     * @return a string describing the upgrade
+     */
     @Override
     public String upgrade() {
         float upgradePercentage = 1.0f;
@@ -116,11 +120,19 @@ public class RefreshingFlask extends TradeableItem implements Upgradable{
         return String.format("%s has been upgraded to regenerate %d STAMINA.", this, (int) (maxStamina * upgradePercentage));
     }
 
+    /**
+     * The price of upgrading the refreshing flask.
+     * @return the price of upgrading the refreshing flask
+     */
     @Override
     public int upgradePrice() {
         return 175;
     }
 
+    /**
+     * Determine if the refreshing flask is single upgrade.
+     * @return true if the refreshing flask is single upgrade, false otherwise
+     */
     @Override
     public boolean singleUpgrade() {
         return true;

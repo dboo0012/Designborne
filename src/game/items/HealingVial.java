@@ -96,6 +96,10 @@ public class HealingVial extends TradeableItem implements Upgradable{
         return (int) (getPrice() * affectedPercentage);
     }
 
+    /**
+     * Upgrade the Healing Vial to heal more health.
+     * @return a string describing the upgrade
+     */
     @Override
     public String upgrade() {
         float upgradePercentage = 0.8f;
@@ -103,11 +107,19 @@ public class HealingVial extends TradeableItem implements Upgradable{
         return String.format("%s has been upgraded to heal %d HEALTH.", this, (int) (maxHealth * upgradePercentage));
     }
 
+    /**
+     * Returns the price of upgrading the Healing Vial.
+     * @return the price of upgrading the Healing Vial
+     */
     @Override
     public int upgradePrice() {
         return 250;
     }
 
+    /**
+     * Determine if the Healing Vial is single upgrade.
+     * @return true if the Healing Vial is single upgrade
+     */
     @Override
     public boolean singleUpgrade() {
         return true;

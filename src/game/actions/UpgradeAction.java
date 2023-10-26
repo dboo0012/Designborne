@@ -7,11 +7,24 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.attributes.Ability;
 import game.items.Upgradable;
 
+/**
+ * Action that allows an actor to upgrade an item.
+ *
+ * @author Daryl
+ */
 public class UpgradeAction extends Action {
     private Item item;
     private boolean singleUpgrade;
     private Upgradable upgradableItem;
     private int upgradePrice;
+
+    /**
+     * Constructor.
+     * @param item the item to be upgraded
+     * @param upgradableItem    the upgradable item
+     * @param upgradePrice the upgrade price
+     * @param singleUpgrade {@code true} if the item can only be upgraded once, {@code false} otherwise.
+     */
     public UpgradeAction(Item item, Upgradable upgradableItem, int upgradePrice, boolean singleUpgrade) {
         this.item = item;
         this.upgradableItem = upgradableItem;

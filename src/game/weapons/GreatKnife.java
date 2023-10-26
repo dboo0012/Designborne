@@ -103,6 +103,10 @@ public class GreatKnife extends TradeableWeaponItem implements Upgradable {
         return new GreatKnife();
     }
 
+    /**
+     * Upgrade the Great Knife to increase hit rate.
+     * @return a string describing the upgrade
+     */
     @Override
     public String upgrade() {
         // Increase hit rate
@@ -113,11 +117,19 @@ public class GreatKnife extends TradeableWeaponItem implements Upgradable {
         return String.format("%s has been upgraded to +%d hit rate, total dealing %d HIT RATE.", this, upgradeValue,this.hitRate);
     }
 
+    /**
+     * The price of upgrading the Great Knife.
+     * @return  the price of upgrading the Great Knife
+     */
     @Override
     public int upgradePrice() {
         return 2000;
     }
 
+    /**
+     * Determines if the Great Knife can only be upgraded once.
+     * @return true if the Great Knife can only be upgraded once, false otherwise.
+     */
     @Override
     public boolean singleUpgrade() {
         return false;
