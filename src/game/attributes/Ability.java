@@ -29,6 +29,8 @@ public enum Ability {
      * Can upgrade items
      */
     UPGRADE,
-
+    /**
+     * Has ability to walk on void
+     */
     VOID_IMMUNITY
 }
