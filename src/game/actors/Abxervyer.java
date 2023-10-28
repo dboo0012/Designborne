@@ -38,7 +38,7 @@ public class Abxervyer extends EnemyActor  {
      * @param weatherControl The WeatherControl object to manage weather conditions.
      */
     public Abxervyer(Gate deathGate, WeatherControl weatherControl) {
-        super("Abxervyer", 'Y', 200, 5000);
+        super("Abxervyer", 'Y', 2000, 5000);
         addCapability(EntityTypes.BOSS);
         addCapability(Ability.VOID_IMMUNITY);
         this.deathGate = deathGate;
