@@ -9,6 +9,8 @@ import java.util.Random;
 
 /**
  * Action for attacking another Actor.
+ *
+ * @author Daryl
  */
 public class AttackAction extends Action {
 

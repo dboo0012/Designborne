@@ -10,6 +10,8 @@ import game.items.Tradeable;
 
 /**
  * A class representing the action of selling an item in the game.
+ *
+ * @author Meekal
  */
 public class SellAction extends Action {
 

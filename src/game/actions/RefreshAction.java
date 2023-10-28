@@ -9,6 +9,8 @@ import game.items.RefreshingFlask;
 
 /**
  * An action to recover Player's stamina.
+ *
+ * @author Daryl
  */
 public class RefreshAction extends Action {
     private final RefreshingFlask refreshingFlask;

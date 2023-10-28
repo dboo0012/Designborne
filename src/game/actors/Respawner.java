@@ -21,6 +21,8 @@ import java.util.List;
 
 /**
  * The Respawner class is responsible for handling player respawning and map reset operations.
+ *
+ * @author Meekal
  */
 public class Respawner {
     private Actor player;
