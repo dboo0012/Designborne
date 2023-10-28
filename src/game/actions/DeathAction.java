@@ -8,6 +8,8 @@ import game.main.FancyMessage;
 
 /**
  * Action that is performed when Player dies.
+ *
+ * @author Daryl
  */
 public class DeathAction extends Action{
     /**

@@ -20,10 +20,17 @@ import java.util.ArrayList;
 
 /**
  * Class representing the Blacksmith.
+ *
+ * @author Daryl
  */
 public class Blacksmith extends Actor implements Monologue{
     private ArrayList<String> monologueOptions;
     private Abxervyer abxervyer;
+
+    /**
+     * Constructor.
+     * @param abxervyer The Abxervyer boss
+     */
     public Blacksmith(Abxervyer abxervyer) {
         super("Blacksmith", 'B', 1);
         this.abxervyer = abxervyer;
@@ -103,6 +110,13 @@ public class Blacksmith extends Actor implements Monologue{
         }
     }
 
+    /**
+     * Returns a list of actions that the other Actor can perform to this Actor.
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return a list of actions that the other Actor can perform to this Actor
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);

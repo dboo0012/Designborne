@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.positions.Location;
 /**
  * The Respawnable interface defines the contract for objects that can be respawned in a game.
  * Any class that implements this interface should provide a way to respawn an actor at a specific location.
+ *
+ * @author Meekal
  */
 public interface Respawnable {
 
