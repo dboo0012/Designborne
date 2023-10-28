@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.actions.MonologueAction;
 import game.actors.*;
 import game.actors.behaviours.AttackBehaviour;
 import game.grounds.Gate;
@@ -16,8 +15,6 @@ import game.items.Bloodberry;
 import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
-import game.weapons.GiantHammer;
-import game.weapons.GreatKnife;
 import game.weather.WeatherControl;
 
 import java.util.ArrayList;
@@ -40,20 +37,27 @@ public class Application {
                 new Wall(), new Floor(), new Puddle(), new Void());
 
         //Maps
+        List<GameMap> activeGameMaps = new ArrayList<>();
+
         GameMap abandonedGroundMap = new GameMap(groundFactory, Maps.ABANDONED_VILLAGE);
         world.addGameMap(abandonedGroundMap);
+        activeGameMaps.add(abandonedGroundMap);
 
         GameMap burialGroundMap = new GameMap(groundFactory, Maps.BURIAL_GROUND);
         world.addGameMap(burialGroundMap);
+        activeGameMaps.add(burialGroundMap);
 
         GameMap ancientWoodsMap = new GameMap(groundFactory, Maps.ANCIENT_WOODS);
         world.addGameMap(ancientWoodsMap);
+        activeGameMaps.add(ancientWoodsMap);
 
         GameMap bossMap = new GameMap(groundFactory, Maps.BOSS_MAP);
         world.addGameMap(bossMap);
+        activeGameMaps.add(bossMap);
 
         GameMap overgrownSanctuary = new GameMap(groundFactory, Maps.OVERGROWN_SANCTUARY);
         world.addGameMap(overgrownSanctuary);
+        activeGameMaps.add(overgrownSanctuary);
 
         FancyMessageDisplay.createString(FancyMessage.TITLE);
 
@@ -93,8 +97,11 @@ public class Application {
 
 
         // Player
-        Player player = new Player("The Abstracted One", '@', 1500, 200); // [Revert] health/stamina
+        Player player = new Player("The Abstracted One", '@', 150, 200); // [Revert] health
         world.addPlayer(player, abandonedGroundMap.at(29, 5));
+
+        //Respawner
+        player.setRespawner(new Respawner(player, activeGameMaps, new Destination(abandonedGroundMap, "Abandoned Ground", 29, 5)));
 
         // Gate
         abandonedGroundMap.at(22, 3).setGround(new Gate(new Destination(burialGroundMap, "Burial Ground",22, 6))); // test: 12, 9, actual: 22, 3
@@ -115,8 +122,9 @@ public class Application {
         burialGroundMap.at(28, 5).addItem(new Bloodberry());
 
         //Boss
-        Abxervyer abxervyer = new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl());
-        bossMap.at(15, 1).addActor(abxervyer);
+        Gate bossDeathGate = new Gate(List.of(new Destination(ancientWoodsMap, "Ancient Woods", 20, 3),
+                new Destination(overgrownSanctuary, "Overgrown Sanctuary", 5, 1)));
+        bossMap.at(15, 1).addActor(new Abxervyer(bossDeathGate, new WeatherControl()));
 
         //Traveller
         ancientWoodsMap.at(45, 8).addActor(new Traveller(abxervyer)); // 45, 8, ancient woods
@@ -159,6 +167,35 @@ public class Application {
 //        abandonedGroundMap.at(29,6).addActor(new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl()));
 //        abandonedGroundMap.at(29, 6).setGround(new Gate(List.of(new Destination(burialGroundMap, "Burial Ground"), new Destination(ancientWoodsMap, "Ancient Woods"))));
 //        player.addBalance(1000);
+
+//        Testing Respawn
+//        world.addPlayer(player, abandonedGroundMap.at(29,5));
+//            Testing max attribute after respawn
+//            player.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, 10);
+//            player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, 1);
+//            player.modifyAttributeMaximum(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, 10);
+//            player.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.UPDATE, 1);
+//            abandonedGroundMap.at(29, 6).addActor(new WanderingUndead());
+//            player.unconscious(abandonedGroundMap);
+            //Testing rune drop
+//            player.addBalance(1000);
+//            player.unconscious(abandonedGroundMap); //Should have 1000 runes to pick up
+//            player.unconscious(abandonedGroundMap); //Should have no runes to pick up
+            //Testing boss respawn
+//            Actor boss = new Abxervyer(ancientWoodsMap, overgrownSanctuary, new WeatherControl());
+//            abandonedGroundMap.at(29, 6).addActor(boss);
+//            player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, 1);
+//            player.unconscious(abandonedGroundMap);
+
+            //Testing locked gates
+//            player.addItemToInventory(new OldKey());
+//            abandonedGroundMap.at(29, 6).setGround(new Gate(new Destination(burialGroundMap, "Burial Ground")));
+
+        //Testing Abxervyer's gate field
+//        player.addItemToInventory(new OldKey());
+//        Actor boss = new Abxervyer(bossDeathGate, new WeatherControl());
+//        abandonedGroundMap.at(29, 6).addActor(boss);
+//        boss.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, 1);
 
 
         world.run();

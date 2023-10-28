@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.behaviours.FollowBehaviour;
+import game.attributes.Ability;
 import game.attributes.EntityTypes;
 import game.grounds.Gate;
 import game.main.FancyMessage;
@@ -27,21 +28,20 @@ import static game.weather.WeatherControl.getCurrentWeather;
  */
 public class Abxervyer extends EnemyActor  {
     private WeatherControl weatherControl;
-    private GameMap ancientWoodsMap;
-    private GameMap overgrownSanctuaryMap;
+    private Gate deathGate;
     private final int FOLLOW_BEHAVIOUR_ID = 997;
 
     /**
      * Constructor for Abxervyer.
      *
-     * @param ancientWoodsMap   The destination GameMap where Abxervyer spawns gates.
+     * @param deathGate The gate the boss drops after being killed
      * @param weatherControl The WeatherControl object to manage weather conditions.
      */
-    public Abxervyer(GameMap ancientWoodsMap, GameMap overgrownSanctuaryMap, WeatherControl weatherControl) {
-        super("Abxervyer", 'Y', 2000, 5000);
-        addCapability(EntityTypes.VOID);
-        this.ancientWoodsMap = ancientWoodsMap;
-        this.overgrownSanctuaryMap = overgrownSanctuaryMap;
+    public Abxervyer(Gate deathGate, WeatherControl weatherControl) {
+        super("Abxervyer", 'Y', 200, 5000);
+        addCapability(EntityTypes.BOSS);
+        addCapability(Ability.VOID_IMMUNITY);
+        this.deathGate = deathGate;
         this.weatherControl = weatherControl;
     }
 
@@ -66,8 +66,7 @@ public class Abxervyer extends EnemyActor  {
     public String unconscious(Actor actor, GameMap map) {
         weatherControl.setCurrentWeather(Weather.DEFAULT);
         Location currentLocation = map.locationOf(this);
-        currentLocation.setGround(new Gate(List.of(new Destination(ancientWoodsMap, "Ancient Woods", 20, 3),
-                new Destination(overgrownSanctuaryMap, "Overgrown Sanctuary", 5, 1))));
+        currentLocation.setGround(deathGate);
         FancyMessageDisplay.createString(FancyMessage.ABEXERVYER_SLAIN);
         return "Abxervyer has been slain!"  + " " + super.unconscious(actor, map);
     }

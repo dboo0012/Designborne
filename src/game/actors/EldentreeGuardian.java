@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.behaviours.FollowBehaviour;
+import game.attributes.Ability;
 import game.attributes.EntityTypes;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
@@ -28,7 +29,7 @@ public class EldentreeGuardian extends EnemyActor implements ActorSpawn {
         super("Eldentree Guardian", 'e', 250, 250);
         addDroppableItem(new HealingVial(), 0.25); //0.2
         addDroppableItem(new RefreshingFlask(), 0.15);
-        addCapability(EntityTypes.VOID);
+        addCapability(Ability.VOID_IMMUNITY);
     }
 
     /**

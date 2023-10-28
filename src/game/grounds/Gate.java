@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.TravelAction;
 import game.actions.UnlockAction;
 import game.attributes.Ability;
+import game.attributes.GroundTypes;
 import game.attributes.Status;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * A class that represents a gate.
  *
- * @author Daryl, Jerry
+ * @author Daryl, Jerry, Meekal
  */
 public class Gate extends Ground {
     private List<Destination> destinationList = new ArrayList<>();
@@ -29,12 +30,14 @@ public class Gate extends Ground {
         super('=');
         destinationList.add(destination);
         addCapability(Status.LOCKED);
+        addCapability(GroundTypes.GATE);
     }
 
     public Gate(List<Destination> destinationList){
         super('=');
         this.destinationList = destinationList;
         addCapability(Status.LOCKED);
+        addCapability(GroundTypes.GATE);
     }
 
     public void addDestination(Destination destination){
