@@ -15,6 +15,7 @@ import game.items.Bloodberry;
 import game.items.OldKey;
 import game.utilities.FancyMessageDisplay;
 import game.weapons.BroadSword;
+import game.weapons.GiantHammer;
 import game.weather.WeatherControl;
 
 import java.util.ArrayList;
@@ -126,6 +127,7 @@ public class Application {
                 new Destination(overgrownSanctuary, "Overgrown Sanctuary", 5, 1)));
         Abxervyer abxervyer = new Abxervyer(bossDeathGate, new WeatherControl());
         bossMap.at(15, 1).addActor(abxervyer);
+        bossMap.at(10, 10).addItem(new GiantHammer());
 
         //Traveller
         ancientWoodsMap.at(45, 8).addActor(new Traveller(abxervyer)); // 45, 8, ancient woods
