@@ -5,8 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
-import game.actions.IncreaseMaxAttributeAction;
-import game.attributes.TradeCharacteristics;
+import game.actions.ChangeMaxAttributeAction;
 
 /**
  * A Bloodberry that increases the player's maximum health when used.
@@ -32,7 +31,7 @@ public class Bloodberry extends TradeableItem {
         int increaseValue = 5;
 
         // Increase the actor's maximum health by a value
-        IncreaseMaxAttributeAction changeAttributeAction = new IncreaseMaxAttributeAction(this, BaseActorAttributes.HEALTH,
+        ChangeMaxAttributeAction changeAttributeAction = new ChangeMaxAttributeAction(this, BaseActorAttributes.HEALTH,
                 ActorAttributeOperations.INCREASE, increaseValue, true);
 
         return new ActionList(changeAttributeAction);

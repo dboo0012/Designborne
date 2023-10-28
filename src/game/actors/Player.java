@@ -9,14 +9,13 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.attributes.Ability;
+import game.attributes.*;
+import game.items.Runes;
 import game.main.FancyMessage;
-import game.attributes.EntityTypes;
-import game.attributes.Status;
 import game.utilities.FancyMessageDisplay;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -26,9 +25,10 @@ import java.util.ArrayList;
  * Modified by: Daryl, Meekal, Jerry
  *
  */
-public class Player extends Actor {
+public class Player extends Actor implements Respawnable {
     private int maxStamina;
     private int currentStamina;
+    private Respawner respawner;
 
     /**
      * Constructor for the Player class.
@@ -41,8 +41,9 @@ public class Player extends Actor {
     public Player(String name, char displayChar, int hitPoints, int stamina) {
         super(name, displayChar, hitPoints);
 
-        this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina)); // New stamina attribute
+
+        this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addCapability(EntityTypes.PLAYABLE);
         this.addCapability(Ability.CAN_ENTER_FLOOR);
         this.addCapability(Ability.TRAVEL);
@@ -63,6 +64,11 @@ public class Player extends Actor {
         }
 //        System.out.println(currentStamina);
     }
+
+    public void setRespawner(Respawner respawner){
+        this.respawner = respawner;
+    }
+
 
     /**
      * Retrieve the intrinsic weapon of the player.
@@ -118,8 +124,15 @@ public class Player extends Actor {
      */
     @Override
     public String unconscious(GameMap map) {
-        FancyMessageDisplay.createString(FancyMessage.YOU_DIED);
-        return super.unconscious(map);
+        Location deathLocation = map.locationOf(this);
+
+        String output = super.unconscious(map); //remove actor from the map he died at
+        respawnActor(deathLocation);
+        dropRunes(deathLocation);
+
+        FancyMessageDisplay.createString(FancyMessage.RESPAWN);
+
+        return output;
     }
 
     /**
@@ -132,7 +145,36 @@ public class Player extends Actor {
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
-        FancyMessageDisplay.createString(FancyMessage.YOU_DIED);
-        return super.unconscious(actor, map);
+        Location deathLocation = map.locationOf(this);
+
+        String output = super.unconscious(map); //remove actor from the map he died at
+        respawnActor(deathLocation);
+        dropRunes(deathLocation);
+
+        FancyMessageDisplay.createString(FancyMessage.RESPAWN);
+
+        return output;
+    }
+
+    /**
+     * Drops runes matching the value of the player's balance at time of death at the location of death
+     * @param deathLocation the location the player dies
+     */
+
+    public void dropRunes(Location deathLocation){
+        // Runes & Balance
+        int runesAmount = this.getBalance();
+        deathLocation.addItem(new Runes(runesAmount)); //drop runes at death location
+        this.deductBalance(runesAmount); //reset balance
+    }
+
+    /**
+     * Calls Respawner's respawn method. Over-ridden from Respawnable interface
+     *
+     * @param deathLocation The location where the actor has died and needs to be respawned.
+     */
+    @Override
+    public void respawnActor(Location deathLocation) {
+        respawner.respawn(deathLocation);
     }
 }

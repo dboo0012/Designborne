@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
  *
  * @author Meekal, Daryl
  */
-public class IncreaseMaxAttributeAction extends Action{
+public class ChangeMaxAttributeAction extends Action{
     private Item item; // The item to be consumed
     private BaseActorAttributes attributeAffected; // The attribute affected by the consumption
     private ActorAttributeOperations operation; // The operation applied to the attribute
@@ -26,8 +26,8 @@ public class IncreaseMaxAttributeAction extends Action{
      * @param amountAffected the amount by which the attribute is modified
      * @param singleConsume indicates whether the item is consumed and removed from inventory after use
      */
-    public IncreaseMaxAttributeAction(Item item, BaseActorAttributes attributeAffected,
-                                      ActorAttributeOperations operation, int amountAffected, boolean singleConsume){
+    public ChangeMaxAttributeAction(Item item, BaseActorAttributes attributeAffected,
+                                    ActorAttributeOperations operation, int amountAffected, boolean singleConsume){
         this.item = item;
         this.attributeAffected = attributeAffected;
         this.operation = operation;

@@ -8,6 +8,8 @@ import game.items.HealingVial;
 
 /**
  * An action to heal the player.
+ *
+ * @author Daryl
  */
 public class HealAction extends Action {
     private final HealingVial healingVial;

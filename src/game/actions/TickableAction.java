@@ -36,10 +36,18 @@ public abstract class TickableAction extends Action {
         return weaponItem;
     }
 
+    /**
+     * Returns the default damage multiplier of the weapon.
+     * @return the default damage multiplier of the weapon
+     */
     public float getDefDmgMultiplier() {
         return defDmgMultiplier;
     }
 
+    /**
+     * Returns the default hit rate of the weapon.
+     * @return the default hit rate of the weapon
+     */
     public int getDefHitRate() {
         return defHitRate;
     }

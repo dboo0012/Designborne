@@ -6,6 +6,11 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
 
+/**
+ * Action for drinking from a puddle.
+ *
+ * @author Meekal
+ */
 public class DrinkPuddleAction extends Action {
 
     /**

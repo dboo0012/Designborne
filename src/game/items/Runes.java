@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.actions.AddBalanceAction;
 import game.attributes.Ability;
+import game.attributes.ItemTypes;
 
 /**
  * A Runes item that can be used to increase the player's balance.
@@ -21,6 +22,7 @@ public class Runes extends Item {
     public Runes(int value){
         super("Runes", '$', true);
         this.value = value;
+        addCapability(ItemTypes.RUNES);
     }
 
     /**
