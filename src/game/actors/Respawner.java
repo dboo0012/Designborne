@@ -18,12 +18,22 @@ import game.items.Runes;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Respawner {
 
+/**
+ * The Respawner class is responsible for handling player respawning and map reset operations.
+ */
+public class Respawner {
     private Actor player;
     private List<GameMap> activeGameMaps;
     private Destination respawnPoint;
 
+    /**
+     * Constructor for the Respawner class.
+     *
+     * @param player The player actor.
+     * @param activeGameMaps The list of active game maps.
+     * @param respawnPoint The destination for respawning the player.
+     */
     public Respawner(Actor player, List<GameMap> activeGameMaps, Destination respawnPoint){
         this.player = player;
         this.activeGameMaps = activeGameMaps;
@@ -31,6 +41,11 @@ public class Respawner {
 
     }
 
+    /**
+     * Respawn the player at the specified location and perform map reset operations.
+     *
+     * @param deathLocation The location where the player died.
+     */
     public void respawn(Location deathLocation){
         //Respawn
         player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, player.getAttributeMaximum(BaseActorAttributes.HEALTH));
@@ -45,11 +60,13 @@ public class Respawner {
         for (GameMap map: activeGameMaps){
             resetMap(map); //remove any actor that isn't a boss or player
         }
-
-
-
     }
 
+    /**
+     * Reset the given game map by removing non-boss actors, locking gates, and removing runes.
+     *
+     * @param map The game map to reset.
+     */
     public void resetMap(GameMap map){
         NumberRange x_range = map.getXRange();
         NumberRange y_range = map.getYRange();

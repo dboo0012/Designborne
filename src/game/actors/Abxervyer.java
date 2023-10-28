@@ -24,7 +24,7 @@ import static game.weather.WeatherControl.getCurrentWeather;
 /**
  * A Abxervyer actor that has the ability to be spawned.
  *
- * @author Jerry
+ * @author Jerry, Meekal
  */
 public class Abxervyer extends EnemyActor  {
     private WeatherControl weatherControl;

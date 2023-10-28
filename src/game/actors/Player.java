@@ -156,6 +156,11 @@ public class Player extends Actor implements Respawnable {
         return output;
     }
 
+    /**
+     * Drops runes matching the value of the player's balance at time of death at the location of death
+     * @param deathLocation the location the player dies
+     */
+
     public void dropRunes(Location deathLocation){
         // Runes & Balance
         int runesAmount = this.getBalance();
@@ -163,7 +168,11 @@ public class Player extends Actor implements Respawnable {
         this.deductBalance(runesAmount); //reset balance
     }
 
-
+    /**
+     * Calls Respawner's respawn method. Over-ridden from Respawnable interface
+     *
+     * @param deathLocation The location where the actor has died and needs to be respawned.
+     */
     @Override
     public void respawnActor(Location deathLocation) {
         respawner.respawn(deathLocation);

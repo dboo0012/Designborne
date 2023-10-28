@@ -20,10 +20,12 @@ import java.util.List;
  * @author Daryl, Jerry, Meekal
  */
 public class Gate extends Ground {
+    //The list of destinations the Gate can travel to
     private List<Destination> destinationList = new ArrayList<>();
 
     /**
-     * Constructor.
+     * Constructor with one destination.
+     *
      * @param destination The map where the actor will be spawned
      */
     public Gate(Destination destination){
@@ -33,6 +35,11 @@ public class Gate extends Ground {
         addCapability(GroundTypes.GATE);
     }
 
+    /**
+     * Constructor with list of destination.
+     *
+     * @param destinationList The list of destinations the gate can travel to
+     */
     public Gate(List<Destination> destinationList){
         super('=');
         this.destinationList = destinationList;
@@ -40,6 +47,11 @@ public class Gate extends Ground {
         addCapability(GroundTypes.GATE);
     }
 
+    /**
+     * Modifier method to add destinations to the gate as the game goes on
+     *
+     * @param destination
+     */
     public void addDestination(Destination destination){
         destinationList.add(destination);
     }
