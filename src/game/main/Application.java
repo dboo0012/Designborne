@@ -124,7 +124,8 @@ public class Application {
         //Boss
         Gate bossDeathGate = new Gate(List.of(new Destination(ancientWoodsMap, "Ancient Woods", 20, 3),
                 new Destination(overgrownSanctuary, "Overgrown Sanctuary", 5, 1)));
-        bossMap.at(15, 1).addActor(new Abxervyer(bossDeathGate, new WeatherControl()));
+        Abxervyer abxervyer = new Abxervyer(bossDeathGate, new WeatherControl());
+        bossMap.at(15, 1).addActor(abxervyer);
 
         //Traveller
         ancientWoodsMap.at(45, 8).addActor(new Traveller(abxervyer)); // 45, 8, ancient woods

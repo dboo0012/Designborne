@@ -29,4 +29,6 @@ public enum Ability {
      * Can upgrade items
      */
     UPGRADE,
+
+    VOID_IMMUNITY
 }
